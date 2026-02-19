@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ResusBuddy</string>
+    <string name="title_activity_main">ResusBuddy</string>
+    <string name="package_name">com.resusbuddy.training</string>
+    <string name="custom_url_scheme">com.resusbuddy.training</string>
+    <string name="app_description">Resuscitation Training Tool - For Educational Purposes Only</string>
+</resources>

@@ -1,0 +1,426 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ResusBuddy - ACLS/PALS Decision Support System - Clinical Design System
+   All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Light theme */
+    --background: 0 0% 97%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222 47% 11%;
+
+    --radius: 0.5rem;
+
+    /* ACLS/PALS Clinical Colors */
+    /* ACLS Adult (Red theme) */
+    --acls-primary: 0 84% 50%;
+    --acls-primary-foreground: 0 0% 100%;
+
+    /* PALS Pediatric (Blue theme) */
+    --pals-primary: 199 89% 48%;
+    --pals-primary-foreground: 0 0% 100%;
+
+    /* Shockable rhythms */
+    --acls-shockable: 0 84% 50%;
+    --acls-shockable-foreground: 0 0% 100%;
+    --acls-non-shockable: 210 100% 45%;
+    --acls-non-shockable-foreground: 0 0% 100%;
+    --acls-pea: 45 100% 40%;
+    --acls-pea-foreground: 0 0% 0%;
+    --acls-success: 142 76% 36%;
+    --acls-success-foreground: 0 0% 100%;
+    --acls-warning: 38 92% 50%;
+    --acls-warning-foreground: 0 0% 0%;
+    --acls-critical: 0 84% 50%;
+    --acls-critical-foreground: 0 0% 100%;
+    --acls-info: 199 89% 48%;
+    --acls-info-foreground: 0 0% 100%;
+    --acls-medication: 262 83% 58%;
+    --acls-medication-foreground: 0 0% 100%;
+    --acls-bradycardia: 217 91% 40%;
+    --acls-bradycardia-foreground: 0 0% 100%;
+    --acls-tachycardia: 25 95% 53%;
+    --acls-tachycardia-foreground: 0 0% 100%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Medical-grade Dark theme - optimized for reduced eye strain */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 17%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 33% 17%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 215 20% 25%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 20% 25%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 217 33% 22%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 20% 25%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+
+    /* ACLS/PALS Clinical Colors - Dark Mode */
+    --acls-primary: 0 84% 55%;
+    --acls-primary-foreground: 0 0% 100%;
+    --pals-primary: 199 89% 55%;
+    --pals-primary-foreground: 0 0% 100%;
+    --acls-shockable: 0 84% 55%;
+    --acls-shockable-foreground: 0 0% 100%;
+    --acls-non-shockable: 210 100% 55%;
+    --acls-non-shockable-foreground: 0 0% 100%;
+    --acls-pea: 45 100% 50%;
+    --acls-pea-foreground: 0 0% 0%;
+    --acls-success: 142 76% 42%;
+    --acls-success-foreground: 0 0% 100%;
+    --acls-warning: 38 92% 55%;
+    --acls-warning-foreground: 0 0% 0%;
+    --acls-critical: 0 84% 55%;
+    --acls-critical-foreground: 0 0% 100%;
+    --acls-info: 199 89% 60%;
+    --acls-info-foreground: 0 0% 100%;
+    --acls-medication: 262 83% 65%;
+    --acls-medication-foreground: 0 0% 100%;
+    --acls-bradycardia: 217 91% 50%;
+    --acls-bradycardia-foreground: 0 0% 100%;
+    --acls-tachycardia: 25 95% 60%;
+    --acls-tachycardia-foreground: 0 0% 100%;
+
+    --sidebar-background: 217 33% 17%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 210 40% 98%;
+    --sidebar-primary-foreground: 222 47% 11%;
+    --sidebar-accent: 217 33% 22%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 215 20% 25%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Safe area insets for mobile devices */
+  :root {
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+  }
+}
+
+/* Touch-friendly tap targets */
+@layer utilities {
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+
+  /* Safe area padding utilities */
+  .pt-safe {
+    padding-top: calc(0.5rem + env(safe-area-inset-top, 0px));
+  }
+
+  .pb-safe {
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .px-safe {
+    padding-left: calc(0.5rem + env(safe-area-inset-left, 0px));
+    padding-right: calc(0.5rem + env(safe-area-inset-right, 0px));
+  }
+
+  .mt-safe {
+    margin-top: env(safe-area-inset-top, 0px);
+  }
+
+  .mb-safe {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Clinical typography scale - responsive */
+  .text-clinical-xs {
+    @apply text-[0.7rem] sm:text-xs;
+  }
+
+  .text-clinical-sm {
+    @apply text-xs sm:text-sm;
+  }
+
+  .text-clinical-base {
+    @apply text-sm sm:text-base;
+  }
+
+  .text-clinical-lg {
+    @apply text-base sm:text-lg;
+  }
+
+  .text-clinical-xl {
+    @apply text-lg sm:text-xl;
+  }
+
+  .text-clinical-2xl {
+    @apply text-xl sm:text-2xl;
+  }
+
+  .text-clinical-3xl {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  .text-clinical-display {
+    @apply text-3xl sm:text-4xl md:text-5xl;
+  }
+
+  /* Elevation system for visual hierarchy */
+  .surface-0 {
+    @apply bg-background;
+  }
+
+  .surface-1 {
+    @apply bg-card shadow-sm;
+  }
+
+  .surface-2 {
+    @apply bg-card shadow-md;
+  }
+
+  .surface-3 {
+    @apply bg-card shadow-lg;
+  }
+
+  .surface-overlay {
+    @apply bg-popover shadow-2xl;
+  }
+
+  /* Border utilities */
+  .border-subtle {
+    @apply border-border/50;
+  }
+
+  .border-moderate {
+    @apply border-border;
+  }
+
+  .border-strong {
+    @apply border-border dark:border-border/80;
+  }
+
+  /* Interactive states */
+  .interactive-default {
+    @apply transition-colors duration-200;
+  }
+
+  .interactive-hover {
+    @apply hover:bg-accent/50 hover:scale-[1.02] transition-all duration-200;
+  }
+
+  .interactive-active {
+    @apply active:scale-[0.98] transition-transform duration-100;
+  }
+
+  /* Pulse animation for critical alerts (dark mode optimized) */
+  .pulse-critical {
+    @apply animate-pulse;
+  }
+
+  .dark .pulse-critical {
+    animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+    }
+    50% {
+      opacity: 0.8;
+      box-shadow: 0 0 30px rgba(220, 38, 38, 0.8);
+    }
+  }
+
+  /* Loading shimmer effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* 3D Pressable Button Effects */
+  /* Large block-style buttons with bottom border shadow for 3D depth */
+  .btn-3d {
+    @apply rounded-lg transition-all duration-100;
+    border-bottom-width: 6px !important;
+    border-bottom-style: solid !important;
+    transform: translateY(0);
+  }
+
+  .btn-3d:active:not(:disabled) {
+    transform: translateY(4px);
+    border-bottom-width: 2px !important;
+  }
+
+  .btn-3d-sm {
+    @apply rounded-md transition-all duration-100;
+    border-bottom-width: 4px !important;
+    border-bottom-style: solid !important;
+    transform: translateY(0);
+  }
+
+  .btn-3d-sm:active:not(:disabled) {
+    transform: translateY(2px);
+    border-bottom-width: 2px !important;
+  }
+
+  /* Color-specific 3D shadows (darker versions of each color) */
+  .btn-3d-critical {
+    border-bottom-color: hsl(0, 84%, 35%) !important; /* Darker red */
+  }
+
+  .btn-3d-medication {
+    border-bottom-color: hsl(262, 83%, 40%) !important; /* Darker purple */
+  }
+
+  .btn-3d-pals {
+    border-bottom-color: hsl(199, 89%, 35%) !important; /* Darker blue */
+  }
+
+  .btn-3d-warning {
+    border-bottom-color: hsl(38, 92%, 35%) !important; /* Darker orange */
+  }
+
+  .btn-3d-success {
+    border-bottom-color: hsl(142, 76%, 25%) !important; /* Darker green */
+  }
+
+  .btn-3d-shockable {
+    border-bottom-color: hsl(0, 84%, 35%) !important; /* Darker red */
+  }
+
+  .btn-3d-non-shockable {
+    border-bottom-color: hsl(210, 100%, 30%) !important; /* Darker blue */
+  }
+
+  .btn-3d-pea {
+    border-bottom-color: hsl(45, 100%, 25%) !important; /* Darker yellow/orange */
+  }
+
+  .btn-3d-bradycardia {
+    border-bottom-color: hsl(217, 91%, 28%) !important; /* Darker blue */
+  }
+
+  .btn-3d-tachycardia {
+    border-bottom-color: hsl(25, 95%, 38%) !important; /* Darker orange */
+  }
+
+  .btn-3d-muted {
+    border-bottom-color: hsl(215, 16%, 35%) !important; /* Darker gray */
+  }
+
+  .btn-3d-yellow {
+    border-bottom-color: hsl(48, 96%, 40%) !important; /* Darker yellow */
+  }
+
+  /* Dark mode adjustments */
+  .dark .btn-3d-critical {
+    border-bottom-color: hsl(0, 84%, 40%) !important;
+  }
+
+  .dark .btn-3d-medication {
+    border-bottom-color: hsl(262, 83%, 48%) !important;
+  }
+
+  .dark .btn-3d-pals {
+    border-bottom-color: hsl(199, 89%, 40%) !important;
+  }
+
+  .dark .btn-3d-warning {
+    border-bottom-color: hsl(38, 92%, 40%) !important;
+  }
+
+  .dark .btn-3d-success {
+    border-bottom-color: hsl(142, 76%, 30%) !important;
+  }
+
+  .dark .btn-3d-muted {
+    border-bottom-color: hsl(215, 20%, 18%) !important;
+  }
+
+  /* Prevent accidental text selection during scrolling on mobile */
+  .no-text-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+}
