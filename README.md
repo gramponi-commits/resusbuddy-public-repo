@@ -87,6 +87,10 @@ npm run ios:dev
 - No backend is required for core operation
 - No analytics pipeline is required for app functionality
 
+## Developer
+
+Developed by [Giacomo Ramponi](https://www.linkedin.com/in/g-r-078715203/), emergency physician.
+
 ## License
 
 MIT. See `LICENSE`.
