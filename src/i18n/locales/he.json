@@ -49,7 +49,7 @@
     "shockable": "קצב בר-שוק",
     "asystole": "אסיסטולה",
     "nonShockable": "לא בר-שוק",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "פעולות",
@@ -403,6 +403,10 @@
   },
   "settings": {
     "title": "הגדרות",
+    "groupGeneral": "כללי",
+    "groupFeedback": "משוב",
+    "groupPreferences": "העדפות",
+    "groupECMO": "ECMO/ECPR",
     "language": "שפה",
     "languageDesc": "בחר את השפה המועדפת",
     "english": "English",
@@ -430,7 +434,22 @@
     "adultDefibrillatorDesc": "בחר אנרגיית שוק למבוגרים",
     "epinephrineInterval": "מרווח אפינפרין",
     "epinephrineIntervalDesc": "זמן בין מינוני אפינפרין (AHA ממליץ 3-5 דקות)",
-    "minutes": "דקות"
+    "minutes": "דקות",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "הפעל תמיכה בקנולציה של ECMO/ECPR במהלך דום לב",
+    "ecmoActivationTime": "זמן הפעלה (דקות)",
+    "ecmoInclusionCriteria": "קריטריוני הכללה",
+    "ecmoExclusionCriteria": "קריטריוני אי-הכללה",
+    "ecmoCriteriaPlaceholder": "הקלד קריטריון ולחץ הוסף",
+    "ecmoAdd": "הוסף",
+    "cowboyMode": "מצב קאובוי",
+    "cowboyModeDesc": "הסר הגבלות תזמון AHA על מתן תרופות והפעלת ECMO",
+    "cowboyModeActive": "פעיל - הנחיות AHA בוטלו",
+    "cowboyModeInactive": "לא פעיל - עוקב אחר הנחיות AHA 2025",
+    "cowboyModeConfirmTitle": "להפעיל מצב קאובוי?",
+    "cowboyModeConfirmDesc": "זה יאפשר לך לתת תרופות בכל עת ולהפעיל ECMO מיידית, בסטייה מהנחיות אלגוריתם דום לב AHA 2025. הצעות תזמון תרופות יושבתו.",
+    "cowboyModeConfirm": "הפעל מצב קאובוי",
+    "cowboyModeCancel": "ביטול"
   },
   "resume": {
     "title": "קוד פעיל זוהה",
@@ -531,7 +550,7 @@
     "hsTsChecked": "H's & T's נבדקו: {{items}}",
     "codeEnded": "קוד הסתיים: {{outcome}}",
     "noteAdded": "הערה: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "משקל נקבע: {{weight}} ק\"ג",
     "pregnancyActivated": "פרוטוקול הריון הופעל",
     "anaphylaxisActivated": "פרוטוקול אנפילקסיס הופעל",
@@ -720,7 +739,7 @@
     "dose": "מינון",
     "doseNumber": "מינון #{{number}}",
     "endSession": "סיים סשן",
-    "sessionEnded": "סשן הסתיים",
+    "sessionEnded": "הסשן הסתיים: {{outcome}}",
     "sessionEndedDisplay": "הפגישה הסתיימה",
     "exportSession": "ייצוא סשן",
     "switchedToArrest": "הועבר לפרוטוקול דום לב",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "VT פולימורפי: השתמש בדפיברילציה (לא מסונכרנת)",
     "deliverDefibrillation": "בצע דפיברילציה (לא מסונכרנת)",
     "defibrillationUnsynchronized": "דפיברילציה (לא מסונכרנת)",
-    "sessionEnded": "הסשן הסתיים: {{outcome}}",
     "outcomeResolved": "פותר",
     "outcomeTransferred": "הועבר"
   },
@@ -981,5 +999,15 @@
     "acceptButton": "אני מסכים",
     "acceptedButton": "התקבל",
     "viewTerms": "הצג תנאי שימוש"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "הפעל ECMO",
+    "active": "ECMO פעיל",
+    "activated": "ECMO/ECPR הופעל",
+    "availableIn": "זמין תוך {{time}}",
+    "inclusionCriteria": "קריטריוני הכללה",
+    "exclusionCriteria": "קריטריוני אי-הכללה",
+    "noneConfigured": "לא הוגדר"
   }
 }

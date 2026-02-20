@@ -191,7 +191,7 @@ const About = () => {
 
       {/* Version */}
       <p className="text-center text-xs text-muted-foreground mt-6">
-        {t('about.version')} 1.0
+        {t('about.version')} 2.0
       </p>
     </div>
   );

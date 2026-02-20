@@ -49,7 +49,7 @@
     "shockable": "Stötvärdig Rytm",
     "asystole": "Asystoli",
     "nonShockable": "Inte Stötvärdig",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Åtgärder",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Inställningar",
+    "groupGeneral": "Allmänt",
+    "groupFeedback": "Feedback",
+    "groupPreferences": "Inställningar",
+    "groupECMO": "ECMO/ECPR",
     "language": "Språk",
     "languageDesc": "Välj ditt föredragna språk",
     "english": "Engelska",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Välj stötenergi för vuxna patienter",
     "epinephrineInterval": "Epinefrin Intervall",
     "epinephrineIntervalDesc": "Tid mellan epinefrin doser (AHA rekommenderar 3-5 min)",
-    "minutes": "min"
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Aktivera stöd för ECMO/ECPR-kanylning vid hjärtstillestånd",
+    "ecmoActivationTime": "Aktiveringstid (minuter)",
+    "ecmoInclusionCriteria": "Inklusionskriterier",
+    "ecmoExclusionCriteria": "Exklusionskriterier",
+    "ecmoCriteriaPlaceholder": "Skriv kriterium och tryck Lägg till",
+    "ecmoAdd": "Lägg till",
+    "cowboyMode": "Cowboy-läge",
+    "cowboyModeDesc": "Ta bort AHA-tidsbegränsningar på läkemedelsadministrering och ECMO-aktivering",
+    "cowboyModeActive": "Aktivt - AHA-riktlinjer åsidosatta",
+    "cowboyModeInactive": "Inaktivt - Följer 2025 AHA-riktlinjer",
+    "cowboyModeConfirmTitle": "Aktivera Cowboy-läge?",
+    "cowboyModeConfirmDesc": "Detta låter dig administrera läkemedel när som helst och aktivera ECMO omedelbart, i avvikelse från 2025 AHA-hjärtstopp-algoritm-riktlinjerna. Förslag på läkemedelstidpunkt inaktiveras.",
+    "cowboyModeConfirm": "Aktivera Cowboy-läge",
+    "cowboyModeCancel": "Avbryt"
   },
   "resume": {
     "title": "Aktiv Kod Upptäckt",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T's kontrollerade: {{items}}",
     "codeEnded": "Kod avslutad: {{outcome}}",
     "noteAdded": "Anteckning: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Patientvikt inställd: {{weight}} kg",
     "pregnancyActivated": "Graviditetsprotokoll aktiverat",
     "anaphylaxisActivated": "[TRANSLATE] Anaphylaxis protocol activated",
@@ -605,7 +624,7 @@
     "dose": "Dosis",
     "doseNumber": "Dosis #{{number}}",
     "endSession": "Avsluta Session",
-    "sessionEnded": "Session Avslutad",
+    "sessionEnded": "Session Avslutad: {{outcome}}",
     "sessionEndedDisplay": "Session Avslutad",
     "exportSession": "Exportera Session",
     "switchedToArrest": "Bytt till cardiac arrest protokoll",
@@ -694,7 +713,6 @@
     "polymorphicVTWarning": "Polymorfisk VT: Använd DEFIBRILLERING (INTE synkroniserat)",
     "deliverDefibrillation": "Levera DEFIBRILLERING (Inte-synkroniserad)",
     "defibrillationUnsynchronized": "Defibrillering (inte-synkroniserad)",
-    "sessionEnded": "Session Avslutad: {{outcome}}",
     "outcomeResolved": "Löst",
     "outcomeTransferred": "Överförd"
   },
@@ -981,5 +999,15 @@
       "measureBPDoppler": "Mål BP med doppler",
       "measureBPDopplerDesc": "Brug doppler til MAP evaluering; pulser kan være svækkede/fraværende selv med fungerende LVAD"
     }
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Aktivera ECMO",
+    "active": "ECMO aktiv",
+    "activated": "ECMO/ECPR aktiverat",
+    "availableIn": "Tillgängligt om {{time}}",
+    "inclusionCriteria": "Inklusionskriterier",
+    "exclusionCriteria": "Exklusionskriterier",
+    "noneConfigured": "Inga konfigurerade"
   }
 }

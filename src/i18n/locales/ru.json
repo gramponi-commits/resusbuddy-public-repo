@@ -49,7 +49,7 @@
     "shockable": "Ритм поддается дефибрилляции",
     "asystole": "Асистолия",
     "nonShockable": "Не поддается дефибрилляции",
-    "pea": "ЭМК"
+    "pea": "Э.М.К."
   },
   "actions": {
     "title": "Действия",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Настройки",
+    "groupGeneral": "Общие",
+    "groupFeedback": "Обратная связь",
+    "groupPreferences": "Настройки",
+    "groupECMO": "ЭКМО/ЭКР",
     "language": "Язык",
     "languageDesc": "Выберите предпочитаемый язык",
     "english": "Английский",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Выберите энергию разряда для взрослых пациентов",
     "epinephrineInterval": "Интервал эпинефрина/адреналина",
     "epinephrineIntervalDesc": "Время между дозами эпинефрина (AHA рекомендует 3-5 мин)",
-    "minutes": "мин"
+    "minutes": "мин",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Включить поддержку канюляции ЭКМО/ECPR при остановке сердца",
+    "ecmoActivationTime": "Время Активации (минуты)",
+    "ecmoInclusionCriteria": "Критерии Включения",
+    "ecmoExclusionCriteria": "Критерии Исключения",
+    "ecmoCriteriaPlaceholder": "Введите критерий и нажмите Добавить",
+    "ecmoAdd": "Добавить",
+    "cowboyMode": "Режим Ковбоя",
+    "cowboyModeDesc": "Убрать временные ограничения AHA на введение препаратов и активацию ЭКМО",
+    "cowboyModeActive": "Активен - Руководства AHA игнорируются",
+    "cowboyModeInactive": "Неактивен - Следование руководствам AHA 2025",
+    "cowboyModeConfirmTitle": "Включить режим Ковбоя?",
+    "cowboyModeConfirmDesc": "Это позволит вам вводить препараты в любое время и активировать ЭКМО немедленно, отклоняясь от руководств по алгоритму остановки сердца AHA 2025. Предложения по времени введения препаратов будут отключены.",
+    "cowboyModeConfirm": "Включить режим Ковбоя",
+    "cowboyModeCancel": "Отмена"
   },
   "resume": {
     "title": "Обнаружен активный код",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H и T проверены: {{items}}",
     "codeEnded": "Код завершен: {{outcome}}",
     "noteAdded": "Заметка: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} мм рт.ст.",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Вес пациента установлен: {{weight}} кг",
     "pregnancyActivated": "Протокол беременности активирован",
     "anaphylaxisActivated": "Протокол анафилаксии активирован",
@@ -720,7 +739,7 @@
     "dose": "Доза",
     "doseNumber": "Доза #{{number}}",
     "endSession": "Завершить сессию",
-    "sessionEnded": "Сессия завершена",
+    "sessionEnded": "Сессия Завершена: {{outcome}}",
     "sessionEndedDisplay": "Сеанс Завершён",
     "exportSession": "Экспортировать сессию",
     "switchedToArrest": "Переключено на протокол остановки сердца",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "Полиморфная ЖТ: Используйте ДЕФИБРИЛЛЯЦИЮ (НЕ синхронизированную)",
     "deliverDefibrillation": "Доставьте ДЕФИБРИЛЛЯЦИЮ (Несинхронизированную)",
     "defibrillationUnsynchronized": "Дефибрилляция (несинхронизированная)",
-    "sessionEnded": "Сессия Завершена: {{outcome}}",
     "outcomeResolved": "Решено",
     "outcomeTransferred": "Переведено"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "Связаться с нами",
     "contactP1": "Если у вас есть вопросы об этой Политике конфиденциальности, пожалуйста, свяжитесь с нами по адресу:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ЭКМО / ECPR",
+    "activateButton": "Активировать ЭКМО",
+    "active": "ЭКМО активно",
+    "activated": "ЭКМО/ECPR активировано",
+    "availableIn": "Доступно через {{time}}",
+    "inclusionCriteria": "Критерии Включения",
+    "exclusionCriteria": "Критерии Исключения",
+    "noneConfigured": "Не настроено"
   }
 }

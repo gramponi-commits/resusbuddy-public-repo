@@ -49,7 +49,7 @@
     "shockable": "Irama yang Dapat Diguncang",
     "asystole": "Asistol",
     "nonShockable": "Tidak Dapat Diguncang",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Tindakan",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Pengaturan",
+    "groupGeneral": "Umum",
+    "groupFeedback": "Umpan Balik",
+    "groupPreferences": "Preferensi",
+    "groupECMO": "ECMO/ECPR",
     "language": "Bahasa",
     "languageDesc": "Pilih bahasa yang Anda sukai",
     "english": "Inggris",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Pilih energi guncangan untuk pasien dewasa",
     "epinephrineInterval": "Interval Epinefrin",
     "epinephrineIntervalDesc": "Waktu antara dosis epinefrin (AHA merekomendasikan 3-5 min)",
-    "minutes": "min"
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Aktifkan dukungan kanulasi ECMO/ECPR selama henti jantung",
+    "ecmoActivationTime": "Waktu Aktivasi (menit)",
+    "ecmoInclusionCriteria": "Kriteria Inklusi",
+    "ecmoExclusionCriteria": "Kriteria Eksklusi",
+    "ecmoCriteriaPlaceholder": "Ketik kriteria dan tekan Tambah",
+    "ecmoAdd": "Tambah",
+    "cowboyMode": "Mode Cowboy",
+    "cowboyModeDesc": "Hapus batasan waktu AHA pada pemberian obat dan aktivasi ECMO",
+    "cowboyModeActive": "Aktif - Pedoman AHA diabaikan",
+    "cowboyModeInactive": "Tidak Aktif - Mengikuti pedoman AHA 2025",
+    "cowboyModeConfirmTitle": "Aktifkan Mode Cowboy?",
+    "cowboyModeConfirmDesc": "Ini akan memungkinkan Anda memberikan obat kapan saja dan mengaktifkan ECMO segera, menyimpang dari pedoman Algoritma Henti Jantung AHA 2025. Saran pengaturan waktu obat akan dinonaktifkan.",
+    "cowboyModeConfirm": "Aktifkan Mode Cowboy",
+    "cowboyModeCancel": "Batal"
   },
   "resume": {
     "title": "Kode Aktif Terdeteksi",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T's diperiksa: {{items}}",
     "codeEnded": "Kode diakhiri: {{outcome}}",
     "noteAdded": "Catatan: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Berat pasien diatur: {{weight}} kg",
     "pregnancyActivated": "Protokol kehamilan diaktifkan",
     "anaphylaxisActivated": "Protokol anafilaksis diaktifkan",
@@ -720,7 +739,7 @@
     "dose": "Dosis",
     "doseNumber": "Dosis #{{number}}",
     "endSession": "Akhiri Sesi",
-    "sessionEnded": "Sesi Diakhiri",
+    "sessionEnded": "Sesi Berakhir: {{outcome}}",
     "sessionEndedDisplay": "Sesi Berakhir",
     "exportSession": "Ekspor Sesi",
     "switchedToArrest": "Beralih ke protokol henti jantung",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "TV Polimorfik: Gunakan DEFIBRILASI (TIDAK tersinkronisasi)",
     "deliverDefibrillation": "Sampaikan DEFIBRILASI (Tidak tersinkronisasi)",
     "defibrillationUnsynchronized": "Defibrilasi (tidak tersinkronisasi)",
-    "sessionEnded": "Sesi Berakhir: {{outcome}}",
     "outcomeResolved": "Selesai",
     "outcomeTransferred": "Dipindahkan"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "Hubungi Kami",
     "contactP1": "Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami di:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Aktifkan ECMO",
+    "active": "ECMO Aktif",
+    "activated": "ECMO/ECPR diaktifkan",
+    "availableIn": "Tersedia dalam {{time}}",
+    "inclusionCriteria": "Kriteria Inklusi",
+    "exclusionCriteria": "Kriteria Eksklusi",
+    "noneConfigured": "Tidak ada yang dikonfigurasi"
   }
 }

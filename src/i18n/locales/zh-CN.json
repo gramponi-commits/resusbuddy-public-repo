@@ -49,7 +49,7 @@
     "shockable": "可除颤心律",
     "asystole": "心电静止",
     "nonShockable": "不可除颤",
-    "pea": "PEA（无脉性电活动）"
+    "pea": "P.E.A.（无脉性电活动）"
   },
   "actions": {
     "title": "操作",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "设置",
+    "groupGeneral": "常规",
+    "groupFeedback": "反馈",
+    "groupPreferences": "偏好设置",
+    "groupECMO": "ECMO/ECPR",
     "language": "语言",
     "languageDesc": "选择您的首选语言",
     "english": "English",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "选择成人患者的除颤能量",
     "epinephrineInterval": "肾上腺素间隔",
     "epinephrineIntervalDesc": "肾上腺素剂量之间的时间（AHA建议3-5分钟）",
-    "minutes": "分钟"
+    "minutes": "分钟",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "在心脏骤停期间启用ECMO/ECPR插管支持",
+    "ecmoActivationTime": "激活时间（分钟）",
+    "ecmoInclusionCriteria": "纳入标准",
+    "ecmoExclusionCriteria": "排除标准",
+    "ecmoCriteriaPlaceholder": "输入标准后按添加",
+    "ecmoAdd": "添加",
+    "cowboyMode": "牛仔模式",
+    "cowboyModeDesc": "取消AHA对药物给药和ECMO激活的时间限制",
+    "cowboyModeActive": "已激活 - AHA指南已被覆盖",
+    "cowboyModeInactive": "未激活 - 遵循2025年AHA指南",
+    "cowboyModeConfirmTitle": "启用牛仔模式？",
+    "cowboyModeConfirmDesc": "这将允许您随时给药并立即激活ECMO，偏离2025年AHA心脏骤停算法指南。药物时间建议将被禁用。",
+    "cowboyModeConfirm": "启用牛仔模式",
+    "cowboyModeCancel": "取消"
   },
   "resume": {
     "title": "检测到活动抢救",
@@ -416,7 +435,7 @@
     "hsTsChecked": "已检查H's & T's：{{items}}",
     "codeEnded": "抢救已结束：{{outcome}}",
     "noteAdded": "备注：{{note}}",
-    "etco2Recorded": "ETCO₂：{{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "已设置患者体重：{{weight}} kg",
     "pregnancyActivated": "妊娠方案已激活",
     "anaphylaxisActivated": "过敏反应方案已激活",
@@ -720,7 +739,7 @@
     "dose": "剂量",
     "doseNumber": "第{{number}}次剂量",
     "endSession": "结束会话",
-    "sessionEnded": "会话已结束",
+    "sessionEnded": "会话已结束：{{outcome}}",
     "sessionEndedDisplay": "会话已结束",
     "exportSession": "导出会话",
     "switchedToArrest": "切换到心脏骤停方案",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "多形性VT：使用除颤（非同步）",
     "deliverDefibrillation": "给予除颤（非同步）",
     "defibrillationUnsynchronized": "除颤（非同步）",
-    "sessionEnded": "会话已结束：{{outcome}}",
     "outcomeResolved": "已解决",
     "outcomeTransferred": "已转移"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "联系我们",
     "contactP1": "如果您对本隐私政策有疑问，请通过以下方式联系我们：",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "激活ECMO",
+    "active": "ECMO已激活",
+    "activated": "ECMO/ECPR已激活",
+    "availableIn": "{{time}}后可用",
+    "inclusionCriteria": "纳入标准",
+    "exclusionCriteria": "排除标准",
+    "noneConfigured": "未配置"
   }
 }

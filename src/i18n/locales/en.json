@@ -49,7 +49,7 @@
     "shockable": "Shockable Rhythm",
     "asystole": "Asystole",
     "nonShockable": "Non-Shockable",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "shock": "SHOCK",
@@ -403,6 +403,10 @@
   },
   "settings": {
     "title": "Settings",
+    "groupGeneral": "General",
+    "groupFeedback": "Feedback",
+    "groupPreferences": "Preferences",
+    "groupECMO": "ECMO/ECPR",
     "language": "Language",
     "languageDesc": "Select your preferred language",
     "english": "English",
@@ -430,7 +434,38 @@
     "adultDefibrillatorDesc": "Select shock energy for adult patients",
     "epinephrineInterval": "Epinephrine/Adrenaline Interval",
     "epinephrineIntervalDesc": "Time between epinephrine doses (AHA recommends 3-5 min)",
-    "minutes": "min"
+    "etco2Unit": "ETCO2 Unit",
+    "etco2UnitDesc": "Controls ETCO2 entry and display units across code and history.",
+    "etco2UnitMmhg": "mmHg",
+    "etco2UnitKpa": "kPa",
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Enable ECMO/ECPR cannulation support during cardiac arrest",
+    "ecmoActivationTime": "Activation Time (minutes)",
+    "ecmoInclusionCriteria": "Inclusion Criteria",
+    "ecmoExclusionCriteria": "Exclusion Criteria",
+    "ecmoCriteriaPlaceholder": "Type criterion and press Add",
+    "ecmoAdd": "Add",
+    "cowboyMode": "Cowboy Mode",
+    "cowboyModeDesc": "Remove AHA timing restrictions on drug administration and ECMO activation",
+    "cowboyModeActive": "Active - AHA guidelines overridden",
+    "cowboyModeInactive": "Inactive - Following 2025 AHA guidelines",
+    "cowboyModeConfirmTitle": "Enable Cowboy Mode?",
+    "cowboyModeConfirmDesc": "This will allow you to administer drugs at any time and activate ECMO immediately, deviating from the 2025 AHA Cardiac Arrest Algorithm guidelines. Drug timing suggestions will be disabled.",
+    "cowboyModeConfirm": "Enable Cowboy Mode",
+    "cowboyModeCancel": "Cancel"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Activate ECMO",
+    "active": "ECMO Active",
+    "activated": "ECMO/ECPR activated",
+    "availableIn": "Available in {{time}}",
+    "inclusionCriteria": "Inclusion Criteria",
+    "exclusionCriteria": "Exclusion Criteria",
+    "noneConfigured": "None configured",
+    "availableNow": "ECMO Available",
+    "availableNowDesc": "Activation time reached - consider ECMO/ECPR"
   },
   "resume": {
     "title": "Active Code Detected",
@@ -479,7 +514,8 @@
     "amiodaroneDue": "Amiodarone",
     "lidocaineDue": "Lidocaine",
     "shock": "Shock delivered",
-    "noShock": "No shock, resume CPR"
+    "noShock": "No shock, resume CPR",
+    "ecmoAvailable": "ECMO available. Consider ECPR activation."
   },
   "banner": {
     "emergencyDelivery": "🚨 EMERGENCY DELIVERY",
@@ -531,7 +567,7 @@
     "hsTsChecked": "H's & T's checked: {{items}}",
     "codeEnded": "Code ended: {{outcome}}",
     "noteAdded": "Note: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Patient weight set: {{weight}} kg",
     "pregnancyActivated": "Pregnancy protocol activated",
     "anaphylaxisActivated": "Anaphylaxis protocol activated",
@@ -720,7 +756,7 @@
     "dose": "Dose",
     "doseNumber": "Dose #{{number}}",
     "endSession": "End Session",
-    "sessionEnded": "Session Ended",
+    "sessionEnded": "Session Ended: {{outcome}}",
     "exportSession": "Export Session",
     "switchedToArrest": "Switched to cardiac arrest protocol",
     "treatmentGiven": "{{treatment}} given",
@@ -808,7 +844,6 @@
     "polymorphicVTWarning": "Polymorphic VT: Use DEFIBRILLATION (NOT synchronized)",
     "deliverDefibrillation": "Deliver DEFIBRILLATION (Unsynchronized)",
     "defibrillationUnsynchronized": "Defibrillation (unsynchronized)",
-    "sessionEnded": "Session Ended: {{outcome}}",
     "sessionEndedDisplay": "Session Ended",
     "outcomeResolved": "Resolved",
     "outcomeTransferred": "Transferred"

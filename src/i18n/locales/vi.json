@@ -49,7 +49,7 @@
     "shockable": "Nhịp Có Sốc",
     "asystole": "Asystole",
     "nonShockable": "Không Sốc",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Hành động",
@@ -403,6 +403,10 @@
   },
   "settings": {
     "title": "Cài Đặt",
+    "groupGeneral": "Chung",
+    "groupFeedback": "Phản hồi",
+    "groupPreferences": "Tùy chọn",
+    "groupECMO": "ECMO/ECPR",
     "language": "Ngôn Ngữ",
     "languageDesc": "Chọn ngôn ngữ ưa thích của bạn",
     "english": "Tiếng Anh",
@@ -430,7 +434,22 @@
     "adultDefibrillatorDesc": "Chọn năng lượng sóc cho bệnh nhân người lớn",
     "epinephrineInterval": "Khoảng Cách Epinephrin",
     "epinephrineIntervalDesc": "Thời gian giữa các liều epinephrin (AHA khuyến nghị 3-5 phút)",
-    "minutes": "phút"
+    "minutes": "phút",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Bật hỗ trợ đặt ống thông ECMO/ECPR trong ngừng tim",
+    "ecmoActivationTime": "Thời gian Kích hoạt (phút)",
+    "ecmoInclusionCriteria": "Tiêu chí Bao gồm",
+    "ecmoExclusionCriteria": "Tiêu chí Loại trừ",
+    "ecmoCriteriaPlaceholder": "Nhập tiêu chí và nhấn Thêm",
+    "ecmoAdd": "Thêm",
+    "cowboyMode": "Chế độ Cowboy",
+    "cowboyModeDesc": "Bỏ các hạn chế thời gian AHA về việc dùng thuốc và kích hoạt ECMO",
+    "cowboyModeActive": "Hoạt động - Hướng dẫn AHA bị ghi đè",
+    "cowboyModeInactive": "Không hoạt động - Tuân theo hướng dẫn AHA 2025",
+    "cowboyModeConfirmTitle": "Kích hoạt Chế độ Cowboy?",
+    "cowboyModeConfirmDesc": "Điều này sẽ cho phép bạn dùng thuốc bất cứ lúc nào và kích hoạt ECMO ngay lập tức, khác với hướng dẫn thuật toán ngừng tim AHA 2025. Các đề xuất thời gian dùng thuốc sẽ bị vô hiệu hóa.",
+    "cowboyModeConfirm": "Kích hoạt Chế độ Cowboy",
+    "cowboyModeCancel": "Hủy"
   },
   "resume": {
     "title": "Đã Phát Hiện Mã Đang Hoạt Động",
@@ -531,7 +550,7 @@
     "hsTsChecked": "Đã kiểm tra H's & T's: {{items}}",
     "codeEnded": "Mã đã kết thúc: {{outcome}}",
     "noteAdded": "Ghi chú: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Đã đặt cân nặng bệnh nhân: {{weight}} kg",
     "pregnancyActivated": "Đã kích hoạt giao thức mang thai",
     "anaphylaxisActivated": "Giao thức phản vệ đã được kích hoạt",
@@ -720,7 +739,7 @@
     "dose": "Liều",
     "doseNumber": "Liều #{{number}}",
     "endSession": "Kết Thúc Phiên",
-    "sessionEnded": "Phiên Đã Kết Thúc",
+    "sessionEnded": "Phiên Đã Kết Thúc: {{outcome}}",
     "sessionEndedDisplay": "Phiên Đã Kết Thúc",
     "exportSession": "Xuất Phiên",
     "switchedToArrest": "Đã chuyển sang giao thức ngừng tim",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "VT Đa Hình: Sử Dụng ĐIỆN GIẢI (KHÔNG đồng bộ)",
     "deliverDefibrillation": "Đưa Ra ĐIỆN GIẢI (Không đồng bộ)",
     "defibrillationUnsynchronized": "Điện giải (không đồng bộ)",
-    "sessionEnded": "Phiên Đã Kết Thúc: {{outcome}}",
     "outcomeResolved": "Đã Giải Quyết",
     "outcomeTransferred": "Đã Chuyển"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "Liên Hệ Với Chúng Tôi",
     "contactP1": "Nếu bạn có bất kỳ câu hỏi nào về Chính Sách Quyền Riêng Tư này, vui lòng liên hệ với chúng tôi tại:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Kích hoạt ECMO",
+    "active": "ECMO Đã kích hoạt",
+    "activated": "ECMO/ECPR đã được kích hoạt",
+    "availableIn": "Sẵn sàng trong {{time}}",
+    "inclusionCriteria": "Tiêu chí Bao gồm",
+    "exclusionCriteria": "Tiêu chí Loại trừ",
+    "noneConfigured": "Chưa được cấu hình"
   }
 }

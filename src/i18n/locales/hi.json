@@ -49,7 +49,7 @@
     "shockable": "शॉक योग्य रिदम",
     "asystole": "एसिस्टोल",
     "nonShockable": "गैर-शॉक योग्य",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "कार्य",
@@ -403,6 +403,10 @@
   },
   "settings": {
     "title": "सेटिंग्स",
+    "groupGeneral": "सामान्य",
+    "groupFeedback": "प्रतिक्रिया",
+    "groupPreferences": "वरीयताएं",
+    "groupECMO": "ECMO/ECPR",
     "language": "भाषा",
     "languageDesc": "अपनी पसंदीदा भाषा चुनें",
     "english": "English",
@@ -430,7 +434,22 @@
     "adultDefibrillatorDesc": "वयस्क मरीज़ों के लिए शॉक ऊर्जा चुनें",
     "epinephrineInterval": "Epinephrine/Adrenaline अंतराल",
     "epinephrineIntervalDesc": "Epinephrine डोज़ के बीच समय (AHA 3-5 मिनट अनुशंसा)",
-    "minutes": "मिनट"
+    "minutes": "मिनट",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "हृदय गति रुकने के दौरान ECMO/ECPR कैन्यूलेशन समर्थन सक्षम करें",
+    "ecmoActivationTime": "सक्रियण समय (मिनट)",
+    "ecmoInclusionCriteria": "समावेशन मानदंड",
+    "ecmoExclusionCriteria": "अपवर्जन मानदंड",
+    "ecmoCriteriaPlaceholder": "मानदंड टाइप करें और जोड़ें दबाएं",
+    "ecmoAdd": "जोड़ें",
+    "cowboyMode": "काउबॉय मोड",
+    "cowboyModeDesc": "दवा प्रशासन और ECMO सक्रियण पर AHA समय प्रतिबंध हटाएं",
+    "cowboyModeActive": "सक्रिय - AHA दिशानिर्देशों को ओवरराइड किया गया",
+    "cowboyModeInactive": "निष्क्रिय - 2025 AHA दिशानिर्देशों का पालन कर रहा है",
+    "cowboyModeConfirmTitle": "काउबॉय मोड सक्षम करें?",
+    "cowboyModeConfirmDesc": "यह आपको किसी भी समय दवाएं देने और तुरंत ECMO सक्रिय करने की अनुमति देगा, 2025 AHA कार्डियक अरेस्ट एल्गोरिदम दिशानिर्देशों से विचलित होकर। दवा समय सुझाव अक्षम कर दिए जाएंगे।",
+    "cowboyModeConfirm": "काउबॉय मोड सक्षम करें",
+    "cowboyModeCancel": "रद्द करें"
   },
   "resume": {
     "title": "सक्रिय कोड पाया गया",
@@ -531,7 +550,7 @@
     "hsTsChecked": "H's & T's जांचे: {{items}}",
     "codeEnded": "कोड समाप्त: {{outcome}}",
     "noteAdded": "नोट: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "मरीज़ वजन सेट: {{weight}} kg",
     "pregnancyActivated": "गर्भावस्था प्रोटोकॉल सक्रिय",
     "anaphylaxisActivated": "एनाफिलैक्सिस प्रोटोकॉल सक्रिय",
@@ -720,7 +739,7 @@
     "dose": "डोज़",
     "doseNumber": "डोज़ #{{number}}",
     "endSession": "सत्र समाप्त",
-    "sessionEnded": "सत्र समाप्त हुआ",
+    "sessionEnded": "सत्र समाप्त: {{outcome}}",
     "sessionEndedDisplay": "सत्र समाप्त हुआ",
     "exportSession": "सत्र निर्यात",
     "switchedToArrest": "कार्डियक अरेस्ट प्रोटोकॉल पर स्विच",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "पोलिमोर्फिक VT: DEFIBRILLATION (सिंकृनाइज़्ड नहीं) उपयोग करें",
     "deliverDefibrillation": "DEFIBRILLATION दें (अनसिंकृनाइज़्ड)",
     "defibrillationUnsynchronized": "डिफिब्रिलेशन (अनसिंकृनाइज़्ड)",
-    "sessionEnded": "सत्र समाप्त: {{outcome}}",
     "outcomeResolved": "हल",
     "outcomeTransferred": "स्थानांतरित"
   },
@@ -981,5 +999,15 @@
     "acceptButton": "मैं स्वीकार करता/करती हूँ",
     "acceptedButton": "स्वीकार किया गया",
     "viewTerms": "उपयोग की शर्तें देखें"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "ECMO सक्रिय करें",
+    "active": "ECMO सक्रिय",
+    "activated": "ECMO/ECPR सक्रिय किया गया",
+    "availableIn": "{{time}} में उपलब्ध",
+    "inclusionCriteria": "समावेशन मानदंड",
+    "exclusionCriteria": "अपवर्जन मानदंड",
+    "noneConfigured": "कुछ भी कॉन्फ़िगर नहीं"
   }
 }

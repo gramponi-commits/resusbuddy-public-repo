@@ -4,6 +4,7 @@ import { XCircle, Save, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CodeTimeline } from '../CodeTimeline';
 import type { Intervention } from '@/types/acls';
+import type { ETCO2Unit } from '@/lib/etco2Units';
 
 interface CodeEndedViewProps {
   interventions: Intervention[];
@@ -15,6 +16,7 @@ interface CodeEndedViewProps {
   shockCount: number;
   epinephrineCount: number;
   amiodaroneCount: number;
+  etco2Unit: ETCO2Unit;
   onExport: () => void;
   onNewCode: () => void;
 }
@@ -33,6 +35,7 @@ export const CodeEndedView = memo<CodeEndedViewProps>(({
   shockCount,
   epinephrineCount,
   amiodaroneCount,
+  etco2Unit,
   onExport,
   onNewCode,
 }) => {
@@ -99,7 +102,12 @@ export const CodeEndedView = memo<CodeEndedViewProps>(({
         </div>
       </div>
 
-      <CodeTimeline interventions={interventions} startTime={startTime} bradyTachyStartTime={bradyTachyStartTime} />
+      <CodeTimeline
+        interventions={interventions}
+        startTime={startTime}
+        bradyTachyStartTime={bradyTachyStartTime}
+        etco2Unit={etco2Unit}
+      />
 
       {/* Actions */}
       <div className="space-y-3 pt-2">

@@ -49,7 +49,7 @@
     "shockable": "Maaaring Shokin na Ritmo",
     "asystole": "Asystole",
     "nonShockable": "Hindi Shokable",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Mga Aksyon",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Mga Setting",
+    "groupGeneral": "Pangkalahatan",
+    "groupFeedback": "Feedback",
+    "groupPreferences": "Mga Kagustuhan",
+    "groupECMO": "ECMO/ECPR",
     "language": "Wika",
     "languageDesc": "Piliin ang iyong paboritong wika",
     "english": "Ingles",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Piliin ang enerhiya ng shok para sa pasyenteng nasa gulang",
     "epinephrineInterval": "Interval ng Epinephrine",
     "epinephrineIntervalDesc": "Oras sa pagitan ng mga dosis ng epinephrine (iniir ng AHA ang 3-5 minuto)",
-    "minutes": "min"
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "I-enable ang suporta sa ECMO/ECPR cannulation sa panahon ng cardiac arrest",
+    "ecmoActivationTime": "Oras ng Pag-activate (minuto)",
+    "ecmoInclusionCriteria": "Mga Pamantayan sa Pagsasama",
+    "ecmoExclusionCriteria": "Mga Pamantayan sa Pagbubukod",
+    "ecmoCriteriaPlaceholder": "Mag-type ng pamantayan at pindutin ang Idagdag",
+    "ecmoAdd": "Idagdag",
+    "cowboyMode": "Mode ng Cowboy",
+    "cowboyModeDesc": "Alisin ang mga paghihigpit sa oras ng AHA sa pagbibigay ng gamot at pag-activate ng ECMO",
+    "cowboyModeActive": "Aktibo - Na-override ang mga alituntunin ng AHA",
+    "cowboyModeInactive": "Hindi Aktibo - Sinusundan ang mga alituntunin ng AHA 2025",
+    "cowboyModeConfirmTitle": "I-activate ang Mode ng Cowboy?",
+    "cowboyModeConfirmDesc": "Ito ay magpapahintulot sa iyong magbigay ng gamot anumang oras at i-activate ang ECMO agad, na lumilihis sa mga alituntunin ng AHA 2025 Cardiac Arrest Algorithm. Ang mga mungkahi sa pag-time ng gamot ay idi-disable.",
+    "cowboyModeConfirm": "I-activate ang Mode ng Cowboy",
+    "cowboyModeCancel": "Kanselahin"
   },
   "resume": {
     "title": "Nadiskubreng Aktibong Kodigo",
@@ -416,7 +435,7 @@
     "hsTsChecked": "Sinusuri ang H's & T's: {{items}}",
     "codeEnded": "Nagtapos ang Code: {{outcome}}",
     "noteAdded": "Tala: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Natakda ang timbang ng pasyente: {{weight}} kg",
     "pregnancyActivated": "Na-activate ang protocol ng pagbubuntis",
     "anaphylaxisActivated": "Na-activate ang protocol ng anaphylaxis",
@@ -605,7 +624,7 @@
     "dose": "Dosis",
     "doseNumber": "Dosis #{{number}}",
     "endSession": "Tapusin ang Sesyon",
-    "sessionEnded": "Tapos na ang Sesyon",
+    "sessionEnded": "Tapos na ang Session: {{outcome}}",
     "sessionEndedDisplay": "Natapos ang Session",
     "exportSession": "I-angkat ang Sesyon",
     "switchedToArrest": "Lumipat sa cardiac arrest protocol",
@@ -694,7 +713,6 @@
     "polymorphicVTWarning": "Polymorphic VT: Gamitin ang DEFIBRILLATION (HINDI synchronized)",
     "deliverDefibrillation": "Ibigay ang DEFIBRILLATION (Unsynchronized)",
     "defibrillationUnsynchronized": "Defibrillation (unsynchronized)",
-    "sessionEnded": "Tapos na ang Session: {{outcome}}",
     "outcomeResolved": "Nalutas",
     "outcomeTransferred": "Naipalipat"
   },
@@ -981,5 +999,15 @@
       "measureBPDoppler": "Sukatin ang BP gamit ang Doppler",
       "measureBPDopplerDesc": "Gamitin ang Doppler para sa assessment ng MAP; ang pulses ay maaring diminished/absent kahit may functioning LVAD"
     }
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "I-activate ang ECMO",
+    "active": "ECMO Aktibo",
+    "activated": "ECMO/ECPR na-activate",
+    "availableIn": "Magagamit sa {{time}}",
+    "inclusionCriteria": "Mga Pamantayan sa Pagsasama",
+    "exclusionCriteria": "Mga Pamantayan sa Pagbubukod",
+    "noneConfigured": "Waling naka-configure"
   }
 }

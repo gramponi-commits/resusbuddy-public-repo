@@ -49,7 +49,7 @@
     "shockable": "Шокувальний ритм",
     "asystole": "Асистолія",
     "nonShockable": "Нешокувальний",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Дії",
@@ -403,6 +403,10 @@
   },
   "settings": {
     "title": "Налаштування",
+    "groupGeneral": "Загальні",
+    "groupFeedback": "Зворотний зв'язок",
+    "groupPreferences": "Налаштування",
+    "groupECMO": "ЕКМО/ЕКР",
     "language": "Мова",
     "languageDesc": "Виберіть бажану мову",
     "english": "English",
@@ -430,7 +434,22 @@
     "adultDefibrillatorDesc": "Виберіть енергію розряду для дорослих пацієнтів",
     "epinephrineInterval": "Інтервал епінефрину/адреналіну",
     "epinephrineIntervalDesc": "Час між дозами епінефрину (AHA рекомендує 3-5 хв)",
-    "minutes": "хв"
+    "minutes": "хв",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Увімкнути підтримку канюляції ЕКМО/ECPR під час зупинки серця",
+    "ecmoActivationTime": "Час Активації (хвилини)",
+    "ecmoInclusionCriteria": "Критерії Включення",
+    "ecmoExclusionCriteria": "Критерії Виключення",
+    "ecmoCriteriaPlaceholder": "Введіть критерій і натисніть Додати",
+    "ecmoAdd": "Додати",
+    "cowboyMode": "Режим Ковбоя",
+    "cowboyModeDesc": "Прибрати обмеження часу AHA на введення препаратів та активацію ЕКМО",
+    "cowboyModeActive": "Активно - Керівництва AHA ігноруються",
+    "cowboyModeInactive": "Неактивно - Дотримання керівництв AHA 2025",
+    "cowboyModeConfirmTitle": "Увімкнути режим Ковбоя?",
+    "cowboyModeConfirmDesc": "Це дозволить вам вводити препарати у будь-який час і активувати ЕКМО негайно, відхиляючись від керівництв алгоритму зупинки серця AHA 2025. Пропозиції щодо часу введення препаратів будуть вимкнені.",
+    "cowboyModeConfirm": "Увімкнути режим Ковбоя",
+    "cowboyModeCancel": "Скасувати"
   },
   "resume": {
     "title": "Виявлено активний код",
@@ -531,7 +550,7 @@
     "hsTsChecked": "H's & T's перевірено: {{items}}",
     "codeEnded": "Код закінчено: {{outcome}}",
     "noteAdded": "Нотатка: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} мм рт.ст.",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Вагу пацієнта встановлено: {{weight}} кг",
     "pregnancyActivated": "Активовано протокол вагітності",
     "anaphylaxisActivated": "Протокол анафілаксії активовано",
@@ -720,7 +739,7 @@
     "dose": "Доза",
     "doseNumber": "Доза #{{number}}",
     "endSession": "Завершити сеанс",
-    "sessionEnded": "Сеанс завершено",
+    "sessionEnded": "Сеанс Завершено: {{outcome}}",
     "sessionEndedDisplay": "Сеанс Завершено",
     "exportSession": "Експортувати сеанс",
     "switchedToArrest": "Перейдено до протоколу зупинки серця",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "Поліморфічна ЖТ: Використовуйте ДЕФІБРИЛЯЦІЮ (НЕ синхронізовану)",
     "deliverDefibrillation": "Підати ДЕФІБРИЛАЦІЮ (Несинхронізовану)",
     "defibrillationUnsynchronized": "Дефібриляція (несинхронізована)",
-    "sessionEnded": "Сеанс Завершено: {{outcome}}",
     "outcomeResolved": "Вирішено",
     "outcomeTransferred": "Переведено"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "Зв'яжіться з Нами",
     "contactP1": "Якщо у вас є питання про цю Політику Конфіденційності, будь ласка, зв'яжіться з нами за адресою:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ЕКМО / ECPR",
+    "activateButton": "Активувати ЕКМО",
+    "active": "ЕКМО активне",
+    "activated": "ЕКМО/ECPR активовано",
+    "availableIn": "Доступно через {{time}}",
+    "inclusionCriteria": "Критерії Включення",
+    "exclusionCriteria": "Критерії Виключення",
+    "noneConfigured": "Не налаштовано"
   }
 }

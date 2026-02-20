@@ -49,7 +49,7 @@
     "shockable": "Rytm Wstrząsowy",
     "asystole": "Asystolia",
     "nonShockable": "Niewstrząsowy",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Akcje",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Ustawienia",
+    "groupGeneral": "Ogólne",
+    "groupFeedback": "Opinie",
+    "groupPreferences": "Preferencje",
+    "groupECMO": "ECMO/ECPR",
     "language": "Język",
     "languageDesc": "Wybierz preferowany język",
     "english": "Angielski",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Wybierz energię wstrząsu dla pacjentów dorosłych",
     "epinephrineInterval": "Interwał Epinefryny",
     "epinephrineIntervalDesc": "Czas między dawkami epinefryny (AHA zaleca 3-5 min)",
-    "minutes": "min"
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Włącz obsługę kaniulacji ECMO/ECPR podczas zatrzymania krążenia",
+    "ecmoActivationTime": "Czas Aktywacji (minuty)",
+    "ecmoInclusionCriteria": "Kryteria Włączenia",
+    "ecmoExclusionCriteria": "Kryteria Wykluczenia",
+    "ecmoCriteriaPlaceholder": "Wpisz kryterium i naciśnij Dodaj",
+    "ecmoAdd": "Dodaj",
+    "cowboyMode": "Tryb Cowboy",
+    "cowboyModeDesc": "Usuń ograniczenia czasowe AHA dotyczące podawania leków i aktywacji ECMO",
+    "cowboyModeActive": "Aktywny - Wytyczne AHA nadpisane",
+    "cowboyModeInactive": "Nieaktywny - Przestrzeganie wytycznych AHA 2025",
+    "cowboyModeConfirmTitle": "Włączyć tryb Cowboy?",
+    "cowboyModeConfirmDesc": "Umożliwi to podawanie leków w dowolnym momencie i natychmiastową aktywację ECMO, odstępując od wytycznych algorytmu zatrzymania krążenia AHA 2025. Sugestie dotyczące czasu podawania leków zostaną wyłączone.",
+    "cowboyModeConfirm": "Włącz tryb Cowboy",
+    "cowboyModeCancel": "Anuluj"
   },
   "resume": {
     "title": "Wykryto Aktywny Kod",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T's sprawdzone: {{items}}",
     "codeEnded": "Kod zakończony: {{outcome}}",
     "noteAdded": "Notatka: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Waga pacjenta ustawiona: {{weight}} kg",
     "pregnancyActivated": "Protokół ciążowy aktywowany",
     "anaphylaxisActivated": "[TRANSLATE] Anaphylaxis protocol activated",
@@ -605,7 +624,7 @@
     "dose": "Dawka",
     "doseNumber": "Dawka #{{number}}",
     "endSession": "Zakończ Sesję",
-    "sessionEnded": "Sesja Zakończona",
+    "sessionEnded": "Sesja Zakończona: {{outcome}}",
     "sessionEndedDisplay": "Sesja Zakończona",
     "exportSession": "Eksportuj Sesję",
     "switchedToArrest": "Przełączono do protokołu zatrzymania krążenia",
@@ -694,7 +713,6 @@
     "polymorphicVTWarning": "VT Polimorficzna: Użyj DEFIBRYLACJI (NIE zsynchronizowanej)",
     "deliverDefibrillation": "Dostarcz DEFIBRYLACJĘ (Niezsynchronizowaną)",
     "defibrillationUnsynchronized": "Defibrylacja (niezsynchronizowana)",
-    "sessionEnded": "Sesja Zakończona: {{outcome}}",
     "outcomeResolved": "Rozwiązany",
     "outcomeTransferred": "Przeniesiony"
   },
@@ -981,5 +999,15 @@
       "measureBPDoppler": "Zmierz RR za pomocą Dopplera",
       "measureBPDopplerDesc": "Użyj Dopplera, aby ocenić SAD; tętna mogą być zredukowane/nieobecne, nawet przy działającym LVAD"
     }
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Aktywuj ECMO",
+    "active": "ECMO aktywne",
+    "activated": "ECMO/ECPR aktywowane",
+    "availableIn": "Dostępne za {{time}}",
+    "inclusionCriteria": "Kryteria Włączenia",
+    "exclusionCriteria": "Kryteria Wykluczenia",
+    "noneConfigured": "Brak skonfigurowanych"
   }
 }

@@ -1,9 +1,11 @@
 import { useState, useCallback, useEffect } from 'react';
 import { logger } from '@/utils/logger';
+import type { ETCO2Unit } from '@/lib/etco2Units';
 
 export type ThemeMode = 'dark' | 'light';
 export type AdultDefibrillatorEnergy = 120 | 150 | 200 | 360;
 export type EpinephrineIntervalMinutes = 3 | 4 | 5;
+export type { ETCO2Unit } from '@/lib/etco2Units';
 
 export interface AppSettings {
   soundEnabled: boolean;
@@ -15,6 +17,12 @@ export interface AppSettings {
   theme: ThemeMode;
   adultDefibrillatorEnergy: AdultDefibrillatorEnergy;
   epinephrineIntervalMinutes: EpinephrineIntervalMinutes;
+  etco2Unit: ETCO2Unit;
+  ecmoEnabled: boolean;
+  ecmoActivationTimeMinutes: number;
+  ecmoInclusionCriteria: string[];
+  ecmoExclusionCriteria: string[];
+  cowboyMode: boolean;
 }
 
 const SETTINGS_KEY = 'acls-settings';
@@ -29,6 +37,12 @@ const DEFAULT_SETTINGS: AppSettings = {
   theme: 'dark',
   adultDefibrillatorEnergy: 200,
   epinephrineIntervalMinutes: 4,
+  etco2Unit: 'mmhg',
+  ecmoEnabled: false,
+  ecmoActivationTimeMinutes: 15,
+  ecmoInclusionCriteria: [],
+  ecmoExclusionCriteria: [],
+  cowboyMode: false,
 };
 
 export function useSettings() {
@@ -66,6 +80,33 @@ export function useSettings() {
             interval: parsed.epinephrineIntervalMinutes
           });
           parsed.epinephrineIntervalMinutes = DEFAULT_SETTINGS.epinephrineIntervalMinutes;
+        }
+
+        // Validate ETCO2 unit
+        const validEtco2Units: ETCO2Unit[] = ['mmhg', 'kpa'];
+        if (parsed.etco2Unit != null && !validEtco2Units.includes(parsed.etco2Unit)) {
+          logger.warn('Invalid ETCO2 unit, resetting to default', {
+            unit: parsed.etco2Unit
+          });
+          parsed.etco2Unit = DEFAULT_SETTINGS.etco2Unit;
+        }
+
+        // Validate ECMO activation time (5-60 minutes)
+        if (parsed.ecmoActivationTimeMinutes != null &&
+            (typeof parsed.ecmoActivationTimeMinutes !== 'number' ||
+             parsed.ecmoActivationTimeMinutes < 5 || parsed.ecmoActivationTimeMinutes > 60)) {
+          logger.warn('Invalid ECMO activation time, resetting to default', {
+            time: parsed.ecmoActivationTimeMinutes
+          });
+          parsed.ecmoActivationTimeMinutes = DEFAULT_SETTINGS.ecmoActivationTimeMinutes;
+        }
+
+        // Validate ECMO criteria arrays
+        if (parsed.ecmoInclusionCriteria != null && !Array.isArray(parsed.ecmoInclusionCriteria)) {
+          parsed.ecmoInclusionCriteria = DEFAULT_SETTINGS.ecmoInclusionCriteria;
+        }
+        if (parsed.ecmoExclusionCriteria != null && !Array.isArray(parsed.ecmoExclusionCriteria)) {
+          parsed.ecmoExclusionCriteria = DEFAULT_SETTINGS.ecmoExclusionCriteria;
         }
 
         return { ...DEFAULT_SETTINGS, ...parsed };

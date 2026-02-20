@@ -49,7 +49,7 @@
     "shockable": "Şoklanabilir Ritim",
     "asystole": "Asistol",
     "nonShockable": "Şoklanamaz",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Eylemler",
@@ -403,6 +403,10 @@
   },
   "settings": {
     "title": "Ayarlar",
+    "groupGeneral": "Genel",
+    "groupFeedback": "Geri Bildirim",
+    "groupPreferences": "Tercihler",
+    "groupECMO": "ECMO/ECPR",
     "language": "Dil",
     "languageDesc": "Tercih ettiğiniz dili seçin",
     "english": "İngilizce",
@@ -430,7 +434,22 @@
     "adultDefibrillatorDesc": "Yetişkin hastalar için şok enerjisini seçin",
     "epinephrineInterval": "Epinefrin Aralığı",
     "epinephrineIntervalDesc": "Epinefrin dozları arasındaki süre (AHA 3-5 dakika önerir)",
-    "minutes": "dk"
+    "minutes": "dk",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Kardiyak arrest sırasında ECMO/ECPR kanülasyon desteğini etkinleştir",
+    "ecmoActivationTime": "Etkinleştirme Süresi (dakika)",
+    "ecmoInclusionCriteria": "Dahil Etme Kriterleri",
+    "ecmoExclusionCriteria": "Dışlama Kriterleri",
+    "ecmoCriteriaPlaceholder": "Kriter yazın ve Ekle'ye basın",
+    "ecmoAdd": "Ekle",
+    "cowboyMode": "Kovboy Modu",
+    "cowboyModeDesc": "İlaç uygulaması ve ECMO aktivasyonunda AHA zaman kısıtlamalarını kaldır",
+    "cowboyModeActive": "Aktif - AHA yönergeleri geçersiz kılındı",
+    "cowboyModeInactive": "Pasif - 2025 AHA yönergeleri takip ediliyor",
+    "cowboyModeConfirmTitle": "Kovboy Modu Etkinleştirilsin mi?",
+    "cowboyModeConfirmDesc": "Bu, 2025 AHA Kardiyak Arrest Algoritması yönergelerinden saparak istediğiniz zaman ilaç uygulamanıza ve ECMO'yu hemen etkinleştirmenize olanak tanır. İlaç zamanlama önerileri devre dışı bırakılacaktır.",
+    "cowboyModeConfirm": "Kovboy Modunu Etkinleştir",
+    "cowboyModeCancel": "İptal"
   },
   "resume": {
     "title": "Aktif Kod Algılandı",
@@ -531,7 +550,7 @@
     "hsTsChecked": "H's & T'ler kontrol edildi: {{items}}",
     "codeEnded": "Kod sonlandırıldı: {{outcome}}",
     "noteAdded": "Not: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Hasta ağırlığı ayarlandı: {{weight}} kg",
     "pregnancyActivated": "Gebelik protokolü etkinleştirildi",
     "anaphylaxisActivated": "Anafilaksi protokolü etkinleştirildi",
@@ -720,7 +739,7 @@
     "dose": "Doz",
     "doseNumber": "Doz #{{number}}",
     "endSession": "Oturumu Sonlandır",
-    "sessionEnded": "Oturum Sonlandırıldı",
+    "sessionEnded": "Oturum Sonlandırıldı: {{outcome}}",
     "sessionEndedDisplay": "Oturum Sona Erdi",
     "exportSession": "Oturumu Dışa Aktar",
     "switchedToArrest": "Kalp durması protokolüne geçildi",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "Polimorfik VT: DEFİBRİLASYON (senkronize değil) kullanın",
     "deliverDefibrillation": "DEFİBRİLASYON (Senkronize değil) verin",
     "defibrillationUnsynchronized": "Defibrilasyon (senkronize değil)",
-    "sessionEnded": "Oturum Sonlandırıldı: {{outcome}}",
     "outcomeResolved": "Çözüldü",
     "outcomeTransferred": "Transfer edildi"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "Bizimle İletişime Geçin",
     "contactP1": "Bu Gizlilik Politikası hakkında sorularınız varsa, lütfen bizimle şu adresten iletişime geçin:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "ECMO'yu Etkinleştir",
+    "active": "ECMO Etkin",
+    "activated": "ECMO/ECPR etkinleştirildi",
+    "availableIn": "{{time}} içinde kullanılabilir",
+    "inclusionCriteria": "Dahil Etme Kriterleri",
+    "exclusionCriteria": "Dışlama Kriterleri",
+    "noneConfigured": "Yapılandırılmadı"
   }
 }

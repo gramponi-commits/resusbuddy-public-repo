@@ -142,11 +142,13 @@ export function HsAndTsChecklist({ hsAndTs, onUpdate }: HsAndTsChecklistProps) {
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger className="w-full">
         <div className={cn(
-          'flex items-center justify-between p-4 rounded-lg border-2 transition-all',
-          'bg-acls-warning/10 border-acls-warning hover:bg-acls-warning/20'
+          'flex items-center justify-between px-3 py-2 rounded-lg border-2 transition-all',
+          'bg-gray-100/50 dark:bg-gray-800/30 border-gray-300 dark:border-gray-600 hover:bg-gray-200/50 dark:hover:bg-gray-700/30'
         )}>
           <div className="flex items-center gap-3">
-            <AlertTriangle className="h-5 w-5 text-acls-warning" />
+            <div className="h-7 w-7 rounded-full bg-orange-500/15 flex items-center justify-center shrink-0 self-center">
+              <AlertTriangle className="h-5 w-5 text-orange-500" />
+            </div>
             <div className="text-left">
               <div className="font-semibold text-foreground">{t('hsTs.title')}</div>
               <div className="text-sm text-muted-foreground">

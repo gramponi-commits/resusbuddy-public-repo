@@ -49,7 +49,7 @@
     "shockable": "Schokbaar Ritme",
     "asystole": "Asystolie",
     "nonShockable": "Niet Schokbaar",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Acties",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Instellingen",
+    "groupGeneral": "Algemeen",
+    "groupFeedback": "Feedback",
+    "groupPreferences": "Voorkeuren",
+    "groupECMO": "ECMO/ECPR",
     "language": "Taal",
     "languageDesc": "Selecteer uw voorkeurstaal",
     "english": "Engels",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Selecteer schokenergie voor volwassen patiënten",
     "epinephrineInterval": "Epinefrine Interval",
     "epinephrineIntervalDesc": "Tijd tussen epinefrine doses (AHA beveelt 3-5 min aan)",
-    "minutes": "min"
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Schakel ECMO/ECPR-cannulatieondersteuning in tijdens hartstilstand",
+    "ecmoActivationTime": "Activeringstijd (minuten)",
+    "ecmoInclusionCriteria": "Inclusiecriteria",
+    "ecmoExclusionCriteria": "Exclusiecriteria",
+    "ecmoCriteriaPlaceholder": "Typ criterium en druk op Toevoegen",
+    "ecmoAdd": "Toevoegen",
+    "cowboyMode": "Cowboy-modus",
+    "cowboyModeDesc": "Verwijder AHA-tijdsbeperkingen voor medicatietoediening en ECMO-activering",
+    "cowboyModeActive": "Actief - AHA-richtlijnen overschreven",
+    "cowboyModeInactive": "Inactief - Volgt 2025 AHA-richtlijnen",
+    "cowboyModeConfirmTitle": "Cowboy-modus inschakelen?",
+    "cowboyModeConfirmDesc": "Hiermee kunt u op elk moment medicatie toedienen en ECMO direct activeren, afwijkend van de 2025 AHA hartstilstand-algoritme richtlijnen. Medicatie-timingssuggesties worden uitgeschakeld.",
+    "cowboyModeConfirm": "Cowboy-modus inschakelen",
+    "cowboyModeCancel": "Annuleren"
   },
   "resume": {
     "title": "Actieve Code Gedetecteerd",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T's gecontroleerd: {{items}}",
     "codeEnded": "Code beëindigd: {{outcome}}",
     "noteAdded": "Notitie: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Patiëntgewicht ingesteld: {{weight}} kg",
     "pregnancyActivated": "Zwangerschapsprotocol geactiveerd",
     "anaphylaxisActivated": "[TRANSLATE] Anaphylaxis protocol activated",
@@ -605,7 +624,7 @@
     "dose": "Dosis",
     "doseNumber": "Dosis #{{number}}",
     "endSession": "Beëindig Sessie",
-    "sessionEnded": "Sessie Beëindigd",
+    "sessionEnded": "Sessie Beëindigd: {{outcome}}",
     "sessionEndedDisplay": "Sessie Beëindigd",
     "exportSession": "Exporteer Sessie",
     "switchedToArrest": "Geschakeld naar cardiac arrest protocol",
@@ -694,7 +713,6 @@
     "polymorphicVTWarning": "Polymorfische VT: Gebruik DEFIBRILLATIE (NIET gesynchroniseerd)",
     "deliverDefibrillation": "Lever DEFIBRILLATIE (Niet-gesynchroniseerd)",
     "defibrillationUnsynchronized": "Defibrillatie (niet-gesynchroniseerd)",
-    "sessionEnded": "Sessie Beëindigd: {{outcome}}",
     "outcomeResolved": "Opgelost",
     "outcomeTransferred": "Overgeplaatst"
   },
@@ -981,5 +999,15 @@
       "measureBPDoppler": "BP meten met Doppler",
       "measureBPDopplerDesc": "Gebruik Doppler om MAP te beoordelen; polsen kunnen verminderd/afwezig zijn, zelfs met werkende LVAD"
     }
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "ECMO activeren",
+    "active": "ECMO actief",
+    "activated": "ECMO/ECPR geactiveerd",
+    "availableIn": "Beschikbaar in {{time}}",
+    "inclusionCriteria": "Inclusiecriteria",
+    "exclusionCriteria": "Exclusiecriteria",
+    "noneConfigured": "Geen geconfigureerd"
   }
 }

@@ -49,7 +49,7 @@
     "shockable": "Stødbar Rytme",
     "asystole": "Asystoli",
     "nonShockable": "Ikke Stødbar",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "Handlinger",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Indstillinger",
+    "groupGeneral": "Generelt",
+    "groupFeedback": "Feedback",
+    "groupPreferences": "Præferencer",
+    "groupECMO": "ECMO/ECPR",
     "language": "Sprog",
     "languageDesc": "Vælg dit foretrukne sprog",
     "english": "Engelsk",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Vælg stødenergi for voksne patienter",
     "epinephrineInterval": "Epinefrin Interval",
     "epinephrineIntervalDesc": "Tid mellem epinefrin doser (AHA anbefaler 3-5 min)",
-    "minutes": "min"
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Aktivér ECMO/ECPR-kanylestøtte under hjertestop",
+    "ecmoActivationTime": "Aktiveringstid (minutter)",
+    "ecmoInclusionCriteria": "Inklusionskriterier",
+    "ecmoExclusionCriteria": "Eksklusionskriterier",
+    "ecmoCriteriaPlaceholder": "Indtast kriterium og tryk Tilføj",
+    "ecmoAdd": "Tilføj",
+    "cowboyMode": "Cowboy-tilstand",
+    "cowboyModeDesc": "Fjern AHA-tidsbegrænsninger på medicinadministration og ECMO-aktivering",
+    "cowboyModeActive": "Aktiv - AHA-retningslinjer tilsidesat",
+    "cowboyModeInactive": "Inaktiv - Følger 2025 AHA-retningslinjer",
+    "cowboyModeConfirmTitle": "Aktivér Cowboy-tilstand?",
+    "cowboyModeConfirmDesc": "Dette tillader dig at administrere medicin når som helst og aktivere ECMO straks, hvilket afviger fra 2025 AHA-hjertestop-algoritme-retningslinjerne. Tidsforslag til medicin deaktiveres.",
+    "cowboyModeConfirm": "Aktivér Cowboy-tilstand",
+    "cowboyModeCancel": "Annuller"
   },
   "resume": {
     "title": "Aktiv Kode Detekteret",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T's tjekket: {{items}}",
     "codeEnded": "Kode afsluttet: {{outcome}}",
     "noteAdded": "Note: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Patientvægt indstillet: {{weight}} kg",
     "pregnancyActivated": "Graviditetsprotokol aktiveret",
     "anaphylaxisActivated": "Anafylaksi-protokol aktiveret",
@@ -720,7 +739,7 @@
     "dose": "Dosis",
     "doseNumber": "Dosis #{{number}}",
     "endSession": "Afslut Session",
-    "sessionEnded": "Session Afsluttet",
+    "sessionEnded": "Session Afsluttet: {{outcome}}",
     "sessionEndedDisplay": "Session Afsluttet",
     "exportSession": "Eksporter Session",
     "switchedToArrest": "Skiftet til hjertestop protokol",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "Polymorfisk VT: Brug DEFIBRILLERING (IKKE synkroniseret)",
     "deliverDefibrillation": "Lever DEFIBRILLERING (Ikke-synkroniseret)",
     "defibrillationUnsynchronized": "Defibrillering (ikke-synkroniseret)",
-    "sessionEnded": "Session Afsluttet: {{outcome}}",
     "outcomeResolved": "Løst",
     "outcomeTransferred": "Overført"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "Kontakt Os",
     "contactP1": "Hvis du har spørgsmål til denne Privatlivspolitik, bedes du kontakte os på:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Aktivér ECMO",
+    "active": "ECMO aktiv",
+    "activated": "ECMO/ECPR aktiveret",
+    "availableIn": "Tilgængelig om {{time}}",
+    "inclusionCriteria": "Inklusionskriterier",
+    "exclusionCriteria": "Eksklusionskriterier",
+    "noneConfigured": "Ingen konfigureret"
   }
 }

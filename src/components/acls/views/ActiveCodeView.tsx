@@ -7,6 +7,7 @@ import { CPRQualityPanel } from '../CPRQualityPanel';
 import { HsAndTsChecklist } from '../HsAndTsChecklist';
 import { PregnancyChecklist } from '../PregnancyChecklist';
 import { SpecialCircumstancesChecklist } from '../SpecialCircumstancesChecklist';
+import { ECMOPanel } from '../ECMOPanel';
 import { CodeTimeline } from '../CodeTimeline';
 import type {
   PathwayMode,
@@ -18,6 +19,7 @@ import type {
   CPRRatio,
   SpecialCircumstances,
 } from '@/types/acls';
+import type { ETCO2Unit } from '@/lib/etco2Units';
 
 // Use HsAndTs directly instead of HsAndTsState alias
 type HsAndTsState = HsAndTs;
@@ -55,10 +57,13 @@ interface ActiveCodeViewProps {
   canGiveAmiodarone: boolean;
   canGiveLidocaine: boolean;
   epiDue: boolean;
+  antiarrhythmicDue: boolean;
 
   // Settings
   preferLidocaine: boolean;
   vibrationEnabled: boolean;
+  cowboyMode?: boolean;
+  etco2Unit: ETCO2Unit;
 
   // Actions
   onSetWeight: (weight: number | null) => void;
@@ -76,6 +81,14 @@ interface ActiveCodeViewProps {
   onDeliveryAlert: () => void;
   // Special Circumstances actions
   onToggleSpecialCircumstance: (key: keyof SpecialCircumstances, active: boolean) => void;
+
+  // ECMO/ECPR
+  ecmoEnabled: boolean;
+  ecmoActivationTimeMinutes: number;
+  ecmoInclusionCriteria: string[];
+  ecmoExclusionCriteria: string[];
+  onActivateECMO: () => void;
+  onECMOAvailable?: () => void;
 }
 
 /**
@@ -110,8 +123,11 @@ export const ActiveCodeView = memo<ActiveCodeViewProps>(({
   canGiveAmiodarone,
   canGiveLidocaine,
   epiDue,
+  antiarrhythmicDue,
   preferLidocaine,
   vibrationEnabled,
+  cowboyMode,
+  etco2Unit,
   onSetWeight,
   onEpinephrine,
   onAmiodarone,
@@ -126,6 +142,12 @@ export const ActiveCodeView = memo<ActiveCodeViewProps>(({
   onUpdatePregnancyInterventions,
   onDeliveryAlert,
   onToggleSpecialCircumstance,
+  ecmoEnabled,
+  ecmoActivationTimeMinutes,
+  ecmoInclusionCriteria,
+  ecmoExclusionCriteria,
+  onActivateECMO,
+  onECMOAvailable,
 }) => {
   const { t } = useTranslation();
   const [showWeightDialog, setShowWeightDialog] = useState(false);
@@ -158,6 +180,7 @@ export const ActiveCodeView = memo<ActiveCodeViewProps>(({
         canGiveAmiodarone={canGiveAmiodarone}
         canGiveLidocaine={canGiveLidocaine}
         epiDue={epiDue}
+        antiarrhythmicDue={antiarrhythmicDue}
         rhythmCheckDue={rhythmCheckDue}
         epinephrineCount={epinephrineCount}
         amiodaroneCount={amiodaroneCount}
@@ -165,6 +188,7 @@ export const ActiveCodeView = memo<ActiveCodeViewProps>(({
         preferLidocaine={preferLidocaine}
         patientWeight={patientWeight}
         pathwayMode={pathwayMode}
+        cowboyMode={cowboyMode}
         onEpinephrine={onEpinephrine}
         onAmiodarone={onAmiodarone}
         onLidocaine={onLidocaine}
@@ -185,6 +209,7 @@ export const ActiveCodeView = memo<ActiveCodeViewProps>(({
         airwayStatus={airwayStatus}
         onAirwayChange={onAirwayChange}
         onETCO2Record={onETCO2Record}
+        etco2Unit={etco2Unit}
         cprRatio={cprRatio}
         onCPRRatioChange={onCPRRatioChange}
         pathwayMode={pathwayMode}
@@ -217,6 +242,17 @@ export const ActiveCodeView = memo<ActiveCodeViewProps>(({
         onToggleCondition={onToggleSpecialCircumstance}
       />
 
+      {/* ECMO/ECPR Panel - Only when enabled in settings */}
+      <ECMOPanel
+        ecmoEnabled={ecmoEnabled}
+        activationTimeMinutes={ecmoActivationTimeMinutes}
+        totalElapsed={totalElapsed}
+        inclusionCriteria={ecmoInclusionCriteria}
+        exclusionCriteria={ecmoExclusionCriteria}
+        onActivateECMO={onActivateECMO}
+        onECMOAvailable={onECMOAvailable}
+      />
+
       {/* Code Timers - Total & CPR */}
       <CodeTimers
         totalElapsed={totalElapsed}
@@ -228,6 +264,7 @@ export const ActiveCodeView = memo<ActiveCodeViewProps>(({
         interventions={interventions}
         startTime={startTime}
         bradyTachyStartTime={bradyTachyStartTime}
+        etco2Unit={etco2Unit}
       />
     </>
   );

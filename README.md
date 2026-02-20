@@ -1,96 +1,198 @@
 # ResusBuddy
 
-ResusBuddy is a clinical-grade ACLS/PALS decision-support Progressive Web App for training and simulation use, aligned with 2025 AHA cardiac arrest workflows.
+A clinical-grade intelligent decision support application implementing the 2025 AHA Cardiac Arrest Algorithm for adult and pediatric resuscitation in hospital code teams and training scenarios.
+
+## Overview
+
+ResusBuddy is a Progressive Web App (PWA) designed to assist healthcare professionals during cardiac arrest situations by providing real-time guidance following American Heart Association guidelines. The app features:
+
+- **Real-time Code Management**: Track cardiac arrest events with automated timing and rhythm checks
+- **Adult & Pediatric Protocols**: Complete implementation of adult and pediatric resuscitation algorithms
+- **Bradycardia & Tachycardia Modules**: Guided pathways for stable and unstable arrhythmias
+- **CPR Quality Tracking**: Monitor compression timing and ensure guideline compliance
+- **Post-ROSC Care**: Structured checklist for return of spontaneous circulation
+- **Session History**: Review past resuscitation events with complete timeline and notes
+- **Offline Support**: Fully functional without internet connection
+- **Cross-Platform**: Available as web app and native mobile app (iOS/Android)
 
 ## Important Disclaimer
 
-**For educational and simulation use only. Not for real-patient clinical decision-making.**
+**FOR EDUCATIONAL AND TRAINING PURPOSES ONLY**
 
-Use institutional protocols, formal training, and clinician judgment in real care settings.
+This application is intended for:
+- Educational training scenarios
+- Resuscitation certification practice
+- Reference during simulations
 
-## Key Capabilities
+This tool is **NOT** intended to replace:
+- Clinical judgment
+- Formal resuscitation training and certification
+- Established hospital protocols
+- Real-time physician oversight during actual resuscitation
 
-- Adult and pediatric cardiac arrest pathways (ACLS/PALS)
-- Bradycardia and tachycardia guided pathways
-- CPR rhythm-check and medication timing support
-- Intervention timeline and session history
-- Weight-based pediatric dosing
-- Offline-first behavior with local persistence
-- Multi-language interface (i18next)
+Healthcare providers are solely responsible for patient care decisions. Always follow your institution's protocols and guidelines.
 
-## Platform Scope
+## Technology Stack
 
-- Web (PWA)
-- Android (Capacitor)
-- iOS (Capacitor)
+This project is built with modern web technologies:
 
-## Tech Stack
+- **Frontend Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Styling**: Tailwind CSS
+- **State Management**: XState (state machines)
+- **Mobile**: Capacitor for iOS/Android native apps
+- **Routing**: React Router
+- **Internationalization**: i18next
+- **Testing**: Vitest + React Testing Library
 
-- React 18 + TypeScript
-- Vite
-- Tailwind + shadcn/ui
-- Capacitor (Android/iOS)
-- Vitest + Testing Library
-- i18next
-
-## Architecture Notes
-
-The protocol flow is implemented with custom React hooks rather than a runtime XState machine:
-
-- `src/hooks/useACLSLogic.ts`: cardiac arrest phases, timers, interventions
-- `src/hooks/useBradyTachyLogic.ts`: brady/tachy assessment and treatment flow
-- `src/types/acls.ts`: centralized clinical and session types
-- `src/lib/*Dosing.ts`: adult/pediatric/brady-tachy dosing utilities
-
-## Development
+## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ recommended
-- npm
-- Android Studio/Xcode for native builds
+- Node.js 16+ and npm (recommended: [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+- For mobile development: Xcode (iOS) or Android Studio (Android)
 
-### Install
+### Installation
 
-```bash
+```sh
+# Clone the repository
+git clone <repository-url>
+
+# Navigate to project directory
+cd acl-assist-now
+
+# Install dependencies
 npm install
-```
 
-### Run and Build
-
-```bash
+# Start development server
 npm run dev
+```
+
+The app will be available at `http://localhost:5173`
+
+## Available Scripts
+
+### Web Development
+
+```sh
+npm run dev          # Start development server with hot reload
+npm run build        # Build for production
+npm run preview      # Preview production build locally
+npm run lint         # Run ESLint
+npm test             # Run tests in watch mode
+npm run test:run     # Run tests once
+npm run test:coverage # Run tests with coverage report
+```
+
+### Mobile Development
+
+```sh
+# Android
+npm run cap:sync:android    # Sync web assets to Android
+npm run cap:open:android    # Open Android Studio
+npm run cap:run:android     # Build and run on Android device/emulator
+npm run android:dev         # Development build and run
+npm run android:build       # Production build for Android
+
+# iOS
+npm run cap:sync:ios        # Sync web assets to iOS
+npm run cap:open:ios        # Open Xcode
+npm run cap:run:ios         # Build and run on iOS device/simulator
+npm run ios:dev             # Development build and run
+```
+
+## Features
+
+### Code Management
+- Start/pause/resume cardiac arrest protocols
+- Automatic 2-minute CPR cycle timing
+- Rhythm check reminders
+- Medication tracking and suggestions
+- Defibrillation tracking with joule settings
+
+### Clinical Decision Support
+- Shockable rhythm pathway (VF/pVT)
+- Non-shockable rhythm pathway (PEA/Asystole)
+- Reversible causes checklist (H's and T's)
+- Pregnancy-specific considerations
+- Post-ROSC care protocol
+
+### Arrhythmia Management
+- Bradycardia assessment and treatment pathways
+- Tachycardia evaluation (stable vs unstable)
+- SVT vs Sinus Tachycardia differentiation
+- Medication dosing calculators
+
+### Session Management
+- Weight-based medication calculations
+- Session notes and timestamps
+- Complete event timeline
+- PDF export of session summaries
+- Local storage (no cloud/no data collection)
+
+## Development
+
+### Project Structure
+
+```
+src/
+├── components/
+│   ├── acls/              # ACLS-specific components
+│   │   ├── bradytachy/    # Bradycardia/Tachycardia modules
+│   │   └── views/         # Main code screen views
+│   └── ui/                # shadcn/ui components
+├── pages/                 # Route pages
+├── hooks/                 # Custom React hooks
+├── lib/                   # Utilities and helpers
+└── main.tsx              # Application entry point
+```
+
+### Adding Features
+
+When contributing to this project:
+1. Follow existing code patterns and component structure
+2. Ensure clinical accuracy - reference AHA guidelines
+3. Add tests for new functionality
+4. Update relevant documentation
+
+## Deployment
+
+### Web (PWA)
+```sh
 npm run build
-npm run preview
-npm run lint
-npm run test
-npm run test:run
-npm run test:coverage
 ```
+Deploy the `dist/` folder to any static hosting service (Vercel, Netlify, GitHub Pages, etc.)
 
-### Mobile
+### Mobile App Store
 
-```bash
-npm run cap:sync:android
-npm run cap:run:android
-npm run android:dev
-npm run android:build
+For iOS and Android builds, follow the [Capacitor deployment guide](https://capacitorjs.com/docs/deployment) for detailed instructions on creating production builds and publishing to app stores.
 
-npm run cap:sync:ios
-npm run cap:run:ios
-npm run ios:dev
-```
+## References
 
-## Data and Privacy
+This application implements guidelines from:
+- [2024 AHA Advanced Cardiovascular Life Support Guidelines](https://www.ahajournals.org/doi/10.1161/CIR.0000000000001376)
+- [2024 AHA Pediatric Advanced Life Support Guidelines](https://www.ahajournals.org/doi/10.1161/CIR.0000000000001368)
 
-- Session data is stored locally (IndexedDB/localStorage)
-- No backend is required for core operation
-- No analytics pipeline is required for app functionality
+## Privacy
 
-## Developer
-
-Developed by [Giacomo Ramponi](https://www.linkedin.com/in/g-r-078715203/), emergency physician.
+- All data is stored locally in your browser/device
+- No analytics or tracking
+- No internet connection required after initial load
+- No data is transmitted to external servers
 
 ## License
 
-MIT. See `LICENSE`.
+See LICENSE file for details.
+
+## Developer
+
+Created by [G.R.](https://www.linkedin.com/in/g-r-078715203/)
+
+## Support
+
+For issues or feature requests, please use the GitHub issue tracker.
+
+---
+
+**Remember**: This is a training and reference tool. Always prioritize formal resuscitation training, clinical judgment, and institutional protocols in real patient care scenarios.

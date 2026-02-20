@@ -220,17 +220,14 @@ export function PregnancyChecklist({
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger className="w-full">
         <div className={cn(
-          'flex items-center justify-between p-4 rounded-lg border-2 transition-all',
-          pregnancyActive 
-            ? 'bg-pink-500/20 border-pink-500' 
-            : 'bg-pink-500/10 border-pink-400/50 hover:bg-pink-500/15'
+          'flex items-center justify-between px-3 py-2 rounded-lg border-2 transition-all',
+          pregnancyActive
+            ? 'bg-gray-200/60 dark:bg-gray-700/40 border-gray-400 dark:border-gray-500'
+            : 'bg-gray-100/50 dark:bg-gray-800/30 border-gray-300 dark:border-gray-600 hover:bg-gray-200/50 dark:hover:bg-gray-700/30'
         )}>
           <div className="flex items-center gap-3">
-            <div className={cn(
-              "p-1.5 rounded-full",
-              pregnancyActive ? "bg-pink-500/30" : "bg-pink-400/20"
-            )}>
-              <PregnantIcon className="h-5 w-5 text-pink-400" />
+            <div className="h-7 w-7 rounded-full bg-fuchsia-500/15 flex items-center justify-center shrink-0 self-center">
+              <PregnantIcon className="h-5 w-5 text-fuchsia-500" />
             </div>
             <div className="text-left">
               <div className="font-semibold text-foreground">{t('pregnancy.title')}</div>

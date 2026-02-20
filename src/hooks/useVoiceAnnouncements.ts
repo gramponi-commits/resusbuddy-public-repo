@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Capacitor } from '@capacitor/core';
 import { TextToSpeech } from '@capacitor-community/text-to-speech';
 
-type AnnouncementType = 'rhythmCheck' | 'preCharge' | 'epiDue' | 'resumeCPR' | 'rosc' | 'amiodaroneDue' | 'lidocaineDue' | 'shock' | 'noShock' | 'emergencyDelivery';
+type AnnouncementType = 'rhythmCheck' | 'preCharge' | 'epiDue' | 'resumeCPR' | 'rosc' | 'amiodaroneDue' | 'lidocaineDue' | 'shock' | 'noShock' | 'emergencyDelivery' | 'ecmoAvailable';
 
 // Priority order: lower number = higher priority
 const ANNOUNCEMENT_PRIORITY: Record<AnnouncementType, number> = {
@@ -17,6 +17,7 @@ const ANNOUNCEMENT_PRIORITY: Record<AnnouncementType, number> = {
   epiDue: 6,
   amiodaroneDue: 7,
   lidocaineDue: 7,
+  ecmoAvailable: 1,
 };
 
 // Check if running on native platform (Android/iOS)
@@ -120,6 +121,7 @@ export function useVoiceAnnouncements() {
       lidocaineDue: t('voice.lidocaineDue'),
       shock: t('voice.shock'),
       noShock: t('voice.noShock'),
+      ecmoAvailable: t('voice.ecmoAvailable'),
     };
 
     const text = announcements[type];

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Zap, Heart, Activity, XCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAutoScaleText } from '@/hooks/useAutoScaleText';
+import { FlatlineIcon, MonitorLineIcon } from '@/components/icons/ClinicalIcons';
 
 interface RhythmCheckModalProps {
   isShockable: boolean;
@@ -38,7 +39,7 @@ export function RhythmCheckModal({
       <div className="w-full max-w-md space-y-4 my-auto">
         <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-acls-warning/20 mb-4">
-            <Activity className="h-8 w-8 text-acls-warning" />
+            <MonitorLineIcon className="h-8 w-8 text-acls-warning" />
           </div>
           <h2 className="text-2xl font-bold text-foreground">{t('rhythmCheckModal.title')}</h2>
           <p className="text-muted-foreground mt-2">
@@ -51,9 +52,9 @@ export function RhythmCheckModal({
           <Button
             onClick={onShock}
             className={cn(
-              'w-full h-20 text-xl font-bold gap-3',
+              'w-full h-[5.5rem] px-4 py-3 text-xl font-bold gap-3 touch-target btn-3d btn-3d-shockable',
               'bg-acls-shockable hover:bg-acls-shockable/90 text-white',
-              'shadow-lg shadow-acls-shockable/30 animate-pulse'
+              'shadow-lg shadow-acls-shockable/30'
             )}
           >
             <Zap className="h-8 w-8" />
@@ -73,12 +74,12 @@ export function RhythmCheckModal({
               onClick={onNoShockAsystole}
               variant="outline"
               className={cn(
-                'h-16 flex-col gap-1 text-base font-bold',
+                'h-[5.25rem] px-4 py-3 flex-col gap-1 text-base font-bold touch-target btn-3d btn-3d-non-shockable',
                 'border-2 border-acls-non-shockable text-acls-non-shockable',
                 'hover:bg-acls-non-shockable hover:text-white'
               )}
             >
-              <Activity className="h-5 w-5" />
+              <FlatlineIcon className="h-5 w-5" />
               <span>{t('rhythm.asystole')}</span>
               <span className="text-xs font-normal">{t('rhythmCheckModal.noShock')}</span>
             </Button>
@@ -87,12 +88,12 @@ export function RhythmCheckModal({
               onClick={onNoShockPEA}
               variant="outline"
               className={cn(
-                'h-16 flex-col gap-1 text-base font-bold',
+                'h-[5.25rem] px-4 py-3 flex-col gap-1 text-base font-bold touch-target btn-3d btn-3d-pea',
                 'border-2 border-acls-pea text-acls-pea',
                 'hover:bg-acls-pea hover:text-white'
               )}
             >
-              <Heart className="h-5 w-5" />
+              <Activity className="h-5 w-5" />
               <span>{t('rhythm.pea')}</span>
               <span className="text-xs font-normal">{t('rhythmCheckModal.noShock')}</span>
             </Button>
@@ -103,7 +104,7 @@ export function RhythmCheckModal({
           <Button
             onClick={onROSC}
             className={cn(
-              'w-full h-16 text-lg font-bold gap-3',
+              'w-full h-[4.5rem] px-4 py-3 text-lg font-bold gap-3 touch-target btn-3d btn-3d-success',
               'bg-acls-success hover:bg-acls-success/90 text-white'
             )}
           >
@@ -121,7 +122,7 @@ export function RhythmCheckModal({
             onClick={onTerminate}
             variant="outline"
             className={cn(
-              'w-full h-14 text-base font-semibold gap-2',
+              'w-full h-[3.85rem] px-4 py-3 text-base font-semibold gap-2 touch-target btn-3d btn-3d-critical',
               'border-2 border-destructive text-destructive',
               'hover:bg-destructive hover:text-destructive-foreground'
             )}

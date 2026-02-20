@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
-import { Syringe, Pill, Stethoscope, Check, Loader2 } from 'lucide-react';
+import { Syringe, Pill, Check, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAutoScaleText } from '@/hooks/useAutoScaleText';
+import { MonitorLineIcon } from '@/components/icons/ClinicalIcons';
 import {
   calculateEpinephrineDose,
   calculateAmiodaroneDose,
@@ -21,6 +22,7 @@ interface ActionButtonsProps {
   canGiveAmiodarone: boolean;
   canGiveLidocaine: boolean;
   epiDue: boolean;
+  antiarrhythmicDue: boolean;
   rhythmCheckDue: boolean;
   epinephrineCount: number;
   amiodaroneCount: number;
@@ -28,6 +30,7 @@ interface ActionButtonsProps {
   preferLidocaine: boolean;
   patientWeight: number | null;
   pathwayMode: PathwayMode;
+  cowboyMode?: boolean;
   onEpinephrine: () => void;
   onAmiodarone: () => void;
   onLidocaine: () => void;
@@ -39,6 +42,7 @@ export function ActionButtons({
   canGiveAmiodarone,
   canGiveLidocaine,
   epiDue,
+  antiarrhythmicDue,
   rhythmCheckDue,
   epinephrineCount,
   amiodaroneCount,
@@ -46,6 +50,7 @@ export function ActionButtons({
   preferLidocaine,
   patientWeight,
   pathwayMode,
+  cowboyMode = false,
   onEpinephrine,
   onAmiodarone,
   onLidocaine,
@@ -135,7 +140,7 @@ export function ActionButtons({
         onClick={handleRhythmCheck}
         disabled={loadingState.rhythmCheck}
         className={cn(
-          'w-full h-14 sm:h-16 text-base sm:text-lg font-bold gap-2 sm:gap-3 touch-target btn-3d btn-3d-critical',
+          'w-full h-12 sm:h-14 text-base sm:text-lg font-bold gap-2 sm:gap-3 touch-target btn-3d btn-3d-critical',
           rhythmCheckDue
             ? 'bg-acls-critical hover:bg-acls-critical/90 text-white pulse-critical'
             : 'bg-acls-critical/80 hover:bg-acls-critical/70 text-white'
@@ -146,21 +151,23 @@ export function ActionButtons({
         {loadingState.rhythmCheck ? (
           <Loader2 className="h-5 w-5 sm:h-6 sm:w-6 animate-spin" />
         ) : (
-          <Stethoscope className="h-5 w-5 sm:h-6 sm:w-6" />
+          <MonitorLineIcon className="h-5 w-5 sm:h-6 sm:w-6" />
         )}
         <span ref={rhythmCheckRef} style={{ fontSize: `${rhythmCheckScale}em` }}>
           {rhythmCheckDue ? t('actions.rhythmCheckNow') : t('actions.rhythmCheck')}
         </span>
       </Button>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3">
         {/* Epinephrine Button */}
         <Button
           onClick={handleEpinephrine}
           disabled={!canGiveEpinephrine || loadingState.epi}
           className={cn(
-            'w-full h-20 sm:h-24 flex-col gap-0.5 sm:gap-1 text-sm sm:text-base font-bold touch-target btn-3d',
-            epiDue && canGiveEpinephrine
+            'w-full h-[4.25rem] sm:h-20 flex-col gap-0.5 sm:gap-1 text-sm sm:text-base font-bold touch-target btn-3d',
+            cowboyMode && canGiveEpinephrine
+              ? 'bg-gray-600 hover:bg-gray-500 dark:bg-gray-600 dark:hover:bg-gray-500 text-white btn-3d-muted'
+              : epiDue && canGiveEpinephrine
               ? 'bg-acls-critical hover:bg-acls-critical/90 text-white pulse-critical btn-3d-critical'
               : canGiveEpinephrine
               ? 'bg-acls-medication hover:bg-acls-medication/90 text-white btn-3d-medication'
@@ -190,8 +197,12 @@ export function ActionButtons({
           onClick={handleAntiarrhythmic}
           disabled={!canGiveAntiarrhythmic || loadingState.antiarrhythmic}
           className={cn(
-            'w-full h-20 sm:h-24 flex-col gap-0.5 sm:gap-1 text-sm sm:text-base font-bold touch-target btn-3d',
-            canGiveAntiarrhythmic
+            'w-full h-[4.25rem] sm:h-20 flex-col gap-0.5 sm:gap-1 text-sm sm:text-base font-bold touch-target btn-3d',
+            cowboyMode && canGiveAntiarrhythmic
+              ? 'bg-gray-600 hover:bg-gray-500 dark:bg-gray-600 dark:hover:bg-gray-500 text-white btn-3d-muted'
+              : antiarrhythmicDue && canGiveAntiarrhythmic
+              ? 'bg-acls-critical hover:bg-acls-critical/90 text-white pulse-critical btn-3d-critical'
+              : canGiveAntiarrhythmic
               ? 'bg-acls-medication hover:bg-acls-medication/90 text-white btn-3d-medication'
               : 'bg-muted text-muted-foreground btn-3d-muted'
           )}

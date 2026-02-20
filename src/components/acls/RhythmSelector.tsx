@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
 import { RhythmType } from '@/types/acls';
-import { Zap, Activity, Heart } from 'lucide-react';
+import { Zap, Activity } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { FlatlineIcon } from '@/components/icons/ClinicalIcons';
 
 interface RhythmSelectorProps {
   currentRhythm: RhythmType;
@@ -21,7 +22,7 @@ export function RhythmSelector({ currentRhythm, onSelectRhythm, isInitial = true
         <button
           onClick={() => onSelectRhythm('vf_pvt')}
           className={cn(
-            'w-full flex items-center justify-start gap-3 h-16 text-lg font-bold focus:outline-none rounded-lg btn-3d btn-3d-shockable',
+            'w-full flex items-center justify-start gap-3 h-14 px-4 py-2.5 text-lg font-bold focus:outline-none rounded-lg btn-3d btn-3d-shockable',
             currentRhythm === 'vf_pvt'
               ? 'bg-acls-shockable text-white hover:bg-acls-shockable/90 ring-2 ring-acls-shockable ring-offset-2 ring-offset-background'
               : 'bg-muted text-acls-shockable hover:bg-acls-shockable/20'
@@ -40,7 +41,7 @@ export function RhythmSelector({ currentRhythm, onSelectRhythm, isInitial = true
         <button
           onClick={() => onSelectRhythm('asystole')}
           className={cn(
-            'w-full flex items-center justify-start gap-3 h-16 text-lg font-bold focus:outline-none rounded-lg btn-3d btn-3d-non-shockable',
+            'w-full flex items-center justify-start gap-3 h-14 px-4 py-2.5 text-lg font-bold focus:outline-none rounded-lg btn-3d btn-3d-non-shockable',
             currentRhythm === 'asystole'
               ? 'bg-acls-non-shockable text-white hover:bg-acls-non-shockable/90 ring-2 ring-acls-non-shockable ring-offset-2 ring-offset-background'
               : 'bg-muted text-acls-non-shockable hover:bg-acls-non-shockable/20'
@@ -49,7 +50,7 @@ export function RhythmSelector({ currentRhythm, onSelectRhythm, isInitial = true
           aria-checked={currentRhythm === 'asystole'}
           aria-label={t('rhythm.asystole')}
         >
-          <Activity className="h-6 w-6" />
+          <FlatlineIcon className="h-6 w-6" />
           <div className="text-left">
             <div>{t('rhythm.asystole')}</div>
             <div className="text-xs font-normal opacity-80">{t('rhythm.nonShockable')}</div>
@@ -59,7 +60,7 @@ export function RhythmSelector({ currentRhythm, onSelectRhythm, isInitial = true
         <button
           onClick={() => onSelectRhythm('pea')}
           className={cn(
-            'w-full flex items-center justify-start gap-3 h-16 text-lg font-bold focus:outline-none rounded-lg btn-3d btn-3d-pea',
+            'w-full flex items-center justify-start gap-3 h-14 px-4 py-2.5 text-lg font-bold focus:outline-none rounded-lg btn-3d btn-3d-pea',
             currentRhythm === 'pea'
               ? 'bg-acls-pea text-white hover:bg-acls-pea/90 ring-2 ring-acls-pea ring-offset-2 ring-offset-background'
               : 'bg-muted text-acls-pea hover:bg-acls-pea/20'
@@ -68,7 +69,7 @@ export function RhythmSelector({ currentRhythm, onSelectRhythm, isInitial = true
           aria-checked={currentRhythm === 'pea'}
           aria-label={t('rhythm.pea')}
         >
-          <Heart className="h-6 w-6" />
+          <Activity className="h-6 w-6" />
           <div className="text-left">
             <div>{t('rhythm.pea')}</div>
             <div className="text-xs font-normal opacity-80">{t('rhythm.nonShockable')}</div>

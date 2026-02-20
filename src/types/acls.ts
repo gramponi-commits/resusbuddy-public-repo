@@ -25,7 +25,8 @@ export interface Intervention {
   id: string;
   timestamp: number;
   type: 'shock' | 'epinephrine' | 'amiodarone' | 'lidocaine' | 'rhythm_change' | 'rosc' | 'airway' | 'cpr_start' | 'note' | 'hs_ts_check' | 'etco2' |
-        'atropine' | 'adenosine' | 'cardioversion' | 'dopamine' | 'epi_infusion' | 'beta_blocker' | 'calcium_blocker' | 'procainamide' | 'vagal_maneuver';
+        'atropine' | 'adenosine' | 'cardioversion' | 'dopamine' | 'epi_infusion' | 'beta_blocker' | 'calcium_blocker' | 'procainamide' | 'vagal_maneuver' |
+        'ecmo_activation';
   details: string;
   value?: number | string;
   translationKey?: string;
@@ -263,6 +264,7 @@ export interface ACLSSession {
   startTime: number;
   endTime: number | null;
   currentRhythm: RhythmType;
+  initialRhythm: Exclude<RhythmType, null> | null;
   phase: ACLSPhase;
   outcome: CodeOutcome;
   shockCount: number;
@@ -371,6 +373,7 @@ export function createInitialSession(): ACLSSession {
     startTime: Date.now(),
     endTime: null,
     currentRhythm: null,
+    initialRhythm: null,
     phase: 'pathway_selection', // Start with pathway selection
     outcome: null,
     shockCount: 0,

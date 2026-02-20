@@ -49,7 +49,7 @@
     "shockable": "제세동 가능한 리듬",
     "asystole": "무수축",
     "nonShockable": "제세동 불가능",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "작업",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "설정",
+    "groupGeneral": "일반",
+    "groupFeedback": "피드백",
+    "groupPreferences": "환경설정",
+    "groupECMO": "ECMO/ECPR",
     "language": "언어",
     "languageDesc": "선호하는 언어 선택",
     "english": "영어",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "성인 환자용 제세동 에너지 선택",
     "epinephrineInterval": "에피네프린/아드레날린 간격",
     "epinephrineIntervalDesc": "에피네프린 용량 간격(AHA 권장 3-5분)",
-    "minutes": "분"
+    "minutes": "분",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "심정지 중 ECMO/ECPR 카뉼레이션 지원 활성화",
+    "ecmoActivationTime": "활성화 시간 (분)",
+    "ecmoInclusionCriteria": "포함 기준",
+    "ecmoExclusionCriteria": "제외 기준",
+    "ecmoCriteriaPlaceholder": "기준을 입력하고 추가를 누르세요",
+    "ecmoAdd": "추가",
+    "cowboyMode": "카우보이 모드",
+    "cowboyModeDesc": "약물 투여 및 ECMO 활성화에 대한 AHA 시간 제한 제거",
+    "cowboyModeActive": "활성 - AHA 가이드라인 무시됨",
+    "cowboyModeInactive": "비활성 - 2025 AHA 가이드라인 따름",
+    "cowboyModeConfirmTitle": "카우보이 모드를 활성화하시겠습니까?",
+    "cowboyModeConfirmDesc": "이렇게 하면 2025 AHA 심정지 알고리즘 가이드라인에서 벗어나 언제든지 약물을 투여하고 즉시 ECMO를 활성화할 수 있습니다. 약물 타이밍 제안이 비활성화됩니다.",
+    "cowboyModeConfirm": "카우보이 모드 활성화",
+    "cowboyModeCancel": "취소"
   },
   "resume": {
     "title": "활성 코드 감지됨",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T's 확인됨: {{items}}",
     "codeEnded": "코드 종료됨: {{outcome}}",
     "noteAdded": "메모: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "환자 체중 설정됨: {{weight}} kg",
     "pregnancyActivated": "임신 프로토콜 활성화됨",
     "anaphylaxisActivated": "아나필락시스 프로토콜 활성화됨",
@@ -720,7 +739,7 @@
     "dose": "용량",
     "doseNumber": "용량 #{{number}}",
     "endSession": "세션 종료",
-    "sessionEnded": "세션 종료됨",
+    "sessionEnded": "세션 종료됨: {{outcome}}",
     "sessionEndedDisplay": "세션 종료됨",
     "exportSession": "세션 내보내기",
     "switchedToArrest": "심정지 프로토콜로 전환됨",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "다형성 VT: 제세동 사용(동기화 아님)",
     "deliverDefibrillation": "제세동 전달(비동기화)",
     "defibrillationUnsynchronized": "제세동(비동기화)",
-    "sessionEnded": "세션 종료됨: {{outcome}}",
     "outcomeResolved": "해결됨",
     "outcomeTransferred": "이송됨"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "문의하기",
     "contactP1": "이 개인정보 처리방침에 대해 질문이 있으시면, 다음으로 연락해 주십시오:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "ECMO 활성화",
+    "active": "ECMO 활성",
+    "activated": "ECMO/ECPR 활성화됨",
+    "availableIn": "{{time}} 후 사용 가능",
+    "inclusionCriteria": "포함 기준",
+    "exclusionCriteria": "제외 기준",
+    "noneConfigured": "설정 없음"
   }
 }

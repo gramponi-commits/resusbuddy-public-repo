@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "الإعدادات",
+    "groupGeneral": "عام",
+    "groupFeedback": "ملاحظات",
+    "groupPreferences": "تفضيلات",
+    "groupECMO": "ECMO/ECPR",
     "language": "اللغة",
     "languageDesc": "اختر اللغة المفضلة لديك",
     "english": "الإنجليزية",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "اختر طاقة الصدم للمرضى البالغين",
     "epinephrineInterval": "الفاصل الزمني للإيبينفرين",
     "epinephrineIntervalDesc": "الوقت بين جرعات الإيبينفرين (توصي جمعية القلب الأمريكية بـ 3-5 دقائق)",
-    "minutes": "دقيقة"
+    "minutes": "دقيقة",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "تفعيل دعم قسطرة ECMO/ECPR أثناء السكتة القلبية",
+    "ecmoActivationTime": "وقت التفعيل (دقائق)",
+    "ecmoInclusionCriteria": "معايير الإدراج",
+    "ecmoExclusionCriteria": "معايير الاستبعاد",
+    "ecmoCriteriaPlaceholder": "اكتب المعيار واضغط إضافة",
+    "ecmoAdd": "إضافة",
+    "cowboyMode": "وضع كاوبوي",
+    "cowboyModeDesc": "إزالة قيود توقيت AHA على إعطاء الأدوية وتفعيل ECMO",
+    "cowboyModeActive": "نشط - تم تجاوز إرشادات AHA",
+    "cowboyModeInactive": "غير نشط - اتباع إرشادات AHA 2025",
+    "cowboyModeConfirmTitle": "تفعيل وضع كاوبوي؟",
+    "cowboyModeConfirmDesc": "سيسمح لك هذا بإعطاء الأدوية في أي وقت وتفعيل ECMO فورًا، مما ينحرف عن إرشادات خوارزمية السكتة القلبية AHA 2025. سيتم تعطيل اقتراحات توقيت الأدوية.",
+    "cowboyModeConfirm": "تفعيل وضع كاوبوي",
+    "cowboyModeCancel": "إلغاء"
   },
   "resume": {
     "title": "تم اكتشاف كود نشط",
@@ -416,7 +435,7 @@
     "hsTsChecked": "تم فحص حروف H وحروف T: {{items}}",
     "codeEnded": "انتهى الكود: {{outcome}}",
     "noteAdded": "ملاحظة: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ثاني أكسيد الكربون في نهاية الزفير: {{value}} {{unit}}",
     "weightSet": "تم تعيين وزن المريض: {{weight}} kg",
     "pregnancyActivated": "تم تفعيل بروتوكول الحمل",
     "anaphylaxisActivated": "تم تفعيل بروتوكول الحساسية المفرطة",
@@ -720,7 +739,7 @@
     "dose": "الجرعة",
     "doseNumber": "الجرعة رقم {{number}}",
     "endSession": "إنهاء الجلسة",
-    "sessionEnded": "انتهت الجلسة",
+    "sessionEnded": "انتهت الجلسة: {{outcome}}",
     "sessionEndedDisplay": "انتهت الجلسة",
     "exportSession": "تصدير الجلسة",
     "switchedToArrest": "تم التبديل إلى بروتوكول توقف القلب",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "تسرع بطيني متعدد الأشكال: استخدم إزالة الرجفان (غير متزامن)",
     "deliverDefibrillation": "قدم إزالة الرجفان (غير متزامن)",
     "defibrillationUnsynchronized": "إزالة الرجفان (غير متزامنة)",
-    "sessionEnded": "انتهت الجلسة: {{outcome}}",
     "outcomeResolved": "تم الحل",
     "outcomeTransferred": "تم النقل"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "اتصل بنا",
     "contactP1": "إذا كان لديك أسئلة حول سياسة الخصوصية هذه، يرجى الاتصال بنا على:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "تفعيل ECMO",
+    "active": "ECMO مفعّل",
+    "activated": "تم تفعيل ECMO/ECPR",
+    "availableIn": "متاح خلال {{time}}",
+    "inclusionCriteria": "معايير الإدراج",
+    "exclusionCriteria": "معايير الاستبعاد",
+    "noneConfigured": "لم يتم التهيئة"
   }
 }

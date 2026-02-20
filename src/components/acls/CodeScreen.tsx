@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Heart, StickyNote } from 'lucide-react';
 import { ErrorBoundary, CodeErrorFallback } from '../ErrorBoundary';
@@ -36,6 +36,7 @@ import {
 } from '@/lib/activeSessionStorage';
 import { getBradyTachySession, clearBradyTachySession } from '@/lib/bradyTachyStorage';
 import { logger } from '@/utils/logger';
+import type { RhythmType } from '@/types/acls';
 
 // Lazy load BradyTachy module for better initial load performance
 const BradyTachyModule = lazy(() =>
@@ -43,6 +44,23 @@ const BradyTachyModule = lazy(() =>
     default: module.BradyTachyModule,
   }))
 );
+
+function parseRhythmCode(value: unknown): Exclude<RhythmType, null> | null {
+  if (value === 'vf_pvt' || value === 'asystole' || value === 'pea') {
+    return value;
+  }
+
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalized = value.toLowerCase();
+  if (normalized.includes('vf') || normalized.includes('pvt')) return 'vf_pvt';
+  if (normalized.includes('asyst')) return 'asystole';
+  if (normalized.includes('pea')) return 'pea';
+
+  return null;
+}
 
 /**
  * CodeScreen - Main orchestrator for ACLS/PALS decision support
@@ -97,6 +115,41 @@ export function CodeScreen() {
   const isCodeEnded = session.phase === 'code_ended';
   const isPathwaySelection = session.phase === 'pathway_selection';
   const isInitial = session.phase === 'initial' || session.phase === 'rhythm_selection';
+  const resolvedInitialRhythm = useMemo<Exclude<RhythmType, null> | null>(() => {
+    if (session.initialRhythm) {
+      return session.initialRhythm;
+    }
+
+    const earliestRhythmEvent = [...session.interventions]
+      .sort((a, b) => a.timestamp - b.timestamp)
+      .find(i => i.translationKey === 'interventions.rhythmIdentified' || i.type === 'rhythm_change');
+
+    const fromValue = parseRhythmCode(earliestRhythmEvent?.value);
+    if (fromValue) {
+      return fromValue;
+    }
+
+    const fromParams = parseRhythmCode(earliestRhythmEvent?.translationParams?.rhythm);
+    if (fromParams) {
+      return fromParams;
+    }
+
+    if (session.shockCount > 0) {
+      return 'vf_pvt';
+    }
+
+    return null;
+  }, [session.initialRhythm, session.interventions, session.shockCount]);
+
+  // Cowboy mode: override button states to remove drug timing restrictions
+  const effectiveButtonStates = settings.cowboyMode ? {
+    canGiveEpinephrine: isActive && !isInRhythmCheck,
+    canGiveAmiodarone: isActive && !isInRhythmCheck,
+    canGiveLidocaine: isActive && !isInRhythmCheck,
+    epiDue: false,
+    antiarrhythmicDue: false,
+    rhythmCheckDue: buttonStates.rhythmCheckDue,
+  } : buttonStates;
 
   // Check for active session on mount
   useEffect(() => {
@@ -185,18 +238,18 @@ export function CodeScreen() {
       logger.medicalEvent('Pre-shock alert triggered');
     }
 
-    // Epi due alert
-    if (buttonStates.epiDue && !prevEpiDue) {
+    // Epi due alert (suppressed in cowboy mode)
+    if (!settings.cowboyMode && buttonStates.epiDue && !prevEpiDue) {
       playAlert('epiDue');
       announce('epiDue');
       if (settings.vibrationEnabled) vibrate([300, 150, 300]);
       logger.medicalEvent('Epinephrine due alert triggered');
     }
 
-    // Antiarrhythmic due alert (after shock #3)
+    // Antiarrhythmic due alert (after shock #3) (suppressed in cowboy mode)
     const antiarrhythmicDue =
       session.shockCount >= 3 && (buttonStates.canGiveAmiodarone || buttonStates.canGiveLidocaine);
-    if (antiarrhythmicDue && !prevAntiarrhythmicDue) {
+    if (!settings.cowboyMode && antiarrhythmicDue && !prevAntiarrhythmicDue) {
       if (settings.preferLidocaine) {
         announce('lidocaineDue');
       } else {
@@ -310,6 +363,13 @@ export function CodeScreen() {
     logger.medicalEvent('Emergency delivery alert');
   };
 
+  const handleECMOAvailable = () => {
+    playAlert('rhythmCheck');
+    announce('ecmoAvailable');
+    if (settings.vibrationEnabled) vibrate([300, 150, 300, 150, 300]);
+    logger.medicalEvent('ECMO available alert');
+  };
+
   const formatDuration = (ms: number) => {
     const min = Math.floor(ms / 60000);
     const sec = Math.floor((ms % 60000) / 1000);
@@ -367,7 +427,7 @@ export function CodeScreen() {
         )}
 
         <ScrollArea className="flex-1">
-          <div className="p-3 sm:p-4 space-y-3 sm:space-y-4 max-w-lg mx-auto no-text-select">
+          <div className="p-2 sm:p-3 space-y-2 sm:space-y-3 max-w-lg mx-auto no-text-select">
             {/* Pathway Selection Screen */}
             {isPathwaySelection && (
               <PathwaySelectionView
@@ -399,6 +459,7 @@ export function CodeScreen() {
                 pregnancyStartTime={session.pregnancyStartTime}
                 specialCircumstances={session.specialCircumstances}
                 vibrationEnabled={settings.vibrationEnabled}
+                etco2Unit={settings.etco2Unit}
                 onSetWeight={actions.setPatientWeight}
                 onSelectRhythm={actions.selectRhythm}
                 onSetRhythmAnalysisActive={actions.setRhythmAnalysisActive}
@@ -439,12 +500,15 @@ export function CodeScreen() {
                 rhythmCheckDue={timerState.rhythmCheckDue}
                 totalElapsed={timerState.totalElapsed}
                 totalCPRTime={timerState.totalCPRTime}
-                canGiveEpinephrine={buttonStates.canGiveEpinephrine}
-                canGiveAmiodarone={buttonStates.canGiveAmiodarone}
-                canGiveLidocaine={buttonStates.canGiveLidocaine}
-                epiDue={buttonStates.epiDue}
+                canGiveEpinephrine={effectiveButtonStates.canGiveEpinephrine}
+                canGiveAmiodarone={effectiveButtonStates.canGiveAmiodarone}
+                canGiveLidocaine={effectiveButtonStates.canGiveLidocaine}
+                epiDue={effectiveButtonStates.epiDue}
+                antiarrhythmicDue={effectiveButtonStates.antiarrhythmicDue}
                 preferLidocaine={settings.preferLidocaine}
                 vibrationEnabled={settings.vibrationEnabled}
+                cowboyMode={settings.cowboyMode}
+                etco2Unit={settings.etco2Unit}
                 onSetWeight={actions.setPatientWeight}
                 onEpinephrine={actions.giveEpinephrine}
                 onAmiodarone={actions.giveAmiodarone}
@@ -459,6 +523,14 @@ export function CodeScreen() {
                 onUpdatePregnancyInterventions={actions.updatePregnancyInterventions}
                 onDeliveryAlert={handleDeliveryAlert}
                 onToggleSpecialCircumstance={actions.toggleSpecialCircumstance}
+                ecmoEnabled={settings.ecmoEnabled}
+                ecmoActivationTimeMinutes={settings.cowboyMode ? 0 : settings.ecmoActivationTimeMinutes}
+                ecmoInclusionCriteria={settings.ecmoInclusionCriteria}
+                ecmoExclusionCriteria={settings.ecmoExclusionCriteria}
+                onActivateECMO={() => {
+                  actions.addIntervention('ecmo_activation', t('ecmo.activated'), undefined, 'ecmo.activated');
+                }}
+                onECMOAvailable={handleECMOAvailable}
               />
             )}
 
@@ -488,7 +560,12 @@ export function CodeScreen() {
             {/* Post-ROSC Screen */}
             {isPostROSC && (
               <>
-                <CodeTimeline interventions={session.interventions} startTime={session.startTime} bradyTachyStartTime={session.bradyTachyStartTime} />
+                <CodeTimeline
+                  interventions={session.interventions}
+                  startTime={session.startTime}
+                  bradyTachyStartTime={session.bradyTachyStartTime}
+                  etco2Unit={settings.etco2Unit}
+                />
                 <PostROSCScreen
                   checklist={session.postROSCChecklist}
                   vitals={session.postROSCVitals}
@@ -512,6 +589,7 @@ export function CodeScreen() {
                 shockCount={session.shockCount}
                 epinephrineCount={session.epinephrineCount}
                 amiodaroneCount={session.amiodaroneCount}
+                etco2Unit={settings.etco2Unit}
                 onExport={actions.exportSession}
                 onNewCode={handleNewCode}
               />
@@ -526,7 +604,7 @@ export function CodeScreen() {
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <Button
                   onClick={actions.achieveROSC}
-                  className="h-12 sm:h-14 gap-1 sm:gap-2 touch-target bg-acls-success hover:bg-acls-success/90 text-white font-bold btn-3d btn-3d-success"
+                  className="h-10 sm:h-12 gap-1 sm:gap-2 touch-target bg-acls-success hover:bg-acls-success/90 text-white font-bold btn-3d btn-3d-success"
                   aria-label={t('actions.rosc')}
                 >
                   <Heart className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -535,7 +613,7 @@ export function CodeScreen() {
                 <Button
                   onClick={actions.terminateCode}
                   variant="outline"
-                  className="h-12 sm:h-14 gap-1 sm:gap-2 touch-target border-destructive text-destructive hover:bg-destructive/10 btn-3d-sm btn-3d-critical"
+                  className="h-10 sm:h-12 gap-1 sm:gap-2 touch-target border-destructive text-destructive hover:bg-destructive/10 btn-3d-sm btn-3d-critical"
                   aria-label={t('actions.terminate')}
                 >
                   <span className="hidden sm:inline">{t('actions.terminate')}</span>
@@ -545,7 +623,7 @@ export function CodeScreen() {
               <Button
                 onClick={() => setShowNoteDialog(true)}
                 variant="outline"
-                className="w-full h-10 sm:h-12 gap-1 sm:gap-2 touch-target text-clinical-sm btn-3d-sm btn-3d-muted"
+                className="w-full h-8 sm:h-10 gap-1 sm:gap-2 touch-target text-clinical-sm btn-3d-sm btn-3d-muted"
                 aria-label={t('actions.addNote')}
               >
                 <StickyNote className="h-3 w-3 sm:h-4 sm:w-4" />
@@ -562,6 +640,8 @@ export function CodeScreen() {
             amiodaroneCount={session.amiodaroneCount}
             lidocaineCount={session.lidocaineCount}
             shockCount={session.shockCount}
+            preferLidocaine={settings.preferLidocaine}
+            initialRhythm={resolvedInitialRhythm}
           />
         )}
       </div>

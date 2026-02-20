@@ -130,9 +130,11 @@ export function SpecialCircumstancesChecklist({
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger className="w-full">
-        <div className={cn('flex items-center justify-between p-4 rounded-lg border-2 transition-all', 'bg-gray-100/50 dark:bg-gray-800/30 border-gray-300 dark:border-gray-600 hover:bg-gray-200/50 dark:hover:bg-gray-700/30')}>
+        <div className={cn('flex items-center justify-between px-3 py-2 rounded-lg border-2 transition-all', 'bg-gray-100/50 dark:bg-gray-800/30 border-gray-300 dark:border-gray-600 hover:bg-gray-200/50 dark:hover:bg-gray-700/30')}>
           <div className="flex items-center gap-3">
-            <AlertCircle className="h-5 w-5 text-gray-500" />
+            <div className="h-7 w-7 rounded-full bg-red-500/15 flex items-center justify-center shrink-0 self-center">
+              <AlertCircle className="h-5 w-5 text-red-500" />
+            </div>
             <div className="text-left">
               <div className="font-semibold text-foreground">{t('specialCircumstances.title')}</div>
               <div className="text-sm text-muted-foreground">{checkedCount > 0 ? t('specialCircumstances.activeCount', { count: checkedCount }) : t('specialCircumstances.tapToReview')}</div>

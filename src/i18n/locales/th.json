@@ -49,7 +49,7 @@
     "shockable": "คลื่นหัวใจที่สามารถกระตุกได้",
     "asystole": "Asystole",
     "nonShockable": "ไม่สามารถกระตุกได้",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "การกระทำ",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "การตั้งค่า",
+    "groupGeneral": "ทั่วไป",
+    "groupFeedback": "ข้อเสนอแนะ",
+    "groupPreferences": "การตั้งค่า",
+    "groupECMO": "ECMO/ECPR",
     "language": "ภาษา",
     "languageDesc": "เลือกภาษาที่คุณต้องการ",
     "english": "English",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "เลือกพลังงานการช็อกสำหรับผู้ป่วยผู้ใหญ่",
     "epinephrineInterval": "ช่วงเวลาเอพิเนฟริน/แอดรีนาลิน",
     "epinephrineIntervalDesc": "เวลาระหว่างโดสเอพิเนฟริน (AHA แนะนำ 3-5 นาที)",
-    "minutes": "นาที"
+    "minutes": "นาที",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "เปิดใช้งานการรองรับการใส่สาย ECMO/ECPR ระหว่างภาวะหัวใจหยุดเต้น",
+    "ecmoActivationTime": "เวลาเปิดใช้งาน (นาที)",
+    "ecmoInclusionCriteria": "เกณฑ์การรวม",
+    "ecmoExclusionCriteria": "เกณฑ์การยกเว้น",
+    "ecmoCriteriaPlaceholder": "พิมพ์เกณฑ์แล้วกดเพิ่ม",
+    "ecmoAdd": "เพิ่ม",
+    "cowboyMode": "โหมดคาวบอย",
+    "cowboyModeDesc": "ยกเลิกข้อจำกัดด้านเวลาของ AHA ในการให้ยาและการเปิดใช้งาน ECMO",
+    "cowboyModeActive": "ใช้งานอยู่ - แทนที่แนวทาง AHA",
+    "cowboyModeInactive": "ไม่ใช้งาน - ปฏิบัติตามแนวทาง AHA 2025",
+    "cowboyModeConfirmTitle": "เปิดใช้งานโหมดคาวบอย?",
+    "cowboyModeConfirmDesc": "สิ่งนี้จะอนุญาตให้คุณให้ยาได้ตลอดเวลาและเปิดใช้งาน ECMO ทันที ซึ่งแตกต่างจากแนวทางอัลกอริทึมหัวใจหยุดเต้น AHA 2025 ข้อเสนอแนะเรื่องเวลาให้ยาจะถูกปิดใช้งาน",
+    "cowboyModeConfirm": "เปิดใช้งานโหมดคาวบอย",
+    "cowboyModeCancel": "ยกเลิก"
   },
   "resume": {
     "title": "ตรวจพบโค้ดที่ใช้งานอยู่",
@@ -416,7 +435,7 @@
     "hsTsChecked": "ตรวจ H's & T's: {{items}}",
     "codeEnded": "จบโค้ด: {{outcome}}",
     "noteAdded": "บันทึก: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} มิลลิเมตรปรอง",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "ตั้งน้ำหนักผู้ป่วย: {{weight}} กิโลกรัม",
     "pregnancyActivated": "เปิดใช้งานโปรโตคอลการตั้งครรภ์",
     "anaphylaxisActivated": "[TRANSLATE] Anaphylaxis protocol activated",
@@ -605,7 +624,7 @@
     "dose": "โดส",
     "doseNumber": "โดสที่ {{number}}",
     "endSession": "จบเซสชัน",
-    "sessionEnded": "จบเซสชันแล้ว",
+    "sessionEnded": "เซสชั่นสิ้นสุด: {{outcome}}",
     "sessionEndedDisplay": "เซสชันสิ้นสุดแล้ว",
     "exportSession": "ส่งออกเซสชัน",
     "switchedToArrest": "เปลี่ยนไปยังโปรโตคอลการหัวใจหยุดเต้น",
@@ -694,7 +713,6 @@
     "polymorphicVTWarning": "VT แบบ Polymorphic: ใช้การช็อกไฟฟ้า (ไม่พร้อมกัน)",
     "deliverDefibrillation": "ให้การช็อกไฟฟ้า (ไม่พร้อมกัน)",
     "defibrillationUnsynchronized": "การช็อกไฟฟ้า (ไม่พร้อมกัน)",
-    "sessionEnded": "เซสชั่นสิ้นสุด: {{outcome}}",
     "outcomeResolved": "แก้ไขแล้ว",
     "outcomeTransferred": "โอนย้ายแล้ว"
   },
@@ -981,5 +999,15 @@
       "measureBPDoppler": "วัด BP ด้วยดอปเลอร์",
       "measureBPDopplerDesc": "ใช้ดอปเลอร์เพื่อประเมิน MAP อาจมีการลดลง/ไม่มีแม้จะมี LVAD ทำงาน"
     }
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "เปิดใช้งาน ECMO",
+    "active": "ECMO ทำงาน",
+    "activated": "ECMO/ECPR เปิดใช้งานแล้ว",
+    "availableIn": "พร้อมใช้ใน {{time}}",
+    "inclusionCriteria": "เกณฑ์การรวม",
+    "exclusionCriteria": "เกณฑ์การยกเว้น",
+    "noneConfigured": "ยังไม่ได้กำหนด"
   }
 }

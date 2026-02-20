@@ -21,6 +21,12 @@ describe('useSettings Hook', () => {
         theme: 'dark',
         adultDefibrillatorEnergy: 200,
         epinephrineIntervalMinutes: 4,
+        etco2Unit: 'mmhg',
+        ecmoEnabled: false,
+        ecmoActivationTimeMinutes: 15,
+        ecmoInclusionCriteria: [],
+        ecmoExclusionCriteria: [],
+        cowboyMode: false,
       });
     });
 
@@ -35,6 +41,12 @@ describe('useSettings Hook', () => {
         theme: 'light',
         adultDefibrillatorEnergy: 360,
         epinephrineIntervalMinutes: 4,
+        etco2Unit: 'kpa',
+        ecmoEnabled: true,
+        ecmoActivationTimeMinutes: 30,
+        ecmoInclusionCriteria: ['Age < 75'],
+        ecmoExclusionCriteria: ['DNR'],
+        cowboyMode: true,
       };
 
       localStorage.setItem('acls-settings', JSON.stringify(savedSettings));
@@ -154,6 +166,12 @@ describe('useSettings Hook', () => {
         theme: 'dark',
         adultDefibrillatorEnergy: 200,
         epinephrineIntervalMinutes: 4,
+        etco2Unit: 'mmhg',
+        ecmoEnabled: false,
+        ecmoActivationTimeMinutes: 15,
+        ecmoInclusionCriteria: [],
+        ecmoExclusionCriteria: [],
+        cowboyMode: false,
       });
     });
 
@@ -268,6 +286,35 @@ describe('useSettings Hook', () => {
     });
   });
 
+  describe('ETCO2 Unit Settings', () => {
+    it('should default to mmhg', () => {
+      const { result } = renderHook(() => useSettings());
+      expect(result.current.settings.etco2Unit).toBe('mmhg');
+    });
+
+    it('should persist ETCO2 unit selection', () => {
+      const { result, unmount } = renderHook(() => useSettings());
+
+      act(() => {
+        result.current.updateSetting('etco2Unit', 'kpa');
+      });
+
+      unmount();
+
+      const { result: remounted } = renderHook(() => useSettings());
+      expect(remounted.current.settings.etco2Unit).toBe('kpa');
+    });
+
+    it('should reset invalid stored ETCO2 unit to default', () => {
+      localStorage.setItem('acls-settings', JSON.stringify({
+        etco2Unit: 'invalid-unit',
+      }));
+
+      const { result } = renderHook(() => useSettings());
+      expect(result.current.settings.etco2Unit).toBe('mmhg');
+    });
+  });
+
   describe('Defibrillator Energy Settings', () => {
     it('should update adult defibrillator energy', () => {
       const { result } = renderHook(() => useSettings());
@@ -372,6 +419,115 @@ describe('useSettings Hook', () => {
       }).not.toThrow();
 
       Storage.prototype.getItem = originalGetItem;
+    });
+  });
+
+  describe('ECMO/ECPR Settings', () => {
+    it('should toggle ECMO enabled', () => {
+      const { result } = renderHook(() => useSettings());
+
+      expect(result.current.settings.ecmoEnabled).toBe(false);
+
+      act(() => {
+        result.current.updateSetting('ecmoEnabled', true);
+      });
+
+      expect(result.current.settings.ecmoEnabled).toBe(true);
+    });
+
+    it('should update ECMO activation time', () => {
+      const { result } = renderHook(() => useSettings());
+
+      act(() => {
+        result.current.updateSetting('ecmoActivationTimeMinutes', 30);
+      });
+
+      expect(result.current.settings.ecmoActivationTimeMinutes).toBe(30);
+    });
+
+    it('should update ECMO inclusion criteria', () => {
+      const { result } = renderHook(() => useSettings());
+
+      act(() => {
+        result.current.updateSetting('ecmoInclusionCriteria', ['Age < 75', 'No CNS injury']);
+      });
+
+      expect(result.current.settings.ecmoInclusionCriteria).toEqual(['Age < 75', 'No CNS injury']);
+    });
+
+    it('should update ECMO exclusion criteria', () => {
+      const { result } = renderHook(() => useSettings());
+
+      act(() => {
+        result.current.updateSetting('ecmoExclusionCriteria', ['DNR', 'Terminal illness']);
+      });
+
+      expect(result.current.settings.ecmoExclusionCriteria).toEqual(['DNR', 'Terminal illness']);
+    });
+
+    it('should persist ECMO criteria across remounts', () => {
+      const { result, unmount } = renderHook(() => useSettings());
+
+      act(() => {
+        result.current.updateSetting('ecmoEnabled', true);
+        result.current.updateSetting('ecmoInclusionCriteria', ['Witnessed arrest']);
+      });
+
+      unmount();
+
+      const { result: result2 } = renderHook(() => useSettings());
+
+      expect(result2.current.settings.ecmoEnabled).toBe(true);
+      expect(result2.current.settings.ecmoInclusionCriteria).toEqual(['Witnessed arrest']);
+    });
+
+    it('should reset invalid ECMO activation time to default', () => {
+      localStorage.setItem('acls-settings', JSON.stringify({
+        ecmoActivationTimeMinutes: 999,
+      }));
+
+      const { result } = renderHook(() => useSettings());
+
+      expect(result.current.settings.ecmoActivationTimeMinutes).toBe(15);
+    });
+
+    it('should reset non-array ECMO criteria to default', () => {
+      localStorage.setItem('acls-settings', JSON.stringify({
+        ecmoInclusionCriteria: 'not-an-array',
+        ecmoExclusionCriteria: 42,
+      }));
+
+      const { result } = renderHook(() => useSettings());
+
+      expect(result.current.settings.ecmoInclusionCriteria).toEqual([]);
+      expect(result.current.settings.ecmoExclusionCriteria).toEqual([]);
+    });
+  });
+
+  describe('Cowboy Mode', () => {
+    it('should toggle cowboy mode', () => {
+      const { result } = renderHook(() => useSettings());
+
+      expect(result.current.settings.cowboyMode).toBe(false);
+
+      act(() => {
+        result.current.updateSetting('cowboyMode', true);
+      });
+
+      expect(result.current.settings.cowboyMode).toBe(true);
+    });
+
+    it('should persist cowboy mode across remounts', () => {
+      const { result, unmount } = renderHook(() => useSettings());
+
+      act(() => {
+        result.current.updateSetting('cowboyMode', true);
+      });
+
+      unmount();
+
+      const { result: result2 } = renderHook(() => useSettings());
+      expect(result2.current.settings.cowboyMode).toBe(true);
     });
   });
 });

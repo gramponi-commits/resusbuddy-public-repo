@@ -1,6 +1,5 @@
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { WeightInput, WeightDisplay } from '../WeightInput';
 import { RhythmSelector } from '../RhythmSelector';
@@ -10,6 +9,7 @@ import { HsAndTsChecklist } from '../HsAndTsChecklist';
 import { PregnancyChecklist } from '../PregnancyChecklist';
 import { SpecialCircumstancesChecklist } from '../SpecialCircumstancesChecklist';
 import { CodeTimeline } from '../CodeTimeline';
+import { MonitorLineIcon } from '@/components/icons/ClinicalIcons';
 import type {
   PathwayMode,
   Intervention,
@@ -21,6 +21,7 @@ import type {
   RhythmType,
   SpecialCircumstances,
 } from '@/types/acls';
+import type { ETCO2Unit } from '@/lib/etco2Units';
 
 // Use HsAndTs directly instead of HsAndTsState alias
 type HsAndTsState = HsAndTs;
@@ -44,6 +45,7 @@ interface CPRPendingRhythmViewProps {
   // Special Circumstances
   specialCircumstances: SpecialCircumstances;
   vibrationEnabled: boolean;
+  etco2Unit: ETCO2Unit;
   onSetWeight: (weight: number | null) => void;
   onSelectRhythm: (rhythm: RhythmType) => void;
   onSetRhythmAnalysisActive: (active: boolean) => void;
@@ -81,6 +83,7 @@ export const CPRPendingRhythmView = memo<CPRPendingRhythmViewProps>(({
   pregnancyStartTime,
   specialCircumstances,
   vibrationEnabled,
+  etco2Unit,
   onSetWeight,
   onSelectRhythm,
   onSetRhythmAnalysisActive,
@@ -128,10 +131,10 @@ export const CPRPendingRhythmView = memo<CPRPendingRhythmViewProps>(({
             setShowRhythmSelector(true);
             onSetRhythmAnalysisActive(true);
           }}
-          className="h-14 sm:h-16 w-full text-lg sm:text-xl font-bold bg-acls-critical hover:bg-acls-critical/90 text-white touch-target btn-3d btn-3d-critical"
+          className="h-14 sm:h-16 w-full px-4 py-3 text-lg sm:text-xl font-bold bg-acls-critical hover:bg-acls-critical/90 text-white touch-target btn-3d btn-3d-critical"
           aria-label={t('actions.analyzeRhythm')}
         >
-          <Stethoscope className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
+          <MonitorLineIcon className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
           {t('actions.analyzeRhythm')}
         </Button>
       ) : (
@@ -156,6 +159,7 @@ export const CPRPendingRhythmView = memo<CPRPendingRhythmViewProps>(({
         airwayStatus={airwayStatus}
         onAirwayChange={onAirwayChange}
         onETCO2Record={onETCO2Record}
+        etco2Unit={etco2Unit}
         cprRatio={cprRatio}
         onCPRRatioChange={onCPRRatioChange}
         pathwayMode={pathwayMode}
@@ -193,6 +197,7 @@ export const CPRPendingRhythmView = memo<CPRPendingRhythmViewProps>(({
         interventions={interventions}
         startTime={startTime}
         bradyTachyStartTime={bradyTachyStartTime}
+        etco2Unit={etco2Unit}
       />
     </>
   );

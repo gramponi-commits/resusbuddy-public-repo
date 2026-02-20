@@ -40,6 +40,7 @@ import {
   getAdultLidocaineDose,
   getAdultShockEnergy,
 } from '@/lib/aclsDosing';
+import { formatEtco2Value, getEtco2UnitLabel } from '@/lib/etco2Units';
 
 interface CommandBanner {
   message: string;
@@ -54,6 +55,56 @@ interface TimerState {
   totalCPRTime: number;
   preShockAlert: boolean;
   rhythmCheckDue: boolean;
+}
+
+type InitialRhythm = Exclude<RhythmType, null>;
+
+function parseRhythmCode(value: unknown): InitialRhythm | null {
+  if (value === 'vf_pvt' || value === 'asystole' || value === 'pea') {
+    return value;
+  }
+
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const normalized = value.toLowerCase();
+  if (normalized.includes('vf') || normalized.includes('pvt')) return 'vf_pvt';
+  if (normalized.includes('pea')) return 'pea';
+  if (normalized.includes('asyst')) return 'asystole';
+
+  return null;
+}
+
+function inferInitialRhythm(session: ACLSSession): InitialRhythm | null {
+  if (session.initialRhythm) {
+    return session.initialRhythm;
+  }
+
+  const identifiedEvent = [...session.interventions]
+    .sort((a, b) => a.timestamp - b.timestamp)
+    .find(i => i.translationKey === 'interventions.rhythmIdentified' || i.type === 'rhythm_change');
+
+  const fromValue = parseRhythmCode(identifiedEvent?.value);
+  if (fromValue) {
+    return fromValue;
+  }
+
+  const fromParam = parseRhythmCode(identifiedEvent?.translationParams?.rhythm);
+  if (fromParam) {
+    return fromParam;
+  }
+
+  // Legacy fallback for sessions where first identified rhythm details are unavailable.
+  if (session.interventions.some(i => i.type === 'shock')) {
+    return 'vf_pvt';
+  }
+
+  if (session.shockCount > 0) {
+    return 'vf_pvt';
+  }
+
+  return parseRhythmCode(session.currentRhythm);
 }
 
 export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrillatorEnergy: number = 200) {
@@ -271,6 +322,28 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
     }
   }, [session.phase]);
 
+  // Backfill initial rhythm once for legacy/in-flight sessions that don't have it yet.
+  useEffect(() => {
+    if (session.initialRhythm !== null) {
+      return;
+    }
+
+    const inferred = inferInitialRhythm(session);
+    if (!inferred) {
+      return;
+    }
+
+    setSession(prev => {
+      if (prev.initialRhythm !== null) {
+        return prev;
+      }
+      return {
+        ...prev,
+        initialRhythm: inferred,
+      };
+    });
+  }, [session.initialRhythm, session.currentRhythm, session.interventions, session.shockCount]);
+
   const addIntervention = useCallback((
     type: Intervention['type'],
     details: string,
@@ -350,6 +423,7 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
         timestamp: now,
         type: 'rhythm_change' as const,
         details: t('interventions.rhythmIdentified', { rhythm: rhythmName }),
+        value: rhythm,
         translationKey: 'interventions.rhythmIdentified',
         translationParams: { rhythm: rhythmName },
       }];
@@ -375,6 +449,7 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
       return {
         ...prev,
         currentRhythm: rhythm,
+        initialRhythm: prev.initialRhythm ?? rhythm,
         phase: newPhase,
         cprCycleStartTime: now,
         interventions,
@@ -422,7 +497,13 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
       cprCycleStartTime: now,
     }));
 
-    addIntervention('rhythm_change', t('interventions.noShockResume', { rhythm: rhythmName }), undefined, 'interventions.noShockResume', { rhythm: rhythmName });
+    addIntervention(
+      'rhythm_change',
+      t('interventions.noShockResume', { rhythm: rhythmName }),
+      newRhythm,
+      'interventions.noShockResume',
+      { rhythm: rhythmName },
+    );
     setIsInRhythmCheck(false);
   }, [addIntervention, t]);
 
@@ -525,7 +606,22 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
   }, [addIntervention, t]);
 
   const recordETCO2 = useCallback((value: number) => {
-    addIntervention('etco2', t('interventions.etco2Recorded', { value }), value, 'interventions.etco2Recorded', { value });
+    const timestamp = Date.now();
+    const displayValue = formatEtco2Value(value, 'mmhg');
+    const displayUnit = getEtco2UnitLabel('mmhg');
+
+    setSession(prev => ({
+      ...prev,
+      vitalReadings: [...prev.vitalReadings, { timestamp, etco2: value }],
+    }));
+
+    addIntervention(
+      'etco2',
+      t('interventions.etco2Recorded', { value: displayValue, unit: displayUnit }),
+      value,
+      'interventions.etco2Recorded',
+      { value: displayValue, unit: displayUnit },
+    );
   }, [addIntervention, t]);
 
   const updateHsAndTs = useCallback((updates: Partial<HsAndTs>) => {
@@ -591,6 +687,7 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
     // Recalculate times based on how long ago the session was saved
     const newSession = {
       ...savedSession,
+      initialRhythm: inferInitialRhythm(savedSession),
       // Update cprCycleStartTime to account for time passed
       cprCycleStartTime: savedSession.cprCycleStartTime 
         ? savedSession.cprCycleStartTime + elapsedSinceSave 
@@ -815,9 +912,24 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
 
   // Button state calculations - now includes cpr_pending_rhythm
   const isCPRActive = session.phase === 'shockable_pathway' || session.phase === 'non_shockable_pathway';
-  const canGiveEpinephrine = isCPRActive && !isInRhythmCheck;
+  const canGiveEpinephrine = (() => {
+    if (!isCPRActive || isInRhythmCheck) return false;
+
+    // VF/pVT: first epi after the 2nd shock.
+    if (session.phase === 'shockable_pathway') {
+      return session.shockCount >= 2;
+    }
+
+    // Asystole/PEA: epi available immediately.
+    return session.phase === 'non_shockable_pathway';
+  })();
   const canGiveAmiodarone = session.phase === 'shockable_pathway' && session.shockCount >= 3 && session.amiodaroneCount < 2 && !isInRhythmCheck;
   const canGiveLidocaine = session.phase === 'shockable_pathway' && session.shockCount >= 3 && !isInRhythmCheck;
+  const antiarrhythmicDue = session.phase === 'shockable_pathway'
+    && session.shockCount >= 3
+    && session.amiodaroneCount === 0
+    && session.lidocaineCount === 0
+    && !isInRhythmCheck;
   
   // Epinephrine timing:
   // - VF/pVT (shockable): after 2nd shock, then every 3-5 minutes
@@ -1026,6 +1138,7 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
       canGiveAmiodarone,
       canGiveLidocaine,
       epiDue,
+      antiarrhythmicDue,
       rhythmCheckDue: timerState.rhythmCheckDue,
     },
     config,

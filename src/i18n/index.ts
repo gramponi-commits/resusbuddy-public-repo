@@ -22,6 +22,7 @@ import no from './locales/no.json';
 import pl from './locales/pl.json';
 import pt from './locales/pt.json';
 import ru from './locales/ru.json';
+import sl from './locales/sl.json';
 import sv from './locales/sv.json';
 import th from './locales/th.json';
 import tl from './locales/tl.json';
@@ -34,7 +35,7 @@ const SUPPORTED_LANGUAGES = [
   'en', 'it', 'es', 'fr', 'de', 'el',  // existing
   'zh-CN', 'hi', 'ar', 'bn', 'pt', 'ru', 'id', 'uk',
   'nl', 'da', 'sv', 'no', 'pl', 'ja', 'ko',
-  'tr', 'vi', 'th', 'tl', 'fa', 'he'  // additional
+  'tr', 'vi', 'th', 'tl', 'fa', 'he', 'sl'  // additional
 ];
 
 // RTL (Right-to-Left) languages
@@ -131,6 +132,7 @@ i18n
       pl: { translation: pl },
       pt: { translation: pt },
       ru: { translation: ru },
+      sl: { translation: sl },
       sv: { translation: sv },
       th: { translation: th },
       tl: { translation: tl },

@@ -19,6 +19,10 @@ describe('Translation Completeness', () => {
   const requiredSettingsKeys = [
     'epinephrineInterval',
     'epinephrineIntervalDesc',
+    'etco2Unit',
+    'etco2UnitDesc',
+    'etco2UnitMmhg',
+    'etco2UnitKpa',
     'minutes',
     'adultDefibrillator',
     'adultDefibrillatorDesc',
@@ -27,7 +31,7 @@ describe('Translation Completeness', () => {
   Object.entries(translations).forEach(([lang, translation]) => {
     describe(`${lang.toUpperCase()} translations`, () => {
       it('should have all required settings keys', () => {
-        requiredSettingsKeys.forEach(key => {
+        requiredSettingsKeys.forEach((key) => {
           expect(translation.settings).toHaveProperty(key);
           expect(translation.settings[key as keyof typeof translation.settings]).toBeTruthy();
         });
@@ -38,9 +42,9 @@ describe('Translation Completeness', () => {
       });
 
       it('should have non-empty epinephrine interval translations', () => {
-        expect(translation.settings.epinephrineInterval).toMatch(/[a-zA-Zα-ωΑ-Ω]/);
-        expect(translation.settings.epinephrineIntervalDesc).toMatch(/[a-zA-Zα-ωΑ-Ω]/);
-        expect(translation.settings.minutes).toMatch(/[a-zA-Zα-ωΑ-Ω]/);
+        expect(translation.settings.epinephrineInterval).toMatch(/\p{L}/u);
+        expect(translation.settings.epinephrineIntervalDesc).toMatch(/\p{L}/u);
+        expect(translation.settings.minutes).toMatch(/\p{L}/u);
       });
     });
   });
@@ -65,7 +69,7 @@ describe('Translation Completeness', () => {
     });
 
     it('FR - should have correct French translations', () => {
-      expect(frTranslations.settings.epinephrineInterval).toBe('Intervalle Épinéphrine/Adrénaline');
+      expect(frTranslations.settings.epinephrineInterval).toBe('Intervalle \u00c9pin\u00e9phrine/Adr\u00e9naline');
       expect(frTranslations.settings.epinephrineIntervalDesc).toContain('AHA recommande 3-5 min');
       expect(frTranslations.settings.minutes).toBe('min');
     });
@@ -77,9 +81,9 @@ describe('Translation Completeness', () => {
     });
 
     it('EL - should have correct Greek translations', () => {
-      expect(elTranslations.settings.epinephrineInterval).toBe('Διάστημα Επινεφρίνης/Αδρεναλίνης');
-      expect(elTranslations.settings.epinephrineIntervalDesc).toContain('AHA συνιστά 3-5 λεπτά');
-      expect(elTranslations.settings.minutes).toBe('λεπ');
+      expect(elTranslations.settings.epinephrineInterval).toBe('\u0394\u03b9\u03ac\u03c3\u03c4\u03b7\u03bc\u03b1 \u0395\u03c0\u03b9\u03bd\u03b5\u03c6\u03c1\u03af\u03bd\u03b7\u03c2/\u0391\u03b4\u03c1\u03b5\u03bd\u03b1\u03bb\u03af\u03bd\u03b7\u03c2');
+      expect(elTranslations.settings.epinephrineIntervalDesc).toContain('AHA \u03c3\u03c5\u03bd\u03b9\u03c3\u03c4\u03ac 3-5 \u03bb\u03b5\u03c0\u03c4\u03ac');
+      expect(elTranslations.settings.minutes).toBe('\u03bb\u03b5\u03c0');
     });
   });
 
@@ -87,7 +91,7 @@ describe('Translation Completeness', () => {
     it('should have the same structure across all languages', () => {
       const enKeys = Object.keys(enTranslations.settings);
 
-      Object.entries(translations).forEach(([lang, translation]) => {
+      Object.entries(translations).forEach(([, translation]) => {
         const langKeys = Object.keys(translation.settings);
         expect(langKeys).toEqual(enKeys);
       });

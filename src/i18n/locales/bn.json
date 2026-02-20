@@ -49,7 +49,7 @@
     "shockable": "শকযোগ্য রিদম",
     "asystole": "অ্যাসিস্টোল",
     "nonShockable": "নন-শকযোগ্য",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "পদক্ষেপ",
@@ -403,6 +403,10 @@
   },
   "settings": {
     "title": "সেটিংস",
+    "groupGeneral": "সাধারণ",
+    "groupFeedback": "প্রতিক্রিয়া",
+    "groupPreferences": "পছন্দ",
+    "groupECMO": "ECMO/ECPR",
     "language": "ভাষা",
     "languageDesc": "আপনার পছন্দের ভাষা নির্বাচন করুন",
     "english": "English",
@@ -430,7 +434,22 @@
     "adultDefibrillatorDesc": "প্রাপ্তবয়স্কদের শক এনার্জি নির্বাচন করুন",
     "epinephrineInterval": "Epinephrine/Adrenaline অন্তর",
     "epinephrineIntervalDesc": "Epinephrine ডোজের মাঝে সময় (AHA 3-5 মিনিট সুপারিশ)",
-    "minutes": "মিনিট"
+    "minutes": "মিনিট",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "কার্ডিয়াক অ্যারেস্টের সময় ECMO/ECPR ক্যানুলেশন সাপোর্ট সক্রিয় করুন",
+    "ecmoActivationTime": "সক্রিয়করণের সময় (মিনিট)",
+    "ecmoInclusionCriteria": "অন্তর্ভুক্তির মানদণ্ড",
+    "ecmoExclusionCriteria": "বর্জনের মানদণ্ড",
+    "ecmoCriteriaPlaceholder": "মানদণ্ড টাইপ করুন এবং যোগ করুন টিপুন",
+    "ecmoAdd": "যোগ করুন",
+    "cowboyMode": "কাউবয় মোড",
+    "cowboyModeDesc": "ওষুধ প্রয়োগ এবং ECMO সক্রিয়করণে AHA সময় সীমাবদ্ধতা সরান",
+    "cowboyModeActive": "সক্রিয় - AHA নির্দেশিকা অগ্রাহ্য করা হয়েছে",
+    "cowboyModeInactive": "নিষ্ক্রিয় - 2025 AHA নির্দেশিকা অনুসরণ করা হচ্ছে",
+    "cowboyModeConfirmTitle": "কাউবয় মোড সক্রিয় করবেন?",
+    "cowboyModeConfirmDesc": "এটি আপনাকে যেকোনো সময় ওষুধ প্রয়োগ করতে এবং অবিলম্বে ECMO সক্রিয় করতে দেবে, 2025 AHA কার্ডিয়াক অ্যারেস্ট অ্যালগরিদম নির্দেশিকা থেকে বিচ্যুত হয়ে। ওষুধের সময় সংক্রান্ত পরামর্শ নিষ্ক্রিয় করা হবে।",
+    "cowboyModeConfirm": "কাউবয় মোড সক্রিয় করুন",
+    "cowboyModeCancel": "বাতিল"
   },
   "resume": {
     "title": "সক্রিয় কোড শনাক্ত",
@@ -531,7 +550,7 @@
     "hsTsChecked": "H's & T's পরীক্ষা: {{items}}",
     "codeEnded": "কোড শেষ: {{outcome}}",
     "noteAdded": "নোট: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "রোগীর ওজন সেট: {{weight}} kg",
     "pregnancyActivated": "গর্ভাবস্থা প্রোটোকল সক্রিয়",
     "anaphylaxisActivated": "অ্যানাফাইল্যাক্সিস প্রোটোকল সক্রিয়",
@@ -720,7 +739,7 @@
     "dose": "ডোজ",
     "doseNumber": "ডোজ #{{number}}",
     "endSession": "সেশন শেষ",
-    "sessionEnded": "সেশন শেষ হয়েছে",
+    "sessionEnded": "সেশন শেষ হয়েছে: {{outcome}}",
     "sessionEndedDisplay": "সেশন শেষ হয়েছে",
     "exportSession": "সেশন এক্সপোর্ট",
     "switchedToArrest": "কার্ডিয়াক অ্যারেস্ট প্রোটোকলে সুইচ করা হয়েছে",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "পলিমরফিক VT: DEFIBRILLATION (সিঙ্ক্রোনাইজড নয়) ব্যবহার করুন",
     "deliverDefibrillation": "DEFIBRILLATION দিন (অসিঙ্ক্রোনাইজড)",
     "defibrillationUnsynchronized": "ডিফিব্রিলেশন (অসিঙ্ক্রোনাইজড)",
-    "sessionEnded": "সেশন শেষ হয়েছে: {{outcome}}",
     "outcomeResolved": "সমাধান হয়েছে",
     "outcomeTransferred": "স্থানান্তর করা হয়েছে"
   },
@@ -981,5 +999,15 @@
     "acceptButton": "আমি গ্রহণ করছি",
     "acceptedButton": "গৃহীত",
     "viewTerms": "ব্যবহারের শর্ত দেখুন"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "ECMO সক্রিয় করুন",
+    "active": "ECMO সক্রিয়",
+    "activated": "ECMO/ECPR সক্রিয় করা হয়েছে",
+    "availableIn": "{{time}} এ উপলব্ধ",
+    "inclusionCriteria": "অন্তর্ভুক্তির মানদণ্ড",
+    "exclusionCriteria": "বর্জনের মানদণ্ড",
+    "noneConfigured": "কিছুই কনফিগার করা হয়নি"
   }
 }

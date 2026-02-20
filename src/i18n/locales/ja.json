@@ -49,7 +49,7 @@
     "shockable": "除細動可能な不整脈",
     "asystole": "心静止",
     "nonShockable": "除細動不要",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "title": "アクション",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "設定",
+    "groupGeneral": "全般",
+    "groupFeedback": "フィードバック",
+    "groupPreferences": "設定",
+    "groupECMO": "ECMO/ECPR",
     "language": "言語",
     "languageDesc": "希望の言語を選択",
     "english": "English",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "成人患者の除細動エネルギーを選択",
     "epinephrineInterval": "エピネフリン/アドレナリン間隔",
     "epinephrineIntervalDesc": "エピネフリン投与間の時間（AHA推奨3-5分）",
-    "minutes": "分"
+    "minutes": "分",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "心停止中のECMO/ECPRカニュレーションサポートを有効にする",
+    "ecmoActivationTime": "作動時間（分）",
+    "ecmoInclusionCriteria": "適応基準",
+    "ecmoExclusionCriteria": "除外基準",
+    "ecmoCriteriaPlaceholder": "基準を入力して追加を押す",
+    "ecmoAdd": "追加",
+    "cowboyMode": "カウボーイモード",
+    "cowboyModeDesc": "薬物投与とECMO活性化に関するAHAの時間制限を解除",
+    "cowboyModeActive": "有効 - AHAガイドラインを上書き",
+    "cowboyModeInactive": "無効 - 2025 AHAガイドラインに従う",
+    "cowboyModeConfirmTitle": "カウボーイモードを有効にしますか？",
+    "cowboyModeConfirmDesc": "これにより、2025 AHA心停止アルゴリズムガイドラインから逸脱して、いつでも薬物を投与し、ECMOを即座に活性化できるようになります。薬物のタイミング提案は無効になります。",
+    "cowboyModeConfirm": "カウボーイモードを有効にする",
+    "cowboyModeCancel": "キャンセル"
   },
   "resume": {
     "title": "アクティブなコードが検出されました",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T'sチェック済み：{{items}}",
     "codeEnded": "コード終了：{{outcome}}",
     "noteAdded": "メモ：{{note}}",
-    "etco2Recorded": "ETCO₂：{{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "患者体重設定：{{weight}} kg",
     "pregnancyActivated": "妊娠プロトコル有効化",
     "anaphylaxisActivated": "アナフィラキシープロトコル有効化",
@@ -720,7 +739,7 @@
     "dose": "投与量",
     "doseNumber": "投与 #{{number}}",
     "endSession": "セッション終了",
-    "sessionEnded": "セッション終了",
+    "sessionEnded": "セッション終了：{{outcome}}",
     "sessionEndedDisplay": "セッション終了",
     "exportSession": "セッションをエクスポート",
     "switchedToArrest": "心停止プロトコルに切り替え",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "多相性VT：除細動を使用（同期ではない）",
     "deliverDefibrillation": "除細動を実施（非同期）",
     "defibrillationUnsynchronized": "除細動（非同期）",
-    "sessionEnded": "セッション終了：{{outcome}}",
     "outcomeResolved": "解決済み",
     "outcomeTransferred": "転送済み"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "お問い合わせ",
     "contactP1": "このプライバシーポリシーについて質問がある場合は、こちらまでご連絡ください：",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "ECMO起動",
+    "active": "ECMO作動中",
+    "activated": "ECMO/ECPR起動済み",
+    "availableIn": "{{time}}で利用可能",
+    "inclusionCriteria": "適応基準",
+    "exclusionCriteria": "除外基準",
+    "noneConfigured": "未設定"
   }
 }

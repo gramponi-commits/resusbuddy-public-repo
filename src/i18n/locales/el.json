@@ -49,7 +49,7 @@
     "shockable": "Απινιδώσιμος Ρυθμός",
     "asystole": "Ασυστολία",
     "nonShockable": "Μη Απινιδώσιμος",
-    "pea": "PEA"
+    "pea": "P.E.A."
   },
   "actions": {
     "shock": "ΑΠΙΝΙΔΩΣΗ",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Ρυθμίσεις",
+    "groupGeneral": "??????",
+    "groupFeedback": "???????????? ??? ??????????????",
+    "groupPreferences": "???????????",
+    "groupECMO": "ECMO/ECPR",
     "language": "Γλώσσα",
     "languageDesc": "Επιλέξτε την προτιμώμενη γλώσσα",
     "english": "English",
@@ -315,7 +319,26 @@
     "adultDefibrillatorDesc": "Επιλέξτε ενέργεια απινίδωσης για ενήλικες",
     "epinephrineInterval": "Διάστημα Επινεφρίνης/Αδρεναλίνης",
     "epinephrineIntervalDesc": "Χρόνος μεταξύ δόσεων επινεφρίνης (AHA συνιστά 3-5 λεπτά)",
-    "minutes": "λεπ"
+    "etco2Unit": "Μονάδα ETCO2",
+    "etco2UnitDesc": "Ελέγχει τις μονάδες εισαγωγής και εμφάνισης ETCO2 σε κώδικα και ιστορικό.",
+    "etco2UnitMmhg": "mmHg",
+    "etco2UnitKpa": "kPa",
+    "minutes": "λεπ",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Ενεργοποίηση υποστήριξης καθετηριασμού ECMO/ECPR κατά τη διάρκεια καρδιακής ανακοπής",
+    "ecmoActivationTime": "Χρόνος Ενεργοποίησης (λεπτά)",
+    "ecmoInclusionCriteria": "Κριτήρια Συμπερίληψης",
+    "ecmoExclusionCriteria": "Κριτήρια Αποκλεισμού",
+    "ecmoCriteriaPlaceholder": "Πληκτρολογήστε κριτήριο και πατήστε Προσθήκη",
+    "ecmoAdd": "Προσθήκη",
+    "cowboyMode": "Λειτουργία Cowboy",
+    "cowboyModeDesc": "Αφαίρεση χρονικών περιορισμών AHA για χορήγηση φαρμάκων και ενεργοποίηση ECMO",
+    "cowboyModeActive": "Ενεργή - Οι κατευθυντήριες γραμμές AHA παρακάμπτονται",
+    "cowboyModeInactive": "Ανενεργή - Ακολουθούνται οι κατευθυντήριες γραμμές AHA 2025",
+    "cowboyModeConfirmTitle": "Ενεργοποίηση λειτουργίας Cowboy;",
+    "cowboyModeConfirmDesc": "Αυτό θα σας επιτρέψει να χορηγείτε φάρμακα οποιαδήποτε στιγμή και να ενεργοποιείτε το ECMO άμεσα, αποκλίνουσες από τις κατευθυντήριες γραμμές αλγορίθμου καρδιακής ανακοπής AHA 2025. Οι προτάσεις χρονισμού φαρμάκων θα απενεργοποιηθούν.",
+    "cowboyModeConfirm": "Ενεργοποίηση λειτουργίας Cowboy",
+    "cowboyModeCancel": "Ακύρωση"
   },
   "resume": {
     "title": "Ανιχνεύθηκε Ενεργός Κωδικός",
@@ -399,7 +422,7 @@
     "hsTsChecked": "Ελέγχθηκαν H's & T's: {{items}}",
     "codeEnded": "Τέλος κωδικού: {{outcome}}",
     "noteAdded": "Σημείωση: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "pregnancyActivated": "Πρωτόκολλο εγκυμοσύνης ενεργοποιήθηκε",
     "anaphylaxisActivated": "Ενεργοποιήθηκε πρωτόκολλο Αναφυλαξίας",
     "asthmaActivated": "Ενεργοποιήθηκε πρωτόκολλο Άσθματος / Σοβαρού Βρογχοσπασμού",
@@ -720,7 +743,7 @@
     "dose": "Δόση",
     "doseNumber": "Δόση #{{number}}",
     "endSession": "Τερματισμός Συνεδρίας",
-    "sessionEnded": "Η Συνεδρία Τερματίστηκε",
+    "sessionEnded": "Συνεδρία Τερματίστηκε: {{outcome}}",
     "sessionEndedDisplay": "Η Συνεδρία Τελείωσε",
     "exportSession": "Εξαγωγή Συνεδρίας",
     "switchedToArrest": "Αλλαγή σε πρωτόκολλο καρδιακής ανακοπής",
@@ -809,7 +832,6 @@
     "polymorphicVTWarning": "Πολύμορφη ΚΤ: Χρησιμοποιήστε ΑΠΙΝΙΔΩΣΗ (ΟΧΙ συγχρονισμένη)",
     "deliverDefibrillation": "Εκτελέστε ΑΠΙΝΙΔΩΣΗ (Μη Συγχρονισμένη)",
     "defibrillationUnsynchronized": "Απινίδωση (μη συγχρονισμένη)",
-    "sessionEnded": "Συνεδρία Τερματίστηκε: {{outcome}}",
     "outcomeResolved": "Επιλύθηκε",
     "outcomeTransferred": "Μεταφέρθηκε"
   },
@@ -981,5 +1003,15 @@
     "contactTitle": "Επικοινωνήστε μαζί μας",
     "contactP1": "Εάν έχετε ερωτήματα σχετικά με την παρούσα Πολιτική Απορρήτου, παρακαλούμε επικοινωνήστε μαζί μας στο:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Ενεργοποίηση ECMO",
+    "active": "ECMO Ενεργό",
+    "activated": "ECMO/ECPR ενεργοποιήθηκε",
+    "availableIn": "Διαθέσιμο σε {{time}}",
+    "inclusionCriteria": "Κριτήρια Συμπερίληψης",
+    "exclusionCriteria": "Κριτήρια Αποκλεισμού",
+    "noneConfigured": "Κανένα ρυθμισμένο"
   }
 }

@@ -10,11 +10,14 @@ import { Trash2, Heart, XCircle, Clock, Zap, Syringe, ChevronDown, ChevronUp, Ac
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { logger } from '@/utils/logger';
+import { useSettings } from '@/hooks/useSettings';
+import { formatEtco2Value, getEtco2UnitLabel } from '@/lib/etco2Units';
 
 type FilterMode = 'all' | 'adult' | 'pediatric' | 'rhythm';
 
 export default function SessionHistory() {
   const { t } = useTranslation();
+  const { settings } = useSettings();
   const [sessions, setSessions] = useState<StoredSession[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -149,6 +152,8 @@ export default function SessionHistory() {
       minute: '2-digit',
     });
   };
+
+  const etco2UnitLabel = getEtco2UnitLabel(settings.etco2Unit);
 
   const getHsTsChecked = (hsAndTs: StoredSession['hsAndTs']) => {
     if (!hsAndTs) return [];
@@ -501,7 +506,7 @@ export default function SessionHistory() {
                           <div className="flex flex-wrap gap-2">
                             {session.etco2Readings.map((reading, idx) => (
                               <Badge key={idx} variant="secondary" className="font-mono">
-                                {formatTime(reading.timestamp, referenceTime)}: {reading.value} mmHg
+                                {formatTime(reading.timestamp, referenceTime)}: {formatEtco2Value(reading.value, settings.etco2Unit)} {etco2UnitLabel}
                               </Badge>
                             ))}
                           </div>
@@ -606,9 +611,27 @@ export default function SessionHistory() {
                           </h4>
                           <div className="space-y-1 max-h-48 overflow-y-auto">
                             {session.interventions.map((intervention, idx) => {
-                              const displayText = intervention.translationKey
-                                ? t(intervention.translationKey, intervention.translationParams || {})
-                                : intervention.details;
+                              let displayText: string;
+                              if (intervention.type === 'etco2') {
+                                const canonicalValue = typeof intervention.value === 'number'
+                                  ? intervention.value
+                                  : Number(intervention.value);
+
+                                if (Number.isFinite(canonicalValue)) {
+                                  displayText = t('interventions.etco2Recorded', {
+                                    value: formatEtco2Value(canonicalValue, settings.etco2Unit),
+                                    unit: etco2UnitLabel,
+                                  });
+                                } else if (intervention.translationKey) {
+                                  displayText = t(intervention.translationKey, intervention.translationParams || {});
+                                } else {
+                                  displayText = intervention.details;
+                                }
+                              } else {
+                                displayText = intervention.translationKey
+                                  ? t(intervention.translationKey, intervention.translationParams || {})
+                                  : intervention.details;
+                              }
 
                               return (
                                 <div key={idx} className="flex items-start gap-2 text-xs">

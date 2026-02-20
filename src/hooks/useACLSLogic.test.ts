@@ -97,6 +97,20 @@ describe('useACLSLogic - Phase Transitions', () => {
     expect(result.current.session.currentRhythm).toBe('pea');
   });
 
+  it('should keep initial rhythm fixed after first rhythm selection', () => {
+    const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
+
+    act(() => {
+      result.current.actions.startCPR();
+      result.current.actions.selectRhythm('vf_pvt');
+      result.current.actions.startRhythmCheck();
+      result.current.actions.completeRhythmCheckNoShock('asystole');
+    });
+
+    expect(result.current.session.initialRhythm).toBe('vf_pvt');
+    expect(result.current.session.currentRhythm).toBe('asystole');
+  });
+
   it('should transition to post_rosc when achieveROSC is called', () => {
     const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
 
@@ -526,6 +540,33 @@ describe('useACLSLogic - Button States', () => {
     expect(result.current.buttonStates.canGiveEpinephrine).toBe(false);
   });
 
+  it('should keep epinephrine disabled in shockable pathway after first shock', () => {
+    const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
+
+    act(() => {
+      result.current.actions.startCPR();
+      result.current.actions.selectRhythm('vf_pvt'); // first shock delivered immediately
+    });
+
+    expect(result.current.session.shockCount).toBe(1);
+    expect(result.current.buttonStates.canGiveEpinephrine).toBe(false);
+  });
+
+  it('should enable epinephrine in shockable pathway after second shock', () => {
+    const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
+
+    act(() => {
+      result.current.actions.startCPR();
+      result.current.actions.selectRhythm('vf_pvt'); // shock #1
+      result.current.actions.startRhythmCheck();
+      result.current.actions.completeRhythmCheckWithShock(200); // shock #2
+    });
+
+    expect(result.current.session.shockCount).toBe(2);
+    expect(result.current.buttonStates.canGiveEpinephrine).toBe(true);
+    expect(result.current.buttonStates.epiDue).toBe(true);
+  });
+
   it('should enable amiodarone after 3rd shock', () => {
     const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
 
@@ -541,6 +582,7 @@ describe('useACLSLogic - Button States', () => {
     });
 
     expect(result.current.buttonStates.canGiveAmiodarone).toBe(true);
+    expect(result.current.buttonStates.antiarrhythmicDue).toBe(true);
   });
 
   it('should enable lidocaine after 3rd shock', () => {
@@ -597,6 +639,7 @@ describe('useACLSLogic - Interventions', () => {
     });
 
     expect(result.current.session.interventions.some(i => i.type === 'etco2' && i.value === 35)).toBe(true);
+    expect(result.current.session.vitalReadings.some(v => v.etco2 === 35)).toBe(true);
   });
 
   it('should add intervention when Hs and Ts are updated', () => {
@@ -835,6 +878,71 @@ describe('useACLSLogic - Session Management', () => {
     expect(result.current.session.phase).toBe('non_shockable_pathway');
     expect(result.current.timerState.totalElapsed).toBe(savedTimerState.totalElapsed);
     expect(result.current.timerState.totalCPRTime).toBe(savedTimerState.totalCPRTime);
+  });
+
+  it('should infer initial rhythm when resuming legacy session without initialRhythm', () => {
+    const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
+
+    const savedSession = {
+      ...createInitialSession(),
+      phase: 'shockable_pathway' as const,
+      currentRhythm: 'vf_pvt' as const,
+      initialRhythm: null,
+      interventions: [
+        {
+          id: 'legacy-rhythm',
+          timestamp: Date.now() - 30000,
+          type: 'rhythm_change' as const,
+          details: 'Rhythm identified: VF/pVT',
+          translationKey: 'interventions.rhythmIdentified',
+          translationParams: { rhythm: 'VF/pVT' },
+        },
+      ],
+    };
+
+    const savedTimerState = {
+      totalElapsed: 60000,
+      totalCPRTime: 45000,
+      savedAt: Date.now() - 5000,
+    };
+
+    act(() => {
+      result.current.actions.resumeSession(savedSession, savedTimerState);
+    });
+
+    expect(result.current.session.initialRhythm).toBe('vf_pvt');
+  });
+
+  it('should keep inferred initial rhythm fixed after subsequent rhythm changes', () => {
+    const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
+
+    const savedSession = {
+      ...createInitialSession(),
+      phase: 'non_shockable_pathway' as const,
+      currentRhythm: 'asystole' as const,
+      initialRhythm: null,
+      interventions: [],
+    };
+
+    const savedTimerState = {
+      totalElapsed: 60000,
+      totalCPRTime: 45000,
+      savedAt: Date.now() - 5000,
+    };
+
+    act(() => {
+      result.current.actions.resumeSession(savedSession, savedTimerState);
+    });
+
+    expect(result.current.session.initialRhythm).toBe('asystole');
+
+    act(() => {
+      result.current.actions.startRhythmCheck();
+      result.current.actions.completeRhythmCheckNoShock('pea');
+    });
+
+    expect(result.current.session.currentRhythm).toBe('pea');
+    expect(result.current.session.initialRhythm).toBe('asystole');
   });
 });
 

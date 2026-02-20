@@ -49,7 +49,7 @@
     "shockable": "Ritmo Choqueável",
     "asystole": "Assistolia",
     "nonShockable": "Não Choqueável",
-    "pea": "AESP"
+    "pea": "A.E.S.P."
   },
   "actions": {
     "title": "Ações",
@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "Configurações",
+    "groupGeneral": "Geral",
+    "groupFeedback": "Feedback",
+    "groupPreferences": "Preferências",
+    "groupECMO": "ECMO/ECPR",
     "language": "Idioma",
     "languageDesc": "Selecione seu idioma preferido",
     "english": "Inglês",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "Selecione energia do choque para pacientes adultos",
     "epinephrineInterval": "Intervalo de Epinefrina",
     "epinephrineIntervalDesc": "Tempo entre doses de epinefrina (AHA recomenda 3-5 min)",
-    "minutes": "min"
+    "minutes": "min",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "Ativar suporte de canulação ECMO/ECPR durante parada cardíaca",
+    "ecmoActivationTime": "Tempo de Ativação (minutos)",
+    "ecmoInclusionCriteria": "Critérios de Inclusão",
+    "ecmoExclusionCriteria": "Critérios de Exclusão",
+    "ecmoCriteriaPlaceholder": "Digite o critério e pressione Adicionar",
+    "ecmoAdd": "Adicionar",
+    "cowboyMode": "Modo Cowboy",
+    "cowboyModeDesc": "Remover restrições de tempo AHA na administração de medicamentos e ativação de ECMO",
+    "cowboyModeActive": "Ativo - Diretrizes AHA substituídas",
+    "cowboyModeInactive": "Inativo - Seguindo diretrizes AHA 2025",
+    "cowboyModeConfirmTitle": "Ativar Modo Cowboy?",
+    "cowboyModeConfirmDesc": "Isso permitirá que você administre medicamentos a qualquer momento e ative o ECMO imediatamente, desviando das diretrizes do algoritmo de parada cardíaca AHA 2025. As sugestões de tempo de medicação serão desativadas.",
+    "cowboyModeConfirm": "Ativar Modo Cowboy",
+    "cowboyModeCancel": "Cancelar"
   },
   "resume": {
     "title": "Código Ativo Detectado",
@@ -416,7 +435,7 @@
     "hsTsChecked": "H's & T's verificados: {{items}}",
     "codeEnded": "Código encerrado: {{outcome}}",
     "noteAdded": "Nota: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "Peso do paciente definido: {{weight}} kg",
     "pregnancyActivated": "Protocolo de gravidez ativado",
     "anaphylaxisActivated": "Protocolo de anafilaxia ativado",
@@ -720,7 +739,7 @@
     "dose": "Dose",
     "doseNumber": "Dose #{{number}}",
     "endSession": "Encerrar Sessão",
-    "sessionEnded": "Sessão Encerrada",
+    "sessionEnded": "Sessão Encerrada: {{outcome}}",
     "sessionEndedDisplay": "Sessão Encerrada",
     "exportSession": "Exportar Sessão",
     "switchedToArrest": "Alternado para protocolo de parada cardíaca",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "TV Polimórfica: Use DESFIBRILAÇÃO (NÃO sincronizada)",
     "deliverDefibrillation": "Entregar DESFIBRILAÇÃO (Não sincronizada)",
     "defibrillationUnsynchronized": "Desfibrilação (não sincronizada)",
-    "sessionEnded": "Sessão Encerrada: {{outcome}}",
     "outcomeResolved": "Resolvido",
     "outcomeTransferred": "Transferido"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "Contate-nos",
     "contactP1": "Se você tiver perguntas sobre esta Política de Privacidade, entre em contato conosco em:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "Ativar ECMO",
+    "active": "ECMO Ativo",
+    "activated": "ECMO/ECPR ativado",
+    "availableIn": "Disponível em {{time}}",
+    "inclusionCriteria": "Critérios de Inclusão",
+    "exclusionCriteria": "Critérios de Exclusão",
+    "noneConfigured": "Nenhum configurado"
   }
 }

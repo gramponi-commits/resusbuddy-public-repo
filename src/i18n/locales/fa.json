@@ -288,6 +288,10 @@
   },
   "settings": {
     "title": "تنظیمات",
+    "groupGeneral": "عمومی",
+    "groupFeedback": "بازخورد",
+    "groupPreferences": "تنظیمات",
+    "groupECMO": "ECMO/ECPR",
     "language": "زبان",
     "languageDesc": "زبان مورد علاقه خود را انتخاب کنید",
     "english": "انگلیسی",
@@ -315,7 +319,22 @@
     "adultDefibrillatorDesc": "انرژی شوک را برای بیماران بزرگسال انتخاب کنید",
     "epinephrineInterval": "فاصله اپی‌نفرین",
     "epinephrineIntervalDesc": "زمان بین دوزهای اپی‌نفرین (توصیه AHA ۳-۵ دقیقه)",
-    "minutes": "دقیقه"
+    "minutes": "دقیقه",
+    "ecmo": "ECMO / ECPR",
+    "ecmoDesc": "فعال‌سازی پشتیبانی کانولاسیون ECMO/ECPR در حین ایست قلبی",
+    "ecmoActivationTime": "زمان فعال‌سازی (دقیقه)",
+    "ecmoInclusionCriteria": "معیارهای ورود",
+    "ecmoExclusionCriteria": "معیارهای خروج",
+    "ecmoCriteriaPlaceholder": "معیار را تایپ کنید و افزود را بزنید",
+    "ecmoAdd": "افزودن",
+    "cowboyMode": "حالت کابوی",
+    "cowboyModeDesc": "حذف محدودیت‌های زمانی AHA در تجویز دارو و فعال‌سازی ECMO",
+    "cowboyModeActive": "فعال - دستورالعمل‌های AHA نادیده گرفته شده",
+    "cowboyModeInactive": "غیرفعال - پیروی از دستورالعمل‌های AHA 2025",
+    "cowboyModeConfirmTitle": "حالت کابوی فعال شود؟",
+    "cowboyModeConfirmDesc": "این امکان به شما می‌دهد تا در هر زمان دارو تجویز کنید و ECMO را فوراً فعال کنید، که از دستورالعمل‌های الگوریتم ایست قلبی AHA 2025 منحرف می‌شود. پیشنهادهای زمان‌بندی دارو غیرفعال خواهند شد.",
+    "cowboyModeConfirm": "فعال‌سازی حالت کابوی",
+    "cowboyModeCancel": "لغو"
   },
   "resume": {
     "title": "کد فعال شناسایی شد",
@@ -416,7 +435,7 @@
     "hsTsChecked": "حروف H و حروف T بررسی شد: {{items}}",
     "codeEnded": "کد خاتمه یافت: {{outcome}}",
     "noteAdded": "یادداشت: {{note}}",
-    "etco2Recorded": "ETCO₂: {{value}} mmHg",
+    "etco2Recorded": "ETCO₂: {{value}} {{unit}}",
     "weightSet": "وزن بیمار تنظیم شد: {{weight}} کیلوگرم",
     "pregnancyActivated": "پروتکل بارداری فعال شد",
     "anaphylaxisActivated": "پروتکل حساسیت مفرط فعال شد",
@@ -720,7 +739,7 @@
     "dose": "دوز",
     "doseNumber": "دوز شماره {{number}}",
     "endSession": "پایان جلسه",
-    "sessionEnded": "جلسه پایان یافت",
+    "sessionEnded": "جلسه پایان یافت: {{outcome}}",
     "sessionEndedDisplay": "جلسه پایان یافت",
     "exportSession": "صدور جلسه",
     "switchedToArrest": "تغییر به پروتکل ایست قلب",
@@ -809,7 +828,6 @@
     "polymorphicVTWarning": "VT چندشکل: از دفیبریلاسیون (غیر هماهنگ) استفاده کنید",
     "deliverDefibrillation": "دفیبریلاسیون (غیر هماهنگ) ارائه دهید",
     "defibrillationUnsynchronized": "دفیبریلاسیون (غیرهماهنگ)",
-    "sessionEnded": "جلسه پایان یافت: {{outcome}}",
     "outcomeResolved": "حل شد",
     "outcomeTransferred": "منتقل شد"
   },
@@ -981,5 +999,15 @@
     "contactTitle": "تماس با ما",
     "contactP1": "اگر سوالاتی در مورد این سیاست حفظ حریم خصوصی دارید، لطفاً با ما در تماس بگیرید:",
     "contactEmail": "resusbuddy@gmail.com"
+  },
+  "ecmo": {
+    "title": "ECMO / ECPR",
+    "activateButton": "فعال‌سازی ECMO",
+    "active": "ECMO فعال",
+    "activated": "ECMO/ECPR فعال شد",
+    "availableIn": "در دسترس در {{time}}",
+    "inclusionCriteria": "معیارهای ورود",
+    "exclusionCriteria": "معیارهای خروج",
+    "noneConfigured": "پیکربندی نشده"
   }
 }

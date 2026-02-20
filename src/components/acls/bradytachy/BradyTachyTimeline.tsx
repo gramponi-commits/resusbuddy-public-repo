@@ -2,9 +2,10 @@ import { useTranslation } from 'react-i18next';
 import { BradyTachyIntervention } from '@/types/acls';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronDown, Clock, Zap, Syringe, Pill, Activity, Wind, FileText, Heart, MessageSquare } from 'lucide-react';
+import { ChevronDown, Zap, Syringe, Pill, Activity, Wind, FileText, Heart, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { HourglassIcon } from '@/components/icons/ClinicalIcons';
 
 interface BradyTachyTimelineProps {
   interventions: BradyTachyIntervention[];
@@ -61,7 +62,7 @@ export function BradyTachyTimeline({ interventions, startTime }: BradyTachyTimel
       <CollapsibleTrigger className="w-full">
         <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors">
           <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-muted-foreground" />
+            <HourglassIcon className="h-4 w-4 text-muted-foreground" />
             <span className="font-semibold text-foreground">{t('timeline.title')}</span>
             <span className="text-sm text-muted-foreground">({interventions.length} {t('timeline.events')})</span>
           </div>

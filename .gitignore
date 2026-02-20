@@ -30,7 +30,6 @@ dist-ssr
 
 # Capacitor
 android/app/build/
-android/app/release/
 android/build/
 android/.gradle/
 android/app/src/main/assets/public/
@@ -38,14 +37,3 @@ android/app/src/main/assets/capacitor.config.json
 ios/App/Pods/
 ios/App/build/
 ios/App/App.xcworkspace/xcuserdata/
-
-# Internal tooling and local agents
-.claude/
-.factory/
-.ralph-tui/
-
-# Backup and scratch files
-*.backup
-*.old
-DEPLOYMENT_ASSETS/
-nul

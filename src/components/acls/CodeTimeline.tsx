@@ -2,14 +2,18 @@ import { useTranslation } from 'react-i18next';
 import { Intervention } from '@/types/acls';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronDown, Clock, Zap, Syringe, Pill, Heart, Activity, Wind, FileText, Gauge, Droplets, HandHeart } from 'lucide-react';
+import { ChevronDown, Clock, Zap, Syringe, Pill, Heart, Activity, Wind, FileText, Droplets, HandHeart } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { CapnographyWaveIcon, HourglassIcon } from '@/components/icons/ClinicalIcons';
+import type { ETCO2Unit } from '@/lib/etco2Units';
+import { formatEtco2Value, getEtco2UnitLabel } from '@/lib/etco2Units';
 
 interface CodeTimelineProps {
   interventions: Intervention[];
   startTime: number;
   bradyTachyStartTime?: number | null;
+  etco2Unit?: ETCO2Unit;
 }
 
 // Helper function to determine the reference time for elapsed time calculations
@@ -80,13 +84,18 @@ function getInterventionIcon(type: Intervention['type']) {
     case 'cpr_start':
       return <Clock className="h-4 w-4 text-foreground" />;
     case 'etco2':
-      return <Gauge className="h-4 w-4 text-acls-info" />;
+      return <CapnographyWaveIcon className="h-4 w-4 text-acls-info" />;
     default:
       return <FileText className="h-4 w-4 text-muted-foreground" />;
   }
 }
 
-export function CodeTimeline({ interventions, startTime, bradyTachyStartTime }: CodeTimelineProps) {
+export function CodeTimeline({
+  interventions,
+  startTime,
+  bradyTachyStartTime,
+  etco2Unit = 'mmhg',
+}: CodeTimelineProps) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const sortedInterventions = [...interventions].sort((a, b) => b.timestamp - a.timestamp);
@@ -97,9 +106,9 @@ export function CodeTimeline({ interventions, startTime, bradyTachyStartTime }: 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
       <CollapsibleTrigger className="w-full">
-        <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors">
+        <div className="flex items-center justify-between p-2 rounded-lg bg-card border border-border hover:bg-muted/50 transition-colors">
           <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 text-muted-foreground" />
+            <HourglassIcon className="h-4 w-4 text-muted-foreground" />
             <span className="font-semibold text-foreground">{t('timeline.title')}</span>
             <span className="text-sm text-muted-foreground">({interventions.length} {t('timeline.events')})</span>
           </div>
@@ -119,9 +128,27 @@ export function CodeTimeline({ interventions, startTime, bradyTachyStartTime }: 
               </p>
             ) : (
               sortedInterventions.map((intervention) => {
-                const displayText = intervention.translationKey
-                  ? t(intervention.translationKey, intervention.translationParams || {})
-                  : intervention.details;
+                let displayText: string;
+                if (intervention.type === 'etco2') {
+                  const canonicalValue = typeof intervention.value === 'number'
+                    ? intervention.value
+                    : Number(intervention.value);
+
+                  if (Number.isFinite(canonicalValue)) {
+                    displayText = t('interventions.etco2Recorded', {
+                      value: formatEtco2Value(canonicalValue, etco2Unit),
+                      unit: getEtco2UnitLabel(etco2Unit),
+                    });
+                  } else if (intervention.translationKey) {
+                    displayText = t(intervention.translationKey, intervention.translationParams || {});
+                  } else {
+                    displayText = intervention.details;
+                  }
+                } else {
+                  displayText = intervention.translationKey
+                    ? t(intervention.translationKey, intervention.translationParams || {})
+                    : intervention.details;
+                }
 
                 return (
                   <div
