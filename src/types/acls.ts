@@ -73,6 +73,7 @@ export interface PregnancyCauses {
 
 // Pregnancy-specific interventions
 export interface PregnancyInterventions {
+  fundusAtUmbilicus: boolean;
   leftUterineDisplacement: boolean;
   earlyAirway: boolean;
   ivAboveDiaphragm: boolean;
@@ -93,6 +94,7 @@ export const DEFAULT_PREGNANCY_CAUSES: PregnancyCauses = {
 };
 
 export const DEFAULT_PREGNANCY_INTERVENTIONS: PregnancyInterventions = {
+  fundusAtUmbilicus: false,
   leftUterineDisplacement: false,
   earlyAirway: false,
   ivAboveDiaphragm: false,

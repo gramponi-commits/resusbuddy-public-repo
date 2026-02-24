@@ -310,104 +310,120 @@ export default function Settings() {
               <div className="space-y-6 border-t border-border">
                 {/* Adult Defibrillator Energy */}
                 <div className="p-4 pb-0">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Zap className="h-5 w-5 text-primary" />
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div className="flex items-start gap-3 min-w-0 sm:flex-1 sm:items-center">
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Zap className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="min-w-0">
+                        <h2 className="font-semibold text-foreground">{t('settings.adultDefibrillator')}</h2>
+                        <p className="text-sm text-muted-foreground">{t('settings.adultDefibrillatorDesc')}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h2 className="font-semibold text-foreground">{t('settings.adultDefibrillator')}</h2>
-                      <p className="text-sm text-muted-foreground">{t('settings.adultDefibrillatorDesc')}</p>
+                    <div className="w-full pl-[52px] sm:w-auto sm:pl-0">
+                      <Select
+                        value={String(settings.adultDefibrillatorEnergy)}
+                        onValueChange={(val) => updateSetting('adultDefibrillatorEnergy', Number(val) as AdultDefibrillatorEnergy)}
+                      >
+                        <SelectTrigger className="w-full sm:w-[100px]">
+                          <SelectValue>{settings.adultDefibrillatorEnergy}J</SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {adultEnergyOptions.map((energy) => (
+                            <SelectItem key={energy} value={String(energy)}>
+                              {energy}J
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <Select
-                      value={String(settings.adultDefibrillatorEnergy)}
-                      onValueChange={(val) => updateSetting('adultDefibrillatorEnergy', Number(val) as AdultDefibrillatorEnergy)}
-                    >
-                      <SelectTrigger className="w-[100px]">
-                        <SelectValue>{settings.adultDefibrillatorEnergy}J</SelectValue>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {adultEnergyOptions.map((energy) => (
-                          <SelectItem key={energy} value={String(energy)}>
-                            {energy}J
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
 
                 {/* Epinephrine Interval */}
                 <div className="p-4 py-0">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Clock className="h-5 w-5 text-primary" />
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div className="flex items-start gap-3 min-w-0 sm:flex-1 sm:items-center">
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Clock className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="min-w-0">
+                        <h2 className="font-semibold text-foreground">{t('settings.epinephrineInterval')}</h2>
+                        <p className="text-sm text-muted-foreground">{t('settings.epinephrineIntervalDesc')}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h2 className="font-semibold text-foreground">{t('settings.epinephrineInterval')}</h2>
-                      <p className="text-sm text-muted-foreground">{t('settings.epinephrineIntervalDesc')}</p>
+                    <div className="w-full pl-[52px] sm:w-auto sm:pl-0">
+                      <Select
+                        value={String(settings.epinephrineIntervalMinutes)}
+                        onValueChange={(val) => updateSetting('epinephrineIntervalMinutes', Number(val) as EpinephrineIntervalMinutes)}
+                      >
+                        <SelectTrigger className="w-full sm:w-[120px]">
+                          <SelectValue>{settings.epinephrineIntervalMinutes} {t('settings.minutes')}</SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {epinephrineIntervalOptions.map((interval) => (
+                            <SelectItem key={interval} value={String(interval)}>
+                              {interval} {t('settings.minutes')}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <Select
-                      value={String(settings.epinephrineIntervalMinutes)}
-                      onValueChange={(val) => updateSetting('epinephrineIntervalMinutes', Number(val) as EpinephrineIntervalMinutes)}
-                    >
-                      <SelectTrigger className="w-[120px]">
-                        <SelectValue>{settings.epinephrineIntervalMinutes} {t('settings.minutes')}</SelectValue>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {epinephrineIntervalOptions.map((interval) => (
-                          <SelectItem key={interval} value={String(interval)}>
-                            {interval} {t('settings.minutes')}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
 
                 {/* ETCO2 Unit */}
                 <div className="p-4 py-0">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <CapnographyWaveIcon className="h-5 w-5 text-primary" />
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div className="flex items-start gap-3 min-w-0 sm:flex-1 sm:items-center">
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
+                        <CapnographyWaveIcon className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="min-w-0">
+                        <h2 className="font-semibold text-foreground">{t('settings.etco2Unit')}</h2>
+                        <p className="text-sm text-muted-foreground">{t('settings.etco2UnitDesc')}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h2 className="font-semibold text-foreground">{t('settings.etco2Unit')}</h2>
-                      <p className="text-sm text-muted-foreground">{t('settings.etco2UnitDesc')}</p>
+                    <div className="w-full pl-[52px] sm:w-auto sm:pl-0">
+                      <Select
+                        value={settings.etco2Unit}
+                        onValueChange={(value) => updateSetting('etco2Unit', value as ETCO2Unit)}
+                      >
+                        <SelectTrigger className="w-full sm:w-[110px]">
+                          <SelectValue>
+                            {settings.etco2Unit === 'mmhg' ? t('settings.etco2UnitMmhg') : t('settings.etco2UnitKpa')}
+                          </SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {etco2UnitOptions.map((unit) => (
+                            <SelectItem key={unit} value={unit}>
+                              {unit === 'mmhg' ? t('settings.etco2UnitMmhg') : t('settings.etco2UnitKpa')}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <Select
-                      value={settings.etco2Unit}
-                      onValueChange={(value) => updateSetting('etco2Unit', value as ETCO2Unit)}
-                    >
-                      <SelectTrigger className="w-[110px]">
-                        <SelectValue>
-                          {settings.etco2Unit === 'mmhg' ? t('settings.etco2UnitMmhg') : t('settings.etco2UnitKpa')}
-                        </SelectValue>
-                      </SelectTrigger>
-                      <SelectContent>
-                        {etco2UnitOptions.map((unit) => (
-                          <SelectItem key={unit} value={unit}>
-                            {unit === 'mmhg' ? t('settings.etco2UnitMmhg') : t('settings.etco2UnitKpa')}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
                   </div>
                 </div>
 
                 {/* Antiarrhythmic Preference */}
                 <div className="p-4 pt-0">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Pill className="h-5 w-5 text-primary" />
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <div className="flex items-start gap-3 min-w-0 sm:flex-1 sm:items-center">
+                      <div className="h-10 w-10 shrink-0 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Pill className="h-5 w-5 text-primary" />
+                      </div>
+                      <div className="min-w-0">
+                        <h2 className="font-semibold text-foreground">{t('settings.antiarrhythmic')}</h2>
+                        <p className="text-sm text-muted-foreground">{t('settings.antiarrhythmicDesc')}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h2 className="font-semibold text-foreground">{t('settings.antiarrhythmic')}</h2>
-                      <p className="text-sm text-muted-foreground">{t('settings.antiarrhythmicDesc')}</p>
+                    <div className="w-full pl-[52px] sm:w-auto sm:pl-0">
+                      <Switch
+                        checked={settings.preferLidocaine}
+                        onCheckedChange={(checked) => updateSetting('preferLidocaine', checked)}
+                      />
                     </div>
-                    <Switch
-                      checked={settings.preferLidocaine}
-                      onCheckedChange={(checked) => updateSetting('preferLidocaine', checked)}
-                    />
                   </div>
                   <div className="mt-2 pl-[52px]">
                     <span className="text-sm text-muted-foreground">

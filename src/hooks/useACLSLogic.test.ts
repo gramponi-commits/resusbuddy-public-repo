@@ -373,6 +373,8 @@ describe('useACLSLogic - Medication Dosing', () => {
 });
 
 describe('useACLSLogic - Command Banner', () => {
+  const emergencyDeliveryMessages = ['banner.emergencyDelivery', '🚨 EMERGENCY DELIVERY'];
+
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -493,6 +495,7 @@ describe('useACLSLogic - Command Banner', () => {
 
     act(() => {
       result.current.actions.togglePregnancy(true);
+      result.current.actions.updatePregnancyInterventions({ fundusAtUmbilicus: true });
       result.current.actions.startCPR();
       result.current.actions.selectRhythm('asystole');
     });
@@ -501,8 +504,49 @@ describe('useACLSLogic - Command Banner', () => {
       vi.advanceTimersByTime(5 * 60 * 1000);
     });
 
-    expect(result.current.commandBanner.priority).toBe('critical');
+    expect(emergencyDeliveryMessages).toContain(result.current.commandBanner.message);
     expect(result.current.session.pregnancyActive).toBe(true);
+  });
+
+  it('should not show emergency delivery banner at 5 minutes without fundus eligibility', () => {
+    const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
+
+    act(() => {
+      result.current.actions.togglePregnancy(true);
+      result.current.actions.startCPR();
+      result.current.actions.selectRhythm('asystole');
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(5 * 60 * 1000);
+    });
+
+    expect(emergencyDeliveryMessages).not.toContain(result.current.commandBanner.message);
+  });
+
+  it('should show emergency delivery banner immediately when fundus eligibility is checked after 5 minutes', () => {
+    const { result } = renderHook(() => useACLSLogic(DEFAULT_ACLS_CONFIG, 200));
+
+    act(() => {
+      result.current.actions.togglePregnancy(true);
+      result.current.actions.startCPR();
+      result.current.actions.selectRhythm('asystole');
+    });
+
+    act(() => {
+      vi.advanceTimersByTime(5 * 60 * 1000);
+    });
+
+    const preEligibilityMessage = result.current.commandBanner.message;
+    expect(emergencyDeliveryMessages).not.toContain(preEligibilityMessage);
+
+    act(() => {
+      result.current.actions.updatePregnancyInterventions({ fundusAtUmbilicus: true });
+    });
+
+    expect(result.current.commandBanner.priority).toBe('critical');
+    expect(emergencyDeliveryMessages).toContain(result.current.commandBanner.message);
+    expect(result.current.commandBanner.message).not.toBe(preEligibilityMessage);
   });
 });
 
@@ -845,9 +889,10 @@ describe('useACLSLogic - Pregnancy Features', () => {
 
     act(() => {
       result.current.actions.togglePregnancy(true);
-      result.current.actions.updatePregnancyInterventions({ leftUterineDisplacement: true, earlyAirway: true });
+      result.current.actions.updatePregnancyInterventions({ fundusAtUmbilicus: true, leftUterineDisplacement: true, earlyAirway: true });
     });
 
+    expect(result.current.session.pregnancyInterventions.fundusAtUmbilicus).toBe(true);
     expect(result.current.session.pregnancyInterventions.leftUterineDisplacement).toBe(true);
     expect(result.current.session.pregnancyInterventions.earlyAirway).toBe(true);
   });

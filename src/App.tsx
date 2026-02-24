@@ -82,7 +82,7 @@ function useInitialTheme() {
  * Main layout component with gesture support for sidebar
  */
 function AppLayout() {
-  const { open, setOpen, isMobile } = useSidebar();
+  const { openMobile, setOpenMobile, isMobile } = useSidebar();
   const isNativeApp = useIsNativeApp();
   const { hasAccepted, isLoading, acceptTos } = useTosAcceptance();
 
@@ -90,14 +90,14 @@ function AppLayout() {
   const swipeHandlers = useSwipeable({
     onSwipedRight: (eventData) => {
       // Only open sidebar if swipe starts from left edge (first 50px)
-      if (isMobile && !open && eventData.initial[0] < 50) {
-        setOpen(true);
+      if (isMobile && !openMobile && eventData.initial[0] < 50) {
+        setOpenMobile(true);
       }
     },
     onSwipedLeft: () => {
       // Close sidebar on left swipe if it's open
-      if (isMobile && open) {
-        setOpen(false);
+      if (isMobile && openMobile) {
+        setOpenMobile(false);
       }
     },
     trackMouse: false, // Touch only, not mouse

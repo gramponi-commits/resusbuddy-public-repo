@@ -546,6 +546,9 @@ export default function SessionHistory() {
                             <div className="mb-2">
                               <p className="text-xs text-muted-foreground mb-1">{t('pregnancy.interventions')}:</p>
                               <div className="flex flex-wrap gap-1">
+                                {session.pregnancyInterventions.fundusAtUmbilicus && (
+                                  <Badge className="text-xs bg-pink-500/20 text-pink-400 border-0">✓ {t('pregnancy.fundusAtUmbilicus')}</Badge>
+                                )}
                                 {session.pregnancyInterventions.leftUterineDisplacement && (
                                   <Badge className="text-xs bg-pink-500/20 text-pink-400 border-0">✓ {t('pregnancy.leftUterineDisplacement')}</Badge>
                                 )}

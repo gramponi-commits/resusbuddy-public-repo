@@ -151,14 +151,15 @@ export function PregnancyChecklist({
 
   // Calculate time since CPR started (not pregnancy activation)
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
-  const deliveryAlertActive = pregnancyActive && timeElapsed >= FIVE_MINUTES_MS;
+  const fundusAtUmbilicus = pregnancyInterventions.fundusAtUmbilicus === true;
+  const deliveryEligible = pregnancyActive && fundusAtUmbilicus;
+  const deliveryDeadlineReached = deliveryEligible && timeElapsed >= FIVE_MINUTES_MS;
   // Calculate remaining time for countdown (5 minutes - elapsed time)
   const timeRemaining = Math.max(0, FIVE_MINUTES_MS - timeElapsed);
 
   useEffect(() => {
     if (!cprStartTime) {
       setTimeElapsed(0);
-      alertFiredRef.current = false;
       return;
     }
 
@@ -169,13 +170,20 @@ export function PregnancyChecklist({
     return () => clearInterval(interval);
   }, [cprStartTime]);
 
-  // Fire delivery alert callback once when 5 min reached
+  // Allow deadline alert to fire again if delivery eligibility is toggled off then on.
   useEffect(() => {
-    if (deliveryAlertActive && !alertFiredRef.current && onDeliveryAlert) {
+    if (!deliveryEligible) {
+      alertFiredRef.current = false;
+    }
+  }, [deliveryEligible]);
+
+  // Fire delivery alert callback once when 5 min deadline is reached.
+  useEffect(() => {
+    if (deliveryDeadlineReached && !alertFiredRef.current && onDeliveryAlert) {
       alertFiredRef.current = true;
       onDeliveryAlert();
     }
-  }, [deliveryAlertActive, onDeliveryAlert]);
+  }, [deliveryDeadlineReached, onDeliveryAlert]);
 
   const handleTogglePregnancy = (checked: boolean) => {
     // Once activated, cannot be deactivated
@@ -241,7 +249,7 @@ export function PregnancyChecklist({
             </div>
           </div>
           <div className="flex items-center gap-2">
-            {pregnancyActive && deliveryAlertActive && (
+            {pregnancyActive && deliveryDeadlineReached && (
               <Badge variant="destructive" className="animate-pulse gap-1">
                 <AlertTriangle className="h-3 w-3" />
                 {t('pregnancy.deliveryAlert')}
@@ -276,16 +284,44 @@ export function PregnancyChecklist({
                 {t('pregnancy.activateDesc')}
               </div>
             </div>
-            {pregnancyActive && (
-              <div className="flex items-center gap-1 text-xs text-pink-400">
-                <Clock className="h-3 w-3" />
-                {formatTime(timeRemaining)}
-              </div>
-            )}
           </label>
 
+          {/* Delivery eligibility checkpoint */}
+          {pregnancyActive && (
+            <label className="flex items-start gap-3 cursor-pointer p-3 rounded-lg bg-pink-500/10 border border-pink-400/30 hover:bg-pink-500/15 transition-colors">
+              <Checkbox
+                checked={fundusAtUmbilicus}
+                onCheckedChange={(checked) => onUpdateInterventions({ fundusAtUmbilicus: checked === true })}
+                className="mt-0.5 border-pink-400 data-[state=checked]:bg-pink-500 data-[state=checked]:border-pink-500"
+              />
+              <div className="flex-1 min-w-0">
+                <div className="font-medium text-foreground">{t('pregnancy.fundusAtUmbilicus')}</div>
+                <div className="text-xs text-muted-foreground">{t('pregnancy.fundusAtUmbilicusDesc')}</div>
+              </div>
+            </label>
+          )}
+
+          {/* Pre-5 minute delivery preparation guidance */}
+          {deliveryEligible && !deliveryDeadlineReached && (
+            <div className="bg-amber-500/15 border border-amber-500 rounded-lg p-4">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-amber-500 font-semibold">
+                  <AlertTriangle className="h-5 w-5" />
+                  {t('pregnancy.deliveryPrepNow')}
+                </div>
+                <div className="flex items-center gap-1 text-xs text-amber-500 font-semibold">
+                  <Clock className="h-3 w-3" />
+                  {formatTime(timeRemaining)}
+                </div>
+              </div>
+              <p className="text-xs text-amber-500/90 mt-1">
+                {t('pregnancy.deliveryPrepDesc')}
+              </p>
+            </div>
+          )}
+
           {/* 5-minute Delivery Alert */}
-          {pregnancyActive && deliveryAlertActive && (
+          {deliveryDeadlineReached && (
             <div className="bg-destructive/20 border-2 border-destructive rounded-lg p-4 animate-pulse">
               <div className="flex items-center gap-2 text-destructive font-bold text-lg">
                 <AlertTriangle className="h-6 w-6" />

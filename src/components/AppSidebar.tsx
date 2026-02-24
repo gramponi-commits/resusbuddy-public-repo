@@ -17,8 +17,9 @@ import { useIsNativeApp } from '@/hooks/useIsNativeApp';
 
 export function AppSidebar() {
   const { t } = useTranslation();
-  const { state } = useSidebar();
+  const { state, isMobile } = useSidebar();
   const collapsed = state === 'collapsed';
+  const hideLabels = !isMobile && collapsed;
   const isNativeApp = useIsNativeApp();
 
   const allItems = [
@@ -39,7 +40,7 @@ export function AppSidebar() {
     <Sidebar
       className={cn(
         'bg-card border-r border-border transition-all duration-300',
-        collapsed ? 'w-14' : 'w-56'
+        hideLabels ? 'w-14' : 'w-56'
       )}
       collapsible="icon"
     >
@@ -50,12 +51,12 @@ export function AppSidebar() {
             alt="ResusBuddy Icon"
             className={cn(
               "h-[2.53125rem] w-[2.53125rem] transition-opacity duration-200",
-              collapsed && "opacity-0 w-0 overflow-hidden"
+              hideLabels && "opacity-0 w-0 overflow-hidden"
             )}
           />
           <span className={cn(
             "font-bold text-lg text-acls-critical transition-opacity duration-200",
-            collapsed && "opacity-0 w-0 overflow-hidden"
+            hideLabels && "opacity-0 w-0 overflow-hidden"
           )}>
             ResusBuddy
           </span>
@@ -81,7 +82,7 @@ export function AppSidebar() {
                       <item.icon className="h-5 w-5 shrink-0" />
                       <span className={cn(
                         "transition-opacity duration-200",
-                        collapsed && "opacity-0 w-0 overflow-hidden"
+                        hideLabels && "opacity-0 w-0 overflow-hidden"
                       )}>
                         {item.title}
                       </span>

@@ -117,6 +117,7 @@ export function createMockACLSSession(overrides = {}) {
       hypertension: false,
     },
     pregnancyInterventions: {
+      fundusAtUmbilicus: false,
       leftUterineDisplacement: false,
       earlyAirway: false,
       ivAboveDiaphragm: false,

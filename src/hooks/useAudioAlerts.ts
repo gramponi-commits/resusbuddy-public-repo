@@ -1,4 +1,6 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef } from 'react';
+import { Capacitor } from '@capacitor/core';
+import { Haptics } from '@capacitor/haptics';
 
 type AlertType = 'rhythmCheck' | 'preCharge' | 'epiDue' | 'rosc' | 'metronome';
 
@@ -35,6 +37,21 @@ const ALERT_SOUNDS: Record<AlertType, { frequency: number; duration: number; rep
 export function useAudioAlerts() {
   const audioContextRef = useRef<AudioContext | null>(null);
   const enabledRef = useRef<boolean>(false);
+
+  const runNativeVibration = useCallback(async (pattern: number | number[]) => {
+    const sequence = Array.isArray(pattern) ? pattern : [pattern];
+
+    for (let i = 0; i < sequence.length; i++) {
+      const duration = Math.max(0, Math.trunc(sequence[i]));
+      if (duration <= 0) continue;
+
+      if (i % 2 === 0) {
+        await Haptics.vibrate({ duration });
+      } else {
+        await new Promise(resolve => setTimeout(resolve, duration));
+      }
+    }
+  }, []);
 
   const initAudioContext = useCallback(() => {
     if (!audioContextRef.current) {
@@ -77,10 +94,21 @@ export function useAudioAlerts() {
 
   // Vibration support
   const vibrate = useCallback((pattern: number | number[]) => {
-    if ('vibrate' in navigator) {
-      navigator.vibrate(pattern);
-    }
-  }, []);
+    void (async () => {
+      if (Capacitor.isNativePlatform()) {
+        try {
+          await runNativeVibration(pattern);
+          return;
+        } catch {
+          // Fall through to web vibration API.
+        }
+      }
+
+      if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+        navigator.vibrate(pattern);
+      }
+    })();
+  }, [runNativeVibration]);
 
   return {
     playAlert,

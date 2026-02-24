@@ -24,6 +24,7 @@ import {
   ElectrocutionChecklist,
   LVADFailureChecklist,
   createInitialSession,
+  DEFAULT_PREGNANCY_INTERVENTIONS,
 } from '@/types/acls';
 import { StoredSession, saveSession } from '@/lib/sessionStorage';
 import { logger } from '@/utils/logger';
@@ -688,6 +689,11 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
     const newSession = {
       ...savedSession,
       initialRhythm: inferInitialRhythm(savedSession),
+      // Backward compatibility for sessions saved before fundusAtUmbilicus existed.
+      pregnancyInterventions: {
+        ...DEFAULT_PREGNANCY_INTERVENTIONS,
+        ...savedSession.pregnancyInterventions,
+      },
       // Update cprCycleStartTime to account for time passed
       cprCycleStartTime: savedSession.cprCycleStartTime 
         ? savedSession.cprCycleStartTime + elapsedSinceSave 
@@ -776,14 +782,15 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
 
   // Command banner logic
   const getCommandBanner = useCallback((): CommandBanner => {
-    const { phase, currentRhythm, shockCount, epinephrineCount, lastEpinephrineTime, amiodaroneCount, pregnancyActive, startTime } = session;
+    const { phase, currentRhythm, shockCount, epinephrineCount, lastEpinephrineTime, amiodaroneCount, pregnancyActive, pregnancyInterventions, startTime } = session;
     const now = Date.now();
     const seconds = Math.ceil(timerState.cprCycleRemaining / 1000);
 
     // Emergency delivery alert - highest priority for obstetric arrest
     const FIVE_MINUTES_MS = 5 * 60 * 1000;
     const timeElapsed = startTime ? now - startTime : 0;
-    if (pregnancyActive && timeElapsed >= FIVE_MINUTES_MS && phase !== 'post_rosc' && phase !== 'code_ended' && !emergencyDeliveryBannerDismissed) {
+    const deliveryEligible = pregnancyInterventions?.fundusAtUmbilicus === true;
+    if (pregnancyActive && deliveryEligible && timeElapsed >= FIVE_MINUTES_MS && phase !== 'post_rosc' && phase !== 'code_ended' && !emergencyDeliveryBannerDismissed) {
       return {
         message: t('banner.emergencyDelivery'),
         priority: 'critical',
@@ -962,9 +969,13 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
       ...prev,
       pregnancyActive: active,
       pregnancyStartTime: active ? Date.now() : null,
+      pregnancyInterventions: active
+        ? { ...DEFAULT_PREGNANCY_INTERVENTIONS, ...prev.pregnancyInterventions }
+        : prev.pregnancyInterventions,
     }));
     if (active) {
       addIntervention('note', t('interventions.pregnancyActivated'), undefined, 'interventions.pregnancyActivated');
+      setEmergencyDeliveryBannerDismissed(false);
     }
   }, [addIntervention, t]);
 
@@ -978,8 +989,11 @@ export function useACLSLogic(config: ACLSConfig = DEFAULT_ACLS_CONFIG, defibrill
   const updatePregnancyInterventions = useCallback((updates: Partial<PregnancyInterventions>) => {
     setSession(prev => ({
       ...prev,
-      pregnancyInterventions: { ...prev.pregnancyInterventions, ...updates },
+      pregnancyInterventions: { ...DEFAULT_PREGNANCY_INTERVENTIONS, ...prev.pregnancyInterventions, ...updates },
     }));
+    if (updates.fundusAtUmbilicus === true) {
+      setEmergencyDeliveryBannerDismissed(false);
+    }
   }, []);
 
   // Special Circumstances actions
